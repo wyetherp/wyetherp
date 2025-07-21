@@ -634,6 +634,69 @@
         0% { transform: translate(-50%, -50%) rotate(0deg) translateX(120px) rotate(0deg); }
         100% { transform: translate(-50%, -50%) rotate(360deg) translateX(120px) rotate(-360deg); }
       }
+
+      .aether-core {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, var(--aether) 20%, transparent 60%);
+  box-shadow: 0 0 40px rgba(147, 112, 219, 0.6), 0 0 80px rgba(147, 112, 219, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: aether-glow 4s ease-in-out infinite;
+  overflow: visible;
+}
+
+.aether-glow {
+  position: absolute;
+  width: 140%;
+  height: 140%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(147,112,219,0.4), transparent 70%);
+  animation: aether-breathe 6s ease-in-out infinite;
+  filter: blur(10px);
+  z-index: 0;
+}
+
+.aether-pulse {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid rgba(147,112,219,0.3);
+  animation: aether-pulse-ring 3s infinite ease-out;
+  z-index: 0;
+}
+
+.aether-glyph {
+  font-size: 2rem;
+  color: var(--aether);
+  z-index: 2;
+  text-shadow: 0 0 10px rgba(147, 112, 219, 0.7);
+}
+
+@keyframes aether-breathe {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.1); opacity: 0.6; }
+}
+
+@keyframes aether-glow {
+  0%, 100% {
+    box-shadow: 0 0 40px rgba(147, 112, 219, 0.6), 0 0 80px rgba(147, 112, 219, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 60px rgba(147, 112, 219, 0.8), 0 0 100px rgba(147, 112, 219, 0.3);
+  }
+}
+
+@keyframes aether-pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+
     }
   </style>
 </head>
@@ -728,7 +791,15 @@
       <div class="orbit-ring orbit-4"></div>
       
       <!-- Central star (Aether) -->
-      <div class="element-orb aether" title="Aether - The dream behind the code, the central light">✨</div>
+      <!-- Central Aether (Mystical Core) -->
+<div class="element-orb aether" title="✨ Aether – The guiding pulse of the elemental realm">
+  <div class="aether-core">
+    <div class="aether-glow"></div>
+    <div class="aether-pulse"></div>
+    <span class="aether-glyph">✶</span>
+  </div>
+</div>
+
       
       <!-- Orbiting planets -->
       <div class="element-orb fire" title="Fire - Sacred technology that ignites (closest to the light)">🔥</div>
@@ -773,7 +844,7 @@
     <p>I’m not here to build the fastest or fanciest apps. I want to make safe and thoughtful spaces—where all kinds of minds feel welcome. Most tech is built for one kind of brain. I build for the ones that don’t fit the mold.</p>
 
     <blockquote>
-      <em>"The forest path takes longer than the tunnel, sure. But that’s where the magic lives—where we find not just our destination, but who we’re meant to be."</em>
+      <em>"“Not all paths are straight, nor short. But the winding road is where one finds their strength.” -Gandalf The White"</em>
     </blockquote>
 
     <button class="resonance-button glow-on-hover" onclick="resonancePing()">✨ Ping My Resonance ✨</button>
