@@ -3,80 +3,691 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Learn about the vision behind Wyetherp — Tech for the soul and senses." />
-  <link rel="stylesheet" href="css/style.css" />
-  <title>About Me - Wyetherp</title>
+  <meta name="description" content="Wyetherp — Tech for the soul and senses. Creating tools for the tender-minded." />
+  <title>Wyetherp</title>
+  <style>
+    :root {
+      --fire: #ff6b35;
+      --water: #4ecdc4;
+      --air: #a8e6cf;
+      --earth: #8b5a3c;
+      --aether: #b794f6;
+      --deep-space: #1a1a2e;
+      --soft-light: #f8f9fa;
+      --mist: rgba(255, 255, 255, 0.1);
+      --flow-speed: 3s;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, var(--deep-space) 0%, #16213e 50%, #1a1a2e 100%);
+      color: var(--soft-light);
+      line-height: 1.7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    /* Mystical background particles */
+    .cosmos {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    .star {
+      position: absolute;
+      background: var(--soft-light);
+      border-radius: 50%;
+      animation: twinkle 4s ease-in-out infinite alternate;
+    }
+    
+    @keyframes twinkle {
+      0% { opacity: 0.3; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.2); }
+    }
+    
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(26, 26, 46, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--mist);
+    }
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--aether);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .logo:hover {
+      transform: scale(1.05);
+      text-shadow: 0 0 20px var(--aether);
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    
+    .nav-links a {
+      color: var(--soft-light);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+    }
+    
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--aether);
+      background: var(--mist);
+    }
+    
+    /* Main content sections */
+    .page-section {
+      display: none;
+      min-height: 100vh;
+      padding: 6rem 2rem 2rem;
+    }
+    
+    .page-section.active {
+      display: block;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    /* Intro page styling */
+    .intro-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    
+    .intro-title {
+      font-size: clamp(3rem, 8vw, 6rem);
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, var(--aether), var(--water), var(--fire));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gentle-pulse 4s ease-in-out infinite;
+    }
+    
+    @keyframes gentle-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+    
+    .intro-tagline {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      max-width: 600px;
+    }
+    
+    .element-orbits {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 2rem 0;
+    }
+    
+    .element-orb {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: orbit 20s linear infinite;
+    }
+    
+    .element-orb:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 30px currentColor;
+    }
+    
+    .fire { 
+      background: radial-gradient(circle, var(--fire), rgba(255, 107, 53, 0.3));
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      animation-delay: 0s;
+    }
+    
+    .water { 
+      background: radial-gradient(circle, var(--water), rgba(78, 205, 196, 0.3));
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      animation-delay: -4s;
+    }
+    
+    .earth { 
+      background: radial-gradient(circle, var(--earth), rgba(139, 90, 60, 0.3));
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      animation-delay: -8s;
+    }
+    
+    .air { 
+      background: radial-gradient(circle, var(--air), rgba(168, 230, 207, 0.3));
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      animation-delay: -12s;
+    }
+    
+    .aether { 
+      background: radial-gradient(circle, var(--aether), rgba(183, 148, 246, 0.3));
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: gentle-pulse 3s ease-in-out infinite;
+    }
+    
+    @keyframes orbit {
+      0% { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+      100% { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+    }
+    
+    .enter-portal {
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      background: linear-gradient(45deg, var(--aether), var(--water));
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(183, 148, 246, 0.3);
+    }
+    
+    .enter-portal:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(183, 148, 246, 0.5);
+    }
+    
+    /* About page styling */
+    .about-page h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--aether);
+      text-align: center;
+    }
+    
+    .about-page h2 {
+      color: var(--water);
+      margin: 2rem 0 1rem;
+      font-size: 1.8rem;
+    }
+    
+    .about-page p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+    
+    .elemental-list {
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+    
+    .elemental-list li {
+      margin: 1rem 0;
+      padding: 1rem;
+      background: var(--mist);
+      border-radius: 10px;
+      border-left: 4px solid var(--aether);
+      transition: all 0.3s ease;
+    }
+    
+    .elemental-list li:hover {
+      transform: translateX(10px);
+      background: rgba(183, 148, 246, 0.1);
+    }
+    
+    blockquote {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      border-left: 4px solid var(--fire);
+      background: rgba(255, 107, 53, 0.1);
+      font-style: italic;
+      border-radius: 0 10px 10px 0;
+    }
+    
+    .resonance-button {
+      display: block;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      background: linear-gradient(45deg, var(--fire), var(--aether));
+      border: none;
+      border-radius: 25px;
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+    }
+    
+    .resonance-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(255, 107, 53, 0.5);
+    }
+    
+    /* Projects page */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    
+    .project-card {
+      background: var(--mist);
+      border-radius: 15px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(183, 148, 246, 0.2);
+    }
+    
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(183, 148, 246, 0.3);
+    }
+    
+    .project-card h3 {
+      color: var(--aether);
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+    
+    /* Contact page */
+    .contact-form {
+      max-width: 600px;
+      margin: 2rem auto;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--water);
+    }
+    
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid var(--mist);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--soft-light);
+      font-family: inherit;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--aether);
+      box-shadow: 0 0 20px rgba(183, 148, 246, 0.3);
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+      border-top: 1px solid var(--mist);
+      opacity: 0.7;
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .nav-links {
+        gap: 1rem;
+      }
+      
+      .nav-links a {
+        padding: 0.3rem 0.7rem;
+        font-size: 0.9rem;
+      }
+      
+      .element-orbits {
+        width: 250px;
+        height: 250px;
+      }
+      
+      .element-orb {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>About Wyeth</h1>
-    <p class="tagline">Exploring the crossroads of neurodivergence, nature, and design.</p>
-  </header>
+  <!-- Mystical background -->
+  <div class="cosmos" id="cosmos"></div>
+  
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="#" class="logo" onclick="showPage('intro')">Wyetherp</a>
+      <ul class="nav-links">
+        <li><a href="#" onclick="showPage('intro')" class="nav-link">Home</a></li>
+        <li><a href="#" onclick="showPage('about')" class="nav-link">About</a></li>
+        <li><a href="#" onclick="showPage('projects')" class="nav-link">Projects</a></li>
+        <li><a href="#" onclick="showPage('contact')" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
 
-  <main>
-    <section>
+  <!-- Intro Page -->
+  <section id="intro" class="page-section intro-page active">
+    <h1 class="intro-title">Wyetherp</h1>
+    <p class="intro-tagline">Tech for the soul and senses. Creating tools for the tender-minded.</p>
+    
+    <div class="element-orbits">
+      <div class="element-orb fire" title="Fire - Sacred technology that ignites">🔥</div>
+      <div class="element-orb water" title="Water - Intuitive design that flows">🌊</div>
+      <div class="element-orb earth" title="Earth - Practical tools built to last">🪨</div>
+      <div class="element-orb air" title="Air - Clear, accessible interfaces">🌬️</div>
+      <div class="element-orb aether" title="Aether - The dream behind the code">✨</div>
+    </div>
+    
+    <button class="enter-portal" onclick="showPage('about')">Enter the Sacred Space</button>
+  </section>
+
+  <!-- About Page -->
+  <section id="about" class="page-section about-page">
+    <div class="container">
+      <h1>About Wyeth</h1>
+      <p class="intro-tagline">Exploring the crossroads of neurodivergence, nature, and design.</p>
+      
       <h2>My Mission</h2>
-      <p>
-        I create tools for the tender-minded. For those who feel deeply, think differently, and move through the world with unspoken brilliance.
-      </p>
-      <p>
-        Wyetherp is more than a portfolio — it’s a philosophy. A place where design honors rhythm, emotion, and elemental presence.
-      </p>
-    </section>
-
-    <section>
+      <p>I create tools for the tender-minded. For those who feel deeply, think differently, and move through the world with unspoken brilliance.</p>
+      <p>Wyetherp is more than a portfolio — it's a philosophy. A place where design honors rhythm, emotion, and elemental presence.</p>
+      
       <h2>My Journey</h2>
-      <p>
-        As a developer, artist, and neuro-spicy creator, I’ve always sensed patterns beneath the surface. Whether I’m designing for Crumb — an AI companion for neurodivergent minds — or crafting interfaces that breathe, I hold one question close:
-      </p>
+      <p>As a developer, artist, and neuro-spicy creator, I've always sensed patterns beneath the surface. Whether I'm designing for Crumb — an AI companion for neurodivergent minds — or crafting interfaces that breathe, I hold one question close:</p>
+      
       <blockquote>
-        <em>“How can technology feel like a forest path, not a sterile tunnel?”</em>
+        <em>"How can technology feel like a forest path, not a sterile tunnel?"</em>
       </blockquote>
-      <p>
-        I don’t just build with logic. I build with care.
-      </p>
-    </section>
-
-    <section>
+      
+      <p>I don't just build with logic. I build with care.</p>
+      
       <h2>The Elemental Compass</h2>
       <p>Each element guides a core part of my creative mission:</p>
-      <ul>
-        <li>🔥 <strong>Fire</strong> – Crumb’s spark: igniting sacred tech that serves and awakens.</li>
+      <ul class="elemental-list">
+        <li>🔥 <strong>Fire</strong> – Crumb's spark: igniting sacred tech that serves and awakens.</li>
         <li>🌊 <strong>Water</strong> – Intuitive design that flows with neuro-spicy sensitivity and rhythm.</li>
         <li>🌬️ <strong>Air</strong> – Interfaces that speak clearly, accessibly, and kindly to every user.</li>
         <li>🪨 <strong>Earth</strong> – Practical tools built to last, rooted in real-world needs.</li>
         <li>✨ <strong>Aether</strong> – The hidden light, the dream behind the code. I build for that, too.</li>
       </ul>
-    </section>
-
-    <section>
+      
       <h2>Guiding Principles</h2>
-      <ul>
+      <ul class="elemental-list">
         <li>🌿 Rooted in nature's rhythm</li>
         <li>💡 Illuminated by the hidden lights</li>
         <li>🌀 Embracing the sacred spiral of growth</li>
         <li>🌈 Designed with emotional resonance</li>
       </ul>
-    </section>
+      
+      <button class="resonance-button" onclick="resonancePing()">✨ Ping My Resonance ✨</button>
+    </div>
+  </section>
 
-    <section>
-      <h2>Let’s Co-Create</h2>
-      <p>
-        Whether you’re neurodivergent yourself, or simply believe technology can be more human — I’d love to collaborate.
-        Reach out via the <a href="contact.html">Contact</a> page and let’s imagine what’s possible.
-      </p>
-      <button onclick="resonancePing()">✨ Ping My Resonance ✨</button>
-    </section>
-  </main>
+  <!-- Projects Page -->
+  <section id="projects" class="page-section">
+    <div class="container">
+      <h1>Sacred Creations</h1>
+      <p>Projects that bridge the mystical and practical, designed with care for neurodivergent minds.</p>
+      
+      <div class="project-grid">
+        <div class="project-card">
+          <h3>🤖 Crumb</h3>
+          <p>An AI companion designed specifically for neurodivergent minds. Crumb understands the tender rhythms of different thinking and offers support that feels genuinely helpful, not overwhelming.</p>
+          <p><em>Currently in sacred development...</em></p>
+        </div>
+        
+        <div class="project-card">
+          <h3>🌊 Flow Interfaces</h3>
+          <p>Web designs that breathe with natural rhythm. Every interaction feels like a gentle conversation rather than a demanding transaction.</p>
+        </div>
+        
+        <div class="project-card">
+          <h3>✨ Elemental Design System</h3>
+          <p>A design framework based on the five elements, creating digital experiences that honor both functionality and emotional resonance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Page -->
+  <section id="contact" class="page-section">
+    <div class="container">
+      <h1>Let's Co-Create</h1>
+      <p>Whether you're neurodivergent yourself, or simply believe technology can be more human — I'd love to collaborate.</p>
+      
+      <form class="contact-form" onsubmit="handleContact(event)">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="project">Project Vision</label>
+          <textarea id="project" name="project" rows="5" placeholder="Share your dreams, ideas, or collaborative visions..."></textarea>
+        </div>
+        
+        <button type="submit" class="resonance-button">Send Into the Cosmos</button>
+      </form>
+    </div>
+  </section>
 
   <footer>
     <p>&copy; 2025 Wyetherp. Walking gently through code and cosmos.</p>
   </footer>
 
   <script>
-    function resonancePing() {
-      alert("🌟 Thank you for resonating. Your light is seen.");
+    // Create mystical background stars
+    function createCosmos() {
+      const cosmos = document.getElementById('cosmos');
+      const starCount = 50;
+      
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
+        star.style.animationDelay = Math.random() * 4 + 's';
+        cosmos.appendChild(star);
+      }
     }
+    
+    // Page navigation system
+    function showPage(pageId) {
+      // Hide all pages
+      const pages = document.querySelectorAll('.page-section');
+      pages.forEach(page => page.classList.remove('active'));
+      
+      // Show selected page
+      document.getElementById(pageId).classList.add('active');
+      
+      // Update navigation
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => link.classList.remove('active'));
+      
+      // Add active class to current nav item
+      const activeLink = document.querySelector(`[onclick="showPage('${pageId}')"]`);
+      if (activeLink && activeLink.classList.contains('nav-link')) {
+        activeLink.classList.add('active');
+      }
+      
+      // Smooth scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Enhanced resonance ping with visual feedback
+    function resonancePing() {
+      const button = event.target;
+      const originalText = button.textContent;
+      
+      // Visual feedback
+      button.style.transform = 'scale(1.1)';
+      button.textContent = '🌟 Resonance received! 🌟';
+      button.style.background = 'linear-gradient(45deg, var(--aether), var(--water), var(--fire))';
+      
+      // Create floating particles
+      createResonanceParticles(button);
+      
+      setTimeout(() => {
+        button.style.transform = 'scale(1)';
+        button.textContent = originalText;
+        button.style.background = 'linear-gradient(45deg, var(--fire), var(--aether))';
+      }, 2000);
+    }
+    
+    // Create magical particles for resonance
+    function createResonanceParticles(element) {
+      const rect = element.getBoundingClientRect();
+      const particles = 12;
+      
+      for (let i = 0; i < particles; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'fixed';
+        particle.style.left = rect.left + rect.width/2 + 'px';
+        particle.style.top = rect.top + rect.height/2 + 'px';
+        particle.style.width = '4px';
+        particle.style.height = '4px';
+        particle.style.background = '#b794f6';
+        particle.style.borderRadius = '50%';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '9999';
+        
+        document.body.appendChild(particle);
+        
+        // Animate particles
+        const angle = (i / particles) * Math.PI * 2;
+        const distance = 100;
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
+        
+        particle.animate([
+          { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+          { transform: `translate(${x}px, ${y}px) scale(0)`, opacity: 0 }
+        ], {
+          duration: 1500,
+          easing: 'ease-out'
+        }).onfinish = () => particle.remove();
+      }
+    }
+    
+    // Handle contact form
+    function handleContact(event) {
+      event.preventDefault();
+      const button = event.target.querySelector('button');
+      const originalText = button.textContent;
+      
+      button.textContent = '✨ Message sent to the cosmos ✨';
+      button.disabled = true;
+      
+      // Simulate sending (replace with actual form handling)
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.disabled = false;
+        event.target.reset();
+      }, 3000);
+    }
+    
+    // Element orb interactions
+    document.addEventListener('DOMContentLoaded', function() {
+      createCosmos();
+      
+      // Add hover descriptions for element orbs
+      const orbs = document.querySelectorAll('.element-orb');
+      orbs.forEach(orb => {
+        orb.addEventListener('click', function() {
+          const element = this.title.split(' - ')[0];
+          const description = this.title.split(' - ')[1];
+          
+          // Create a gentle notification
+          const notification = document.createElement('div');
+          notification.style.position = 'fixed';
+          notification.style.top = '50%';
+          notification.style.left = '50%';
+          notification.style.transform = 'translate(-50%, -50%)';
+          notification.style.background = 'rgba(26, 26, 46, 0.95)';
+          notification.style.padding = '2rem';
+          notification.style.borderRadius = '15px';
+          notification.style.border = '1px solid var(--aether)';
+          notification.style.color = 'var(--soft-light)';
+          notification.style.textAlign = 'center';
+          notification.style.zIndex = '10000';
+          notification.style.maxWidth = '400px';
+          
+          notification.innerHTML = `
+            <h3 style="color: var(--aether); margin-bottom: 1rem;">${element}</h3>
+            <p>${description}</p>
+            <button onclick="this.parentElement.remove()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--aether); border: none; border-radius: 20px; color: white; cursor: pointer;">✨ Close</button>
+          `;
+          
+          document.body.appendChild(notification);
+        });
+      });
+    });
   </script>
 </body>
 </html>
