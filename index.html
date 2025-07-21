@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<footer>
+    <p>&copy; 2025 Wyetherp. Walking gently through code and cosmos.</p>
+  </footer><!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -450,7 +452,94 @@
       opacity: 0.7;
     }
     
-    /* Responsive design */
+    /* Hidden mystical menu */
+    .hidden-portal {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 1001;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .hidden-portal:hover {
+      opacity: 0.1;
+      background: radial-gradient(circle, var(--aether), transparent);
+    }
+    
+    .secret-menu {
+      position: fixed;
+      top: 60px;
+      right: 20px;
+      background: rgba(11, 12, 30, 0.95);
+      backdrop-filter: blur(15px);
+      border: 1px solid var(--aether);
+      border-radius: 15px;
+      padding: 1.5rem;
+      min-width: 200px;
+      z-index: 1002;
+      opacity: 0;
+      transform: translateY(-20px) scale(0.9);
+      transition: all 0.3s ease;
+      pointer-events: none;
+      box-shadow: 0 10px 30px rgba(147, 112, 219, 0.3);
+    }
+    
+    .secret-menu.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: all;
+    }
+    
+    .secret-menu h3 {
+      color: var(--aether);
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(147, 112, 219, 0.3);
+      padding-bottom: 0.5rem;
+    }
+    
+    .secret-menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .secret-menu li {
+      margin: 0.8rem 0;
+    }
+    
+    .secret-menu a {
+      color: var(--soft-light);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+    
+    .secret-menu a:hover {
+      background: rgba(147, 112, 219, 0.2);
+      color: var(--aether);
+      transform: translateX(5px);
+    }
+    
+    .secret-item-icon {
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     @media (max-width: 768px) {
       .nav-links {
         gap: 1rem;
@@ -478,6 +567,21 @@
   <!-- Mystical background -->
   <div class="cosmos" id="cosmos"></div>
   
+  <!-- Hidden Portal (invisible clickable area) -->
+  <button class="hidden-portal" onclick="toggleSecretMenu()" title="✨"></button>
+  
+  <!-- Secret Menu -->
+  <div class="secret-menu" id="secretMenu">
+    <h3>⚡ Hidden Pathways ⚡</h3>
+    <ul>
+      <li><a href="#" onclick="showPage('codex')"><span class="secret-item-icon">📜</span> The Codex</a></li>
+      <li><a href="#" onclick="showPage('garden')"><span class="secret-item-icon">🌱</span> Digital Garden</a></li>
+      <li><a href="#" onclick="showPage('workshop')"><span class="secret-item-icon">🔮</span> Sacred Workshop</a></li>
+      <li><a href="#" onclick="showPage('frequencies')"><span class="secret-item-icon">🎵</span> Frequencies</a></li>
+      <li><a href="#" onclick="activateCosmicMode()"><span class="secret-item-icon">🌌</span> Cosmic Mode</a></li>
+    </ul>
+  </div>
+
   <!-- Navigation -->
   <nav>
     <div class="nav-container">
@@ -610,7 +714,97 @@
     </div>
   </section>
 
-  <footer>
+  <!-- Codex Page (Hidden) -->
+  <section id="codex" class="page-section">
+    <div class="container">
+      <h1>📜 The Codex</h1>
+      <p>Sacred writings and digital spells. The deeper mysteries of creation.</p>
+      
+      <h2>Development Philosophy</h2>
+      <blockquote>
+        <em>"Every line of code is a prayer, every function a ritual, every interface a sacred geometry."</em>
+      </blockquote>
+      
+      <h2>The Elemental Programming Principles</h2>
+      <ul class="elemental-list">
+        <li>🔥 <strong>Fire Code</strong> – Passionate, transformative algorithms that ignite possibility</li>
+        <li>🌊 <strong>Water Logic</strong> – Flowing, adaptive functions that bend without breaking</li>
+        <li>🌬️ <strong>Air Interfaces</strong> – Light, breathable UX that lifts the spirit</li>
+        <li>🪨 <strong>Earth Architecture</strong> – Solid, foundational systems built to endure</li>
+        <li>✨ <strong>Aether Vision</strong> – The transcendent purpose that guides all creation</li>
+      </ul>
+      
+      <h2>Sacred Patterns</h2>
+      <p>Modular, readable code with clear sectioning. Comments for all hardware interaction. Subtle animations and emotionally intelligent behavior. Code that feels like a spellbook: intentional, layered, and mystical.</p>
+    </div>
+  </section>
+
+  <!-- Digital Garden Page (Hidden) -->
+  <section id="garden" class="page-section">
+    <div class="container">
+      <h1>🌱 Digital Garden</h1>
+      <p>A growing collection of thoughts, experiments, and seeds of inspiration.</p>
+      
+      <div class="project-grid">
+        <div class="project-card">
+          <h3>🧠 Neurodivergent Design Patterns</h3>
+          <p>Exploring how interfaces can better serve different cognitive styles and sensory needs.</p>
+          <p><em>Growing slowly...</em></p>
+        </div>
+        
+        <div class="project-card">
+          <h3>🎨 Emotional Color Theory</h3>
+          <p>How color palettes can create safer, more nurturing digital spaces for sensitive minds.</p>
+          <p><em>Blooming...</em></p>
+        </div>
+        
+        <div class="project-card">
+          <h3>🌊 Rhythm-Based UX</h3>
+          <p>Interfaces that breathe and pulse with natural timing, honoring the body's rhythms.</p>
+          <p><em>Flowing...</em></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sacred Workshop Page (Hidden) -->
+  <section id="workshop" class="page-section">
+    <div class="container">
+      <h1>🔮 Sacred Workshop</h1>
+      <p>Where ideas are forged into reality. The laboratory of digital alchemy.</p>
+      
+      <h2>Current Experiments</h2>
+      <ul class="elemental-list">
+        <li>🤖 <strong>Crumb's Emotional Engine</strong> – Teaching AI to recognize and respond to neurodivergent communication patterns</li>
+        <li>🌈 <strong>Synesthetic Interfaces</strong> – Visual representations of sound and emotion</li>
+        <li>🌙 <strong>Circadian Design</strong> – Interfaces that adapt to natural energy cycles</li>
+        <li>🔊 <strong>Haptic Harmony</strong> – Gentle vibrations that communicate without overwhelming</li>
+      </ul>
+      
+      <button class="resonance-button" onclick="resonancePing()">🔬 Request Workshop Access</button>
+    </div>
+  </section>
+
+  <!-- Frequencies Page (Hidden) -->
+  <section id="frequencies" class="page-section">
+    <div class="container">
+      <h1>🎵 Frequencies</h1>
+      <p>The sounds, vibrations, and energetic signatures that guide the work.</p>
+      
+      <h2>Creative Soundscape</h2>
+      <p>Every project has its own frequency. Here are the vibrations that shape different aspects of the work:</p>
+      
+      <ul class="elemental-list">
+        <li>🔥 <strong>Crumb Development</strong> – 432Hz meditation bells, forest sounds, gentle rain</li>
+        <li>🌊 <strong>Interface Design</strong> – Ocean waves, ambient drones, crystalline tones</li>
+        <li>🌬️ <strong>Writing & Content</strong> – Wind chimes, distant thunder, bird songs</li>
+        <li>🪨 <strong>Architecture & Planning</strong> – Deep earth tones, stone percussion, cave echoes</li>
+        <li>✨ <strong>Vision Work</strong> – Cosmic frequencies, stellar winds, quantum harmonics</li>
+      </ul>
+      
+      <p><em>Sound is the bridge between the physical and digital realms. Every pixel vibrates.</em></p>
+    </div>
+  </section>
     <p>&copy; 2025 Wyetherp. Walking gently through code and cosmos.</p>
   </footer>
 
@@ -654,7 +848,138 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
-    // Enhanced enter sacred space with smooth transition
+    // Secret menu functionality
+    let secretMenuVisible = false;
+    
+    function toggleSecretMenu() {
+      const menu = document.getElementById('secretMenu');
+      secretMenuVisible = !secretMenuVisible;
+      
+      if (secretMenuVisible) {
+        menu.classList.add('visible');
+        // Add subtle mystical sound effect (visual feedback)
+        createSecretMenuParticles();
+      } else {
+        menu.classList.remove('visible');
+      }
+    }
+    
+    // Close secret menu when clicking elsewhere
+    document.addEventListener('click', function(event) {
+      const menu = document.getElementById('secretMenu');
+      const portal = document.querySelector('.hidden-portal');
+      
+      if (secretMenuVisible && !menu.contains(event.target) && event.target !== portal) {
+        secretMenuVisible = false;
+        menu.classList.remove('visible');
+      }
+    });
+    
+    // Create particles when secret menu opens
+    function createSecretMenuParticles() {
+      const particles = 6;
+      const portal = document.querySelector('.hidden-portal');
+      const rect = portal.getBoundingClientRect();
+      
+      for (let i = 0; i < particles; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'fixed';
+        particle.style.left = rect.left + rect.width/2 + 'px';
+        particle.style.top = rect.top + rect.height/2 + 'px';
+        particle.style.width = '3px';
+        particle.style.height = '3px';
+        particle.style.background = '#9370db';
+        particle.style.borderRadius = '50%';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '9999';
+        
+        document.body.appendChild(particle);
+        
+        const angle = (i / particles) * Math.PI * 2;
+        const distance = 60;
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
+        
+        particle.animate([
+          { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+          { transform: `translate(${x}px, ${y}px) scale(0)`, opacity: 0 }
+        ], {
+          duration: 800,
+          easing: 'ease-out'
+        }).onfinish = () => particle.remove();
+      }
+    }
+    
+    // Cosmic Mode activation
+    function activateCosmicMode() {
+      const body = document.body;
+      const currentFilter = body.style.filter;
+      
+      if (currentFilter.includes('hue-rotate')) {
+        // Deactivate cosmic mode
+        body.style.filter = '';
+        body.style.animation = '';
+        createNotification('🌌 Cosmic Mode Deactivated', 'Returning to earthly frequencies...');
+      } else {
+        // Activate cosmic mode
+        body.style.filter = 'hue-rotate(180deg) saturate(1.5) brightness(1.1)';
+        body.style.animation = 'cosmic-pulse 8s ease-in-out infinite alternate';
+        createNotification('🌌 Cosmic Mode Activated', 'Reality shifting... frequencies elevated...');
+      }
+      
+      // Close secret menu
+      secretMenuVisible = false;
+      document.getElementById('secretMenu').classList.remove('visible');
+    }
+    
+    // Create notification system
+    function createNotification(title, message) {
+      const notification = document.createElement('div');
+      notification.style.position = 'fixed';
+      notification.style.top = '20px';
+      notification.style.left = '50%';
+      notification.style.transform = 'translateX(-50%)';
+      notification.style.background = 'rgba(11, 12, 30, 0.95)';
+      notification.style.border = '1px solid var(--aether)';
+      notification.style.borderRadius = '15px';
+      notification.style.padding = '1rem 2rem';
+      notification.style.color = 'var(--soft-light)';
+      notification.style.textAlign = 'center';
+      notification.style.zIndex = '10000';
+      notification.style.backdropFilter = 'blur(10px)';
+      notification.style.boxShadow = '0 10px 30px rgba(147, 112, 219, 0.3)';
+      
+      notification.innerHTML = `
+        <h4 style="color: var(--aether); margin: 0 0 0.5rem 0;">${title}</h4>
+        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">${message}</p>
+      `;
+      
+      document.body.appendChild(notification);
+      
+      // Animate in
+      notification.animate([
+        { opacity: 0, transform: 'translateX(-50%) translateY(-20px)' },
+        { opacity: 1, transform: 'translateX(-50%) translateY(0)' }
+      ], { duration: 300, easing: 'ease-out' });
+      
+      // Remove after 3 seconds
+      setTimeout(() => {
+        notification.animate([
+          { opacity: 1, transform: 'translateX(-50%) translateY(0)' },
+          { opacity: 0, transform: 'translateX(-50%) translateY(-20px)' }
+        ], { duration: 300, easing: 'ease-in' }).onfinish = () => notification.remove();
+      }, 3000);
+    }
+    
+    // Add cosmic pulse animation
+    const cosmicStyle = document.createElement('style');
+    cosmicStyle.textContent = `
+      @keyframes cosmic-pulse {
+        0% { filter: hue-rotate(180deg) saturate(1.5) brightness(1.1); }
+        100% { filter: hue-rotate(200deg) saturate(2) brightness(1.3); }
+      }
+    `;
+    document.head.appendChild(cosmicStyle);
     function enterSacredSpace() {
       const button = event.target;
       const originalText = button.textContent;
