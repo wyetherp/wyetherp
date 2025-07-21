@@ -17,6 +17,24 @@
   }
 }
 
+@keyframes shoot {
+  from { transform: translateX(0) translateY(0) rotate(45deg); opacity: 0.8; }
+  to { transform: translateX(400px) translateY(400px); opacity: 0; }
+}
+
+.shooting-star {
+  position: absolute;
+  height: 2px;
+  background: white;
+  opacity: 0.8;
+  border-radius: 1px;
+  transform: rotate(45deg);
+  animation: shoot 1.2s ease-out forwards;
+  pointer-events: none;
+  filter: blur(1px);
+}
+
+
 .glow-on-hover {
   transition: all 0.3s ease;
 }
@@ -757,6 +775,8 @@
 <body>
   <!-- Mystical background -->
   <div class="cosmos" id="cosmos"></div>
+  <canvas id="constellation" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:-1;"></canvas>
+
 
   <!-- Hidden Portal (invisible clickable area) -->
   <button class="hidden-portal" onclick="toggleSecretMenu()" title="✨"></button>
@@ -1066,18 +1086,72 @@
     
     // Create mystical background stars
     function createCosmos() {
-      const cosmos = document.getElementById('cosmos');
-      const starCount = 50;
-      
-      for (let i = 0; i < starCount; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        star.style.left = Math.random() * 100 + '%';
-        star.style.top = Math.random() * 100 + '%';
-        star.style.width = star.style.height = (Math.random() * 3 + 1) + 'px';
-        star.style.animationDelay = Math.random() * 4 + 's';
-        cosmos.appendChild(star);
-      }
+      function drawConstellation() {
+  const canvas = document.getElementById('constellation');
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+  const ctx = canvas.getContext('2d');
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+  ctx.fillStyle = 'rgba(255,255,255,0.1)';
+
+  // Get aether star center in canvas coords
+  const aetherEl = document.querySelector('.element-orb.aether');
+  const rect = aetherEl.getBoundingClientRect();
+  const headX = rect.left + rect.width/2;
+  const headY = rect.top + rect.height/2;
+
+  // Body points (relative offsets)
+  const points = [
+    [headX, headY],                     // head
+    [headX, headY + 50],                // torso
+    [headX - 20, headY + 90],           // left leg
+    [headX, headY + 50],                // back to torso
+    [headX + 20, headY + 90],           // right leg
+    [headX, headY + 60],                // back to torso
+    [headX - 30, headY + 30],           // left arm
+    [headX, headY + 50],                // back to torso
+    [headX + 30, headY + 30],           // right arm
+  ];
+
+  ctx.beginPath();
+  ctx.moveTo(points[0][0], points[0][1]);
+  for (let i = 1; i < points.length; i++) {
+    ctx.lineTo(points[i][0], points[i][1]);
+  }
+  ctx.stroke();
+
+  // Draw tiny “key” stars at joints
+  points.slice(1).forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p[0], p[1], 1.5, 0, 2 * Math.PI);
+    ctx.fill();
+  });
+}
+
+function launchShootingStar() {
+  const star = document.createElement('div');
+  star.className = 'shooting-star';
+  document.getElementById('cosmos').appendChild(star);
+  const xStart = Math.random() * window.innerWidth;
+  const yStart = Math.random() * window.innerHeight * 0.5;
+  const length = 150 + Math.random() * 200;
+
+  star.style.left = xStart + 'px';
+  star.style.top = yStart + 'px';
+  star.style.width = length + 'px';
+
+  star.addEventListener('animationend', () => star.remove());
+}
+
+// initiate shooting stars every 7 seconds
+setInterval(launchShootingStar, 5000);
+
+
+// redraw on load & resize
+window.addEventListener('load', drawConstellation);
+window.addEventListener('resize', drawConstellation);
+
     }
     
     // Page navigation system
