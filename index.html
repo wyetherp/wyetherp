@@ -1,6 +1,4 @@
-<footer>
-    <p>&copy; 2025 Wyetherp. Walking gently through code and cosmos.</p>
-  </footer><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -56,6 +54,95 @@
     @keyframes twinkle {
       0% { opacity: 0.3; transform: scale(1); }
       100% { opacity: 1; transform: scale(1.2); }
+    }
+    
+    /* Hidden mystical menu */
+    .hidden-portal {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 1001;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .hidden-portal:hover {
+      opacity: 0.1;
+      background: radial-gradient(circle, var(--aether), transparent);
+    }
+    
+    .secret-menu {
+      position: fixed;
+      top: 60px;
+      right: 20px;
+      background: rgba(11, 12, 30, 0.95);
+      backdrop-filter: blur(15px);
+      border: 1px solid var(--aether);
+      border-radius: 15px;
+      padding: 1.5rem;
+      min-width: 200px;
+      z-index: 1002;
+      opacity: 0;
+      transform: translateY(-20px) scale(0.9);
+      transition: all 0.3s ease;
+      pointer-events: none;
+      box-shadow: 0 10px 30px rgba(147, 112, 219, 0.3);
+    }
+    
+    .secret-menu.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: all;
+    }
+    
+    .secret-menu h3 {
+      color: var(--aether);
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      text-align: center;
+      border-bottom: 1px solid rgba(147, 112, 219, 0.3);
+      padding-bottom: 0.5rem;
+    }
+    
+    .secret-menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .secret-menu li {
+      margin: 0.8rem 0;
+    }
+    
+    .secret-menu a {
+      color: var(--soft-light);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+    
+    .secret-menu a:hover {
+      background: rgba(147, 112, 219, 0.2);
+      color: var(--aether);
+      transform: translateX(5px);
+    }
+    
+    .secret-item-icon {
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
     /* Navigation */
@@ -452,94 +539,23 @@
       opacity: 0.7;
     }
     
-    /* Hidden mystical menu */
-    .hidden-portal {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      width: 30px;
-      height: 30px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      z-index: 1001;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+    /* Sacred Geometry Animations */
+    @keyframes rotateSlow {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
     }
     
-    .hidden-portal:hover {
-      opacity: 0.1;
-      background: radial-gradient(circle, var(--aether), transparent);
+    @keyframes pulseOverlay {
+      0%, 100% { transform: scale(1); opacity: 0.4; }
+      50% { transform: scale(1.02); opacity: 0.6; }
     }
     
-    .secret-menu {
-      position: fixed;
-      top: 60px;
-      right: 20px;
-      background: rgba(11, 12, 30, 0.95);
-      backdrop-filter: blur(15px);
-      border: 1px solid var(--aether);
-      border-radius: 15px;
-      padding: 1.5rem;
-      min-width: 200px;
-      z-index: 1002;
-      opacity: 0;
-      transform: translateY(-20px) scale(0.9);
-      transition: all 0.3s ease;
-      pointer-events: none;
-      box-shadow: 0 10px 30px rgba(147, 112, 219, 0.3);
+    @keyframes fibonacci-pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.7; }
     }
     
-    .secret-menu.visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      pointer-events: all;
-    }
-    
-    .secret-menu h3 {
-      color: var(--aether);
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
-      text-align: center;
-      border-bottom: 1px solid rgba(147, 112, 219, 0.3);
-      padding-bottom: 0.5rem;
-    }
-    
-    .secret-menu ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    
-    .secret-menu li {
-      margin: 0.8rem 0;
-    }
-    
-    .secret-menu a {
-      color: var(--soft-light);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-    }
-    
-    .secret-menu a:hover {
-      background: rgba(147, 112, 219, 0.2);
-      color: var(--aether);
-      transform: translateX(5px);
-    }
-    
-    .secret-item-icon {
-      width: 16px;
-      height: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    /* Responsive design */
     @media (max-width: 768px) {
       .nav-links {
         gap: 1rem;
@@ -551,14 +567,45 @@
       }
       
       .element-orbits {
-        width: 250px;
-        height: 250px;
+        width: 280px;
+        height: 280px;
       }
       
+      .orbit-1 { width: 120px; height: 120px; }
+      .orbit-2 { width: 160px; height: 160px; }
+      .orbit-3 { width: 200px; height: 200px; }
+      .orbit-4 { width: 240px; height: 240px; }
+      
       .element-orb {
-        width: 50px;
-        height: 50px;
-        font-size: 1.2rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+      }
+      
+      .aether {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+      }
+      
+      @keyframes orbit-fire {
+        0% { transform: translate(-50%, -50%) rotate(0deg) translateX(60px) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg) translateX(60px) rotate(-360deg); }
+      }
+      
+      @keyframes orbit-earth {
+        0% { transform: translate(-50%, -50%) rotate(0deg) translateX(80px) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg) translateX(80px) rotate(-360deg); }
+      }
+      
+      @keyframes orbit-water {
+        0% { transform: translate(-50%, -50%) rotate(0deg) translateX(100px) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg) translateX(100px) rotate(-360deg); }
+      }
+      
+      @keyframes orbit-air {
+        0% { transform: translate(-50%, -50%) rotate(0deg) translateX(120px) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg) translateX(120px) rotate(-360deg); }
       }
     }
   </style>
@@ -566,7 +613,7 @@
 <body>
   <!-- Mystical background -->
   <div class="cosmos" id="cosmos"></div>
-  
+
   <!-- Hidden Portal (invisible clickable area) -->
   <button class="hidden-portal" onclick="toggleSecretMenu()" title="✨"></button>
   
@@ -578,10 +625,56 @@
       <li><a href="#" onclick="showPage('garden')"><span class="secret-item-icon">🌱</span> Digital Garden</a></li>
       <li><a href="#" onclick="showPage('workshop')"><span class="secret-item-icon">🔮</span> Sacred Workshop</a></li>
       <li><a href="#" onclick="showPage('frequencies')"><span class="secret-item-icon">🎵</span> Frequencies</a></li>
-      <li><a href="#" onclick="activateCosmicMode()"><span class="secret-item-icon">🌌</span> Cosmic Mode</a></li>
+      <li><a href="#" onclick="activateSacredGeometry()"><span class="secret-item-icon">🔱</span> Sacred Geometry</a></li>
     </ul>
   </div>
 
+  <!-- Sacred Geometry Mode Overlay -->
+  <div id="sacredGeometryOverlay" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:9998; pointer-events:none;">
+    <!-- Flower of Life -->
+    <svg id="flowerOfLife" width="200" height="200" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) rotate(0deg); opacity:0.4; animation: rotateSlow 60s linear infinite;">
+      <defs>
+        <circle id="circle" r="50" fill="none" stroke="#9370db" stroke-width="1.5" />
+      </defs>
+      <g>
+        <!-- Central circle -->
+        <use href="#circle" x="100" y="100" />
+        <!-- Six surrounding circles -->
+        <use href="#circle" x="150" y="100" />
+        <use href="#circle" x="125" y="143.3" />
+        <use href="#circle" x="75" y="143.3" />
+        <use href="#circle" x="50" y="100" />
+        <use href="#circle" x="75" y="56.7" />
+        <use href="#circle" x="125" y="56.7" />
+      </g>
+    </svg>
+
+    <!-- Golden Ratio Spiral -->
+    <svg id="goldenSpiral" width="300" height="300" style="position:absolute; top:20px; right:20px; opacity:0.5; animation: fibonacci-pulse 8s ease-in-out infinite;">
+      <path d="M150,150 Q120,120 90,150 Q60,180 90,210 Q120,240 150,210 Q180,180 150,150" 
+            fill="none" stroke="#00bfff" stroke-width="2" stroke-dasharray="5,5" />
+      <path d="M150,150 Q180,120 210,150 Q240,180 210,210 Q180,240 150,210" 
+            fill="none" stroke="#00bfff" stroke-width="1.5" stroke-dasharray="3,3" />
+    </svg>
+
+    <!-- Fibonacci Grid -->
+    <div id="fibonacciGrid" style="position:absolute; top:20px; left:20px; width:200px; height:200px; opacity:0.4; animation: fibonacci-pulse 6s ease-in-out infinite;">
+      <svg width="200" height="200">
+        <rect x="0" y="0" width="50" height="50" fill="none" stroke="#87ceeb" stroke-width="1" />
+        <rect x="50" y="0" width="50" height="50" fill="none" stroke="#87ceeb" stroke-width="1" />
+        <rect x="0" y="50" width="100" height="100" fill="none" stroke="#87ceeb" stroke-width="1.5" />
+        <rect x="100" y="0" width="100" height="150" fill="none" stroke="#87ceeb" stroke-width="1" />
+        <rect x="0" y="150" width="200" height="50" fill="none" stroke="#87ceeb" stroke-width="1" />
+      </svg>
+    </div>
+
+    <!-- Platonic Solids in corners -->
+    <div style="position:absolute; top:50px; left:50px; font-size:2rem; opacity:0.6; animation: fibonacci-pulse 4s ease-in-out infinite;">🔺</div>
+    <div style="position:absolute; top:50px; right:50px; font-size:2rem; opacity:0.6; animation: fibonacci-pulse 5s ease-in-out infinite;">⬜</div>
+    <div style="position:absolute; bottom:50px; left:50px; font-size:2rem; opacity:0.6; animation: fibonacci-pulse 6s ease-in-out infinite;">🔷</div>
+    <div style="position:absolute; bottom:50px; right:50px; font-size:2rem; opacity:0.6; animation: fibonacci-pulse 7s ease-in-out infinite;">⚪</div>
+  </div>
+  
   <!-- Navigation -->
   <nav>
     <div class="nav-container">
@@ -628,7 +721,7 @@
       
       <h2>My Mission</h2>
       <p>I create tools for the tender-minded. For those who feel deeply, think differently, and move through the world with unspoken brilliance.</p>
-      <p>Wyetherp is more than a portfolio — it's a philosophy. A place where design honors rhythm, emotion, and elemental presence.</p>
+      <p>Wyetherp is more than a portfolio — it's a philosophy. A place that honors rhythm, emotion, and elemental presence.</p>
       
       <h2>My Journey</h2>
       <p>As a developer, artist, and neuro-spicy creator, I've always sensed patterns beneath the surface. Whether I'm designing for Crumb — an AI companion for neurodivergent minds — or crafting interfaces that breathe, I hold one question close:</p>
@@ -646,7 +739,7 @@
         <li>🌊 <strong>Water</strong> – Intuitive design that flows with neuro-spicy sensitivity and rhythm.</li>
         <li>🌬️ <strong>Air</strong> – Interfaces that speak clearly, accessibly, and kindly to every user.</li>
         <li>🪨 <strong>Earth</strong> – Practical tools built to last, rooted in real-world needs.</li>
-        <li>✨ <strong>Aether</strong> – The hidden light, the dream behind the code. I build for that, too.</li>
+        <li>✨ <strong>Aether</strong> – The hidden light, the dream behind the code.</li>
       </ul>
       
       <h2>Guiding Principles</h2>
@@ -714,6 +807,8 @@
     </div>
   </section>
 
+  <!-- Hidden Pages from Secret Menu -->
+  
   <!-- Codex Page (Hidden) -->
   <section id="codex" class="page-section">
     <div class="container">
@@ -805,10 +900,16 @@
       <p><em>Sound is the bridge between the physical and digital realms. Every pixel vibrates.</em></p>
     </div>
   </section>
+
+  <footer>
     <p>&copy; 2025 Wyetherp. Walking gently through code and cosmos.</p>
   </footer>
 
   <script>
+    // Sacred geometry state
+    let sacredGeometryActive = false;
+    let secretMenuVisible = false;
+    
     // Create mystical background stars
     function createCosmos() {
       const cosmos = document.getElementById('cosmos');
@@ -844,142 +945,17 @@
         activeLink.classList.add('active');
       }
       
+      // Close secret menu if open
+      if (secretMenuVisible) {
+        secretMenuVisible = false;
+        document.getElementById('secretMenu').classList.remove('visible');
+      }
+      
       // Smooth scroll to top
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
-    // Secret menu functionality
-    let secretMenuVisible = false;
-    
-    function toggleSecretMenu() {
-      const menu = document.getElementById('secretMenu');
-      secretMenuVisible = !secretMenuVisible;
-      
-      if (secretMenuVisible) {
-        menu.classList.add('visible');
-        // Add subtle mystical sound effect (visual feedback)
-        createSecretMenuParticles();
-      } else {
-        menu.classList.remove('visible');
-      }
-    }
-    
-    // Close secret menu when clicking elsewhere
-    document.addEventListener('click', function(event) {
-      const menu = document.getElementById('secretMenu');
-      const portal = document.querySelector('.hidden-portal');
-      
-      if (secretMenuVisible && !menu.contains(event.target) && event.target !== portal) {
-        secretMenuVisible = false;
-        menu.classList.remove('visible');
-      }
-    });
-    
-    // Create particles when secret menu opens
-    function createSecretMenuParticles() {
-      const particles = 6;
-      const portal = document.querySelector('.hidden-portal');
-      const rect = portal.getBoundingClientRect();
-      
-      for (let i = 0; i < particles; i++) {
-        const particle = document.createElement('div');
-        particle.style.position = 'fixed';
-        particle.style.left = rect.left + rect.width/2 + 'px';
-        particle.style.top = rect.top + rect.height/2 + 'px';
-        particle.style.width = '3px';
-        particle.style.height = '3px';
-        particle.style.background = '#9370db';
-        particle.style.borderRadius = '50%';
-        particle.style.pointerEvents = 'none';
-        particle.style.zIndex = '9999';
-        
-        document.body.appendChild(particle);
-        
-        const angle = (i / particles) * Math.PI * 2;
-        const distance = 60;
-        const x = Math.cos(angle) * distance;
-        const y = Math.sin(angle) * distance;
-        
-        particle.animate([
-          { transform: 'translate(0, 0) scale(1)', opacity: 1 },
-          { transform: `translate(${x}px, ${y}px) scale(0)`, opacity: 0 }
-        ], {
-          duration: 800,
-          easing: 'ease-out'
-        }).onfinish = () => particle.remove();
-      }
-    }
-    
-    // Cosmic Mode activation
-    function activateCosmicMode() {
-      const body = document.body;
-      const currentFilter = body.style.filter;
-      
-      if (currentFilter.includes('hue-rotate')) {
-        // Deactivate cosmic mode
-        body.style.filter = '';
-        body.style.animation = '';
-        createNotification('🌌 Cosmic Mode Deactivated', 'Returning to earthly frequencies...');
-      } else {
-        // Activate cosmic mode
-        body.style.filter = 'hue-rotate(180deg) saturate(1.5) brightness(1.1)';
-        body.style.animation = 'cosmic-pulse 8s ease-in-out infinite alternate';
-        createNotification('🌌 Cosmic Mode Activated', 'Reality shifting... frequencies elevated...');
-      }
-      
-      // Close secret menu
-      secretMenuVisible = false;
-      document.getElementById('secretMenu').classList.remove('visible');
-    }
-    
-    // Create notification system
-    function createNotification(title, message) {
-      const notification = document.createElement('div');
-      notification.style.position = 'fixed';
-      notification.style.top = '20px';
-      notification.style.left = '50%';
-      notification.style.transform = 'translateX(-50%)';
-      notification.style.background = 'rgba(11, 12, 30, 0.95)';
-      notification.style.border = '1px solid var(--aether)';
-      notification.style.borderRadius = '15px';
-      notification.style.padding = '1rem 2rem';
-      notification.style.color = 'var(--soft-light)';
-      notification.style.textAlign = 'center';
-      notification.style.zIndex = '10000';
-      notification.style.backdropFilter = 'blur(10px)';
-      notification.style.boxShadow = '0 10px 30px rgba(147, 112, 219, 0.3)';
-      
-      notification.innerHTML = `
-        <h4 style="color: var(--aether); margin: 0 0 0.5rem 0;">${title}</h4>
-        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">${message}</p>
-      `;
-      
-      document.body.appendChild(notification);
-      
-      // Animate in
-      notification.animate([
-        { opacity: 0, transform: 'translateX(-50%) translateY(-20px)' },
-        { opacity: 1, transform: 'translateX(-50%) translateY(0)' }
-      ], { duration: 300, easing: 'ease-out' });
-      
-      // Remove after 3 seconds
-      setTimeout(() => {
-        notification.animate([
-          { opacity: 1, transform: 'translateX(-50%) translateY(0)' },
-          { opacity: 0, transform: 'translateX(-50%) translateY(-20px)' }
-        ], { duration: 300, easing: 'ease-in' }).onfinish = () => notification.remove();
-      }, 3000);
-    }
-    
-    // Add cosmic pulse animation
-    const cosmicStyle = document.createElement('style');
-    cosmicStyle.textContent = `
-      @keyframes cosmic-pulse {
-        0% { filter: hue-rotate(180deg) saturate(1.5) brightness(1.1); }
-        100% { filter: hue-rotate(200deg) saturate(2) brightness(1.3); }
-      }
-    `;
-    document.head.appendChild(cosmicStyle);
+    // Enhanced enter sacred space with smooth transition
     function enterSacredSpace() {
       const button = event.target;
       const originalText = button.textContent;
@@ -1051,6 +1027,8 @@
         }).onfinish = () => ring.remove();
       }
     }
+    
+    // Enhanced resonance ping with visual feedback
     function resonancePing() {
       const button = event.target;
       const originalText = button.textContent;
@@ -1082,7 +1060,7 @@
         particle.style.top = rect.top + rect.height/2 + 'px';
         particle.style.width = '4px';
         particle.style.height = '4px';
-        particle.style.background = '#b794f6';
+        particle.style.background = '#9370db';
         particle.style.borderRadius = '50%';
         particle.style.pointerEvents = 'none';
         particle.style.zIndex = '9999';
@@ -1122,6 +1100,128 @@
       }, 3000);
     }
     
+    // Secret menu functionality
+    function toggleSecretMenu() {
+      const menu = document.getElementById('secretMenu');
+      secretMenuVisible = !secretMenuVisible;
+      
+      if (secretMenuVisible) {
+        menu.classList.add('visible');
+        createSecretMenuParticles();
+      } else {
+        menu.classList.remove('visible');
+      }
+    }
+    
+    // Close secret menu when clicking elsewhere
+    document.addEventListener('click', function(event) {
+      const menu = document.getElementById('secretMenu');
+      const portal = document.querySelector('.hidden-portal');
+      
+      if (secretMenuVisible && !menu.contains(event.target) && event.target !== portal) {
+        secretMenuVisible = false;
+        menu.classList.remove('visible');
+      }
+    });
+    
+    // Create particles when secret menu opens
+    function createSecretMenuParticles() {
+      const particles = 6;
+      const portal = document.querySelector('.hidden-portal');
+      const rect = portal.getBoundingClientRect();
+      
+      for (let i = 0; i < particles; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'fixed';
+        particle.style.left = rect.left + rect.width/2 + 'px';
+        particle.style.top = rect.top + rect.height/2 + 'px';
+        particle.style.width = '3px';
+        particle.style.height = '3px';
+        particle.style.background = '#9370db';
+        particle.style.borderRadius = '50%';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '9999';
+        
+        document.body.appendChild(particle);
+        
+        const angle = (i / particles) * Math.PI * 2;
+        const distance = 60;
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
+        
+        particle.animate([
+          { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+          { transform: `translate(${x}px, ${y}px) scale(0)`, opacity: 0 }
+        ], {
+          duration: 800,
+          easing: 'ease-out'
+        }).onfinish = () => particle.remove();
+      }
+    }
+    
+    // Sacred Geometry Mode - Enhanced Version
+    function activateSacredGeometry() {
+      const overlay = document.getElementById('sacredGeometryOverlay');
+      
+      if (!sacredGeometryActive) {
+        // Activate Sacred Geometry
+        overlay.style.display = 'block';
+        overlay.style.animation = 'pulseOverlay 6s ease-in-out infinite';
+        sacredGeometryActive = true;
+        createNotification('🔱 Sacred Geometry Activated', 'The hidden patterns of creation revealed... Fibonacci spirals, golden ratios, and platonic solids now dance across your reality.');
+      } else {
+        // Deactivate Sacred Geometry
+        overlay.style.display = 'none';
+        overlay.style.animation = '';
+        sacredGeometryActive = false;
+        createNotification('🔱 Sacred Geometry Deactivated', 'The patterns fade back into the quantum field...');
+      }
+      
+      // Close secret menu
+      secretMenuVisible = false;
+      document.getElementById('secretMenu').classList.remove('visible');
+    }
+    
+    // Create notification system
+    function createNotification(title, message) {
+      const notification = document.createElement('div');
+      notification.style.position = 'fixed';
+      notification.style.top = '20px';
+      notification.style.left = '50%';
+      notification.style.transform = 'translateX(-50%)';
+      notification.style.background = 'rgba(11, 12, 30, 0.95)';
+      notification.style.border = '1px solid var(--aether)';
+      notification.style.borderRadius = '15px';
+      notification.style.padding = '1rem 2rem';
+      notification.style.color = 'var(--soft-light)';
+      notification.style.textAlign = 'center';
+      notification.style.zIndex = '10000';
+      notification.style.backdropFilter = 'blur(10px)';
+      notification.style.boxShadow = '0 10px 30px rgba(147, 112, 219, 0.3)';
+      notification.style.maxWidth = '400px';
+      
+      notification.innerHTML = `
+        <h4 style="color: var(--aether); margin: 0 0 0.5rem 0;">${title}</h4>
+        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">${message}</p>
+      `;
+      
+      document.body.appendChild(notification);
+      
+      // Animate in
+      notification.animate([
+        { opacity: 0, transform: 'translateX(-50%) translateY(-20px)' },
+        { opacity: 1, transform: 'translateX(-50%) translateY(0)' }
+      ], { duration: 300, easing: 'ease-out' });
+      
+      // Remove after 4 seconds
+      setTimeout(() => {
+        notification.animate([
+          { opacity: 1, transform: 'translateX(-50%) translateY(0)' },
+          { opacity: 0, transform: 'translateX(-50%) translateY(-20px)' }
+        ], { duration: 300, easing: 'ease-in' }).onfinish = () => notification.remove();
+      }, 4000);
+    }
+    
     // Element orb interactions
     document.addEventListener('DOMContentLoaded', function() {
       createCosmos();
@@ -1147,6 +1247,7 @@
           notification.style.textAlign = 'center';
           notification.style.zIndex = '10000';
           notification.style.maxWidth = '400px';
+          notification.style.backdropFilter = 'blur(10px)';
           
           notification.innerHTML = `
             <h3 style="color: var(--aether); margin-bottom: 1rem;">${element}</h3>
