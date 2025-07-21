@@ -277,14 +277,15 @@
     }
     
     .element-orbits {
-      position: relative;
-      width: 350px;
-      height: 350px;
-      margin: 2rem auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  width: 400px;
+  height: 400px;
+  margin: 2rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
     
     /* Central aether (sun) */
     .aether { 
@@ -308,9 +309,13 @@
     }
     
     .aether:hover {
-      transform: translate(-50%, -50%) scale(1.1);
-      box-shadow: 0 0 60px rgba(147, 112, 219, 1), 0 0 120px rgba(147, 112, 219, 0.6);
-    }
+  transform: translate(-50%, -50%) scale(1.2);
+  box-shadow:
+    0 0 80px rgba(183, 148, 246, 1),
+    0 0 150px rgba(183, 148, 246, 0.8),
+    0 0 250px rgba(183, 148, 246, 0.6);
+}
+
     
     /* Orbit rings */
     .orbit-ring {
