@@ -6,6 +6,33 @@
   <meta name="description" content="Wyetherp — Tech for the soul and senses. Creating tools for the tender-minded." />
   <title>Wyetherp</title>
   <style>
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.glow-on-hover {
+  transition: all 0.3s ease;
+}
+.glow-on-hover:hover {
+  color: var(--aether);
+  text-shadow: 0 0 10px rgba(147, 112, 219, 0.7);
+  transform: scale(1.02);
+}
+
+.highlight-aether {
+  color: var(--aether);
+  font-weight: bold;
+  text-shadow: 0 0 8px rgba(147, 112, 219, 0.3);
+}
+
+
     :root {
       --fire: #ff4500;
       --water: #00bfff;
@@ -713,47 +740,49 @@
     <button class="enter-portal" onclick="enterSacredSpace()">Enter the Sacred Space</button>
   </section>
 
-  <!-- About Page -->
-  <section id="about" class="page-section about-page">
-    <div class="container">
-      <h1>About Wyeth</h1>
-      <p class="intro-tagline">Exploring the crossroads of neurodivergence, nature, and design.</p>
-      
-      <h2>My Mission</h2>
-      <p>I create tools for the tender-minded. For those who feel deeply, think differently, and move through the world with unspoken brilliance.</p>
-      <p>Wyetherp is more than a portfolio — it's a philosophy. A place that honors rhythm, emotion, and elemental presence.</p>
-      
-      <h2>My Journey</h2>
-      <p>As a developer, artist, and neuro-spicy creator, I've always sensed patterns beneath the surface. Whether I'm designing for Crumb — an AI companion for neurodivergent minds — or crafting interfaces that breathe, I hold one question close:</p>
-      
-      <blockquote>
-        <em>"How can technology feel like a forest path, not a sterile tunnel?"</em>
-      </blockquote>
-      
-      <p>I don't just build with logic. I build with care.</p>
-      
-      <h2>The Elemental Compass</h2>
-      <p>Each element guides a core part of my creative mission:</p>
-      <ul class="elemental-list">
-        <li>🔥 <strong>Fire</strong> – Crumb's spark: igniting sacred tech that serves and awakens.</li>
-        <li>🌊 <strong>Water</strong> – Intuitive design that flows with neuro-spicy sensitivity and rhythm.</li>
-        <li>🌬️ <strong>Air</strong> – Interfaces that speak clearly, accessibly, and kindly to every user.</li>
-        <li>🪨 <strong>Earth</strong> – Practical tools built to last, rooted in real-world needs.</li>
-        <li>✨ <strong>Aether</strong> – The hidden light, the dream behind the code.</li>
-      </ul>
-      
-      <h2>Guiding Principles</h2>
-      <ul class="elemental-list">
-        <li>🌿 Rooted in nature's rhythm</li>
-        <li>💡 Illuminated by the hidden lights</li>
-        <li>🌀 Embracing the sacred spiral of growth</li>
-        <li>🌈 Designed with emotional resonance</li>
-      </ul>
-      
-      <button class="resonance-button" onclick="resonancePing()">✨ Ping My Resonance ✨</button>
-    </div>
-  </section>
+<!-- About Page -->
+<!-- About Page -->
+<section id="about" class="page-section about-page">
+  <div class="container" style="animation: fadeInUp 1.2s ease-out;">
+    <h1 style="background: linear-gradient(45deg, var(--aether), var(--water), var(--fire));
+               background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+               animation: gentle-pulse 4s infinite;">Walking the Forest Path</h1>
 
+    <p class="intro-tagline glow-on-hover">Most technology feels cold and rushed—like walking through a tunnel. I like the forest path instead, where things move slowly and care about how you feel.</p>
+
+    <h2 class="glow-on-hover">What I Believe</h2>
+    <p>I think every website or app is a chance to connect with someone. Code can help people—or make things harder. I don’t just build software. I build digital spaces where people who think differently feel at home.</p>
+
+    <h2 class="glow-on-hover">Listening First</h2>
+    <p>Before I start anything, I ask, “What does this want to be?” Whether I’m working on Crumb (my gentle AI friend) or building a website, I try to hear the quiet things most tech ignores. The best ideas often speak softly.</p>
+
+    <h2 class="glow-on-hover">Code With Care</h2>
+    <p>Coding is like meditation to me. I write each function with a purpose. I place buttons where they feel right. I follow a simple truth: if something feels good, it usually works well too. The strongest tech is often the softest.</p>
+
+    <h2 class="glow-on-hover">The Five Elements</h2>
+    <p>I use five elements to guide me:</p>
+    <ul class="elemental-list">
+      <li>🔥 <strong>Fire</strong> – Inspiration and passion</li>
+      <li>🌊 <strong>Water</strong> – Smooth, easy flow</li>
+      <li>🌬️ <strong>Air</strong> – Clear and kind communication</li>
+      <li>🪨 <strong>Earth</strong> – Solid, steady foundations</li>
+      <li>✨ <strong>Aether</strong> – The big vision that ties it all together</li>
+    </ul>
+
+    <h2 class="glow-on-hover">My Mission</h2>
+    <p>I’m not here to build the fastest or fanciest apps. I want to make safe and thoughtful spaces—where all kinds of minds feel welcome. Most tech is built for one kind of brain. I build for the ones that don’t fit the mold.</p>
+
+    <blockquote>
+      <em>"The forest path takes longer than the tunnel, sure. But that’s where the magic lives—where we find not just our destination, but who we’re meant to be."</em>
+    </blockquote>
+
+    <button class="resonance-button glow-on-hover" onclick="resonancePing()">✨ Ping My Resonance ✨</button>
+  </div>
+</section>
+
+  
+
+  
   <!-- Projects Page -->
   <section id="projects" class="page-section">
     <div class="container">
