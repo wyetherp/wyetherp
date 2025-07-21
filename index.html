@@ -6,6 +6,41 @@
   <meta name="description" content="Wyetherp — Tech for the soul and senses. Creating tools for the tender-minded." />
   <title>Wyetherp</title>
   <style>
+
+
+.resonance-flare {
+  box-shadow:
+    0 0 60px rgba(255,255,255,0.9),
+    0 0 120px rgba(147,112,219,0.8),
+    0 0 200px rgba(147,112,219,0.6) !important;
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+
+.resonance-confirm {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(147, 112, 219, 0.85);
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  color: white;
+  font-size: 1.1rem;
+  box-shadow: 0 0 15px rgba(147,112,219,0.4);
+  animation: fadeOutUp 4s ease-out forwards;
+  z-index: 9999;
+}
+
+@keyframes fadeOutUp {
+  0% { opacity: 0; transform: translate(-50%, 20px); }
+  10% { opacity: 1; transform: translate(-50%, 0); }
+  90% { opacity: 1; transform: translate(-50%, -10px); }
+  100% { opacity: 0; transform: translate(-50%, -20px); }
+}
+
+
+
 @keyframes fadeInUp {
   0% {
     opacity: 0;
@@ -893,10 +928,10 @@
                background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
                animation: gentle-pulse 4s infinite;">Walking the Forest Path</h1>
 
-    <p class="intro-tagline glow-on-hover">Most technology feels cold and rushed—like walking through a tunnel. I like the forest path instead, where things move slowly and care about how you feel.</p>
+    <p class="intro-tagline glow-on-hover">Most technology feels mentally straining and overwhelming</p>
 
     <h2 class="glow-on-hover">What I Believe</h2>
-    <p>I think every website or app is a chance to connect with someone. Code can help people—or make things harder. I don’t just build software. I build digital spaces where people who think differently feel at home.</p>
+    <p>I believe every website or app is a chance to connect with someone. I don’t just build software. I build digital spaces where people who think differently feel at home.</p>
 
     <h2 class="glow-on-hover">Listening First</h2>
     <p>Before I start anything, I ask, “What does this want to be?” Whether I’m working on Crumb (my gentle AI friend) or building a website, I try to hear the quiet things most tech ignores. The best ideas often speak softly.</p>
@@ -907,9 +942,9 @@
     <h2 class="glow-on-hover">The Five Elements</h2>
     <p>I use five elements to guide me:</p>
     <ul class="elemental-list">
-      <li>🔥 <strong>Fire</strong> – Inspiration and passion</li>
-      <li>🌊 <strong>Water</strong> – Smooth, easy flow</li>
-      <li>🌬️ <strong>Air</strong> – Clear and kind communication</li>
+      <li>🔥 <strong>Fire</strong> – Inspiration / Passion</li>
+      <li>🌊 <strong>Water</strong> – Smooth, easy Flow</li>
+      <li>🌬️ <strong>Air</strong> – Clear / Kind communication</li>
       <li>🪨 <strong>Earth</strong> – Solid, steady foundations</li>
       <li>✨ <strong>Aether</strong> – The big vision that ties it all together</li>
     </ul>
@@ -1023,7 +1058,7 @@
         
         <div class="project-card">
           <h3>🎨 Emotional Color Theory</h3>
-          <p>How color palettes can create safer, more nurturing digital spaces for sensitive minds.</p>
+          <p>How color palettes can create more intuitive non-verbal communication.</p>
           <p><em>Blooming...</em></p>
         </div>
         
@@ -1256,25 +1291,20 @@ window.addEventListener('resize', drawConstellation);
       }
     }
     
-    // Enhanced resonance ping with visual feedback
     function resonancePing() {
-      const button = event.target;
-      const originalText = button.textContent;
-      
-      // Visual feedback
-      button.style.transform = 'scale(1.1)';
-      button.textContent = '🌟 Resonance received! 🌟';
-      button.style.background = 'linear-gradient(45deg, var(--aether), var(--water), var(--fire))';
-      
-      // Create floating particles
-      createResonanceParticles(button);
-      
-      setTimeout(() => {
-        button.style.transform = 'scale(1)';
-        button.textContent = originalText;
-        button.style.background = 'linear-gradient(45deg, var(--fire), var(--aether))';
-      }, 2000);
-    }
+  const aether = document.querySelector('.aether-core');
+  if (aether) {
+    aether.classList.add('resonance-flare');
+    setTimeout(() => aether.classList.remove('resonance-flare'), 1000);
+  }
+
+  const msg = document.createElement('div');
+  msg.className = 'resonance-confirm';
+  msg.innerHTML = "✨ Resonance sent into the cosmos...";
+  document.body.appendChild(msg);
+  setTimeout(() => msg.remove(), 4000);
+}
+
     
     // Create magical particles for resonance
     function createResonanceParticles(element) {
