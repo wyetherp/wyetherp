@@ -8,6 +8,45 @@
   <style>
 
 
+.featured-crumb {
+  background: linear-gradient(135deg, #f0f4ff, #e6e0f8);
+  border-left: 6px solid #9370db;
+  padding: 2em;
+  margin-bottom: 2em;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(147, 112, 219, 0.2);
+}
+
+.resume-section {
+  margin-top: 3em;
+  padding: 2em;
+  background: #fefefe;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.resume-button {
+  display: inline-block;
+  margin-top: 1em;
+  padding: 0.75em 1.5em;
+  background-color: #9370db;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+
+.resume-button:hover {
+  background-color: #7a5ec2;
+}
+
+
+
+
+
+
+
 .resonance-flare {
   box-shadow:
     0 0 60px rgba(255,255,255,0.9),
@@ -934,10 +973,10 @@
     <p>I believe every website or app is a chance to connect with someone. I don’t just build software. I build digital spaces where people who think differently feel at home.</p>
 
     <h2 class="glow-on-hover">Listening First</h2>
-    <p>Before I start anything, I ask, “What does this want to be?” Whether I’m working on Crumb (my gentle AI friend) or building a website, I try to hear the quiet things most tech ignores. The best ideas often speak softly.</p>
+    <p>I aim to build computers that are both easy to talk to, and can meet the unique preferences of every user.</p>
 
     <h2 class="glow-on-hover">Code With Care</h2>
-    <p>Coding is like meditation to me. I write each function with a purpose. I place buttons where they feel right. I follow a simple truth: if something feels good, it usually works well too. The strongest tech is often the softest.</p>
+    <p>My goal is to create tools that prioritize listening over commanding. That way they support, rather than control, the people who use them.</p>
 
     <h2 class="glow-on-hover">The Five Elements</h2>
     <p>I use five elements to guide me:</p>
@@ -946,17 +985,17 @@
       <li>🌊 <strong>Water</strong> – Smooth, easy Flow</li>
       <li>🌬️ <strong>Air</strong> – Clear / Kind communication</li>
       <li>🪨 <strong>Earth</strong> – Solid, steady foundations</li>
-      <li>✨ <strong>Aether</strong> – The big vision that ties it all together</li>
+      <li>✨ <strong>Aether</strong> – Quiet vision that holds the whole in harmony.</li>
     </ul>
 
     <h2 class="glow-on-hover">My Mission</h2>
-    <p>I’m not here to build the fastest or fanciest apps. I want to make safe and thoughtful spaces—where all kinds of minds feel welcome. Most tech is built for one kind of brain. I build for the ones that don’t fit the mold.</p>
+    <p>I’m not here to build the fastest or fanciest apps. I want to make safe and intuitive spaces—where all kinds of minds feel welcome. Most tech is built for one kind of brain. I build for the ones that don’t fit the mold.</p>
 
     <blockquote>
       <em>"“Not all paths are straight, nor short. But the winding road is where one finds their strength.” -Gandalf The White"</em>
     </blockquote>
 
-    <button class="resonance-button glow-on-hover" onclick="resonancePing()">✨ Ping My Resonance ✨</button>
+    <button class="resonance-button glow-on-hover" onclick="resonancePing()">✨ (im)Press_Me! ✨</button>
   </div>
 </section>
 
@@ -964,30 +1003,41 @@
 
   
   <!-- Projects Page -->
-  <section id="projects" class="page-section">
-    <div class="container">
-      <h1>Sacred Creations</h1>
-      <p>Projects that bridge the mystical and practical, designed with care for neurodivergent minds.</p>
-      
-      <div class="project-grid">
-        <div class="project-card">
-          <h3>🤖 Crumb</h3>
-          <p>An AI companion designed specifically for neurodivergent minds. Crumb understands the tender rhythms of different thinking and offers support that feels genuinely helpful, not overwhelming.</p>
-          <p><em>Currently in sacred development...</em></p>
-        </div>
-        
-        <div class="project-card">
-          <h3>🌊 Flow Interfaces</h3>
-          <p>Web designs that breathe with natural rhythm. Every interaction feels like a gentle conversation rather than a demanding transaction.</p>
-        </div>
-        
-        <div class="project-card">
-          <h3>✨ Elemental Design System</h3>
-          <p>A design framework based on the five elements, creating digital experiences that honor both functionality and emotional resonance.</p>
-        </div>
+<section id="projects" class="page-section">
+  <div class="container">
+    <h1>Current Creations</h1>
+    <p>Tools crafted with rhythm and resonance—where the mystical meets the practical, especially for neurodivergent minds.</p>
+
+    <!-- Featured Project: Crumb -->
+    <div class="project-card featured-crumb">
+      <h2>🤖 Crumb</h2>
+      <p><strong>A sacred companion for neurodivergent thinkers.</strong></p>
+      <p>Crumb isn’t just a gadget—it’s a gentle presence. Built on a Raspberry Pi, Crumb listens more than it speaks, offers elemental modes of support, and invites users into a world of symbolic, sensory-centered interaction. It’s technology softened into kindness.</p>
+      <p><em>Currently in sacred development…</em></p>
+    </div>
+
+    <!-- Other Projects -->
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>🌊 Flow Interfaces</h3>
+        <p>Web designs that move like breath. Interfaces built to ease, not pressure—each interaction mindful and kind.</p>
+      </div>
+
+      <div class="project-card">
+        <h3>✨ Elemental Design System</h3>
+        <p>A framework rooted in the five elements—creating emotionally intelligent designs that honor function, feeling, and form.</p>
       </div>
     </div>
-  </section>
+
+    <!-- Resume / Hire Me -->
+    <div class="resume-section">
+      <h2>🎓 Resume & Opportunities</h2>
+      <p>I'm currently open to meaningful work, internships, and collaborations. I bring curiosity, care, and a multidisciplinary approach to everything I build.</p>
+      <a href="your-resume-link.pdf" target="_blank" class="resume-button">View Resume</a>
+    </div>
+  </div>
+</section>
+///////
 
   <!-- Contact Page -->
   <section id="contact" class="page-section">
