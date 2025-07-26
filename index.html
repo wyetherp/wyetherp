@@ -31,7 +31,7 @@
   margin-top: 1em;
   padding: 0.75em 1.5em;
   background-color: #9370db;
-  color: white;
+  color: purple;
   text-decoration: none;
   border-radius: 6px;
   transition: background 0.3s ease;
@@ -1352,46 +1352,66 @@ window.addEventListener('resize', drawConstellation);
     
     // Create magical portal opening effect
     function createPortalEffect() {
-      const portalRings = 8;
-      const container = document.querySelector('.intro-page');
-      
-      for (let i = 0; i < portalRings; i++) {
-        const ring = document.createElement('div');
-        ring.style.position = 'fixed';
-        ring.style.top = '50%';
-        ring.style.left = '50%';
-        ring.style.width = '50px';
-        ring.style.height = '50px';
-        ring.style.border = '2px solid var(--aether)';
-        ring.style.borderRadius = '50%';
-        ring.style.transform = 'translate(-50%, -50%)';
-        ring.style.pointerEvents = 'none';
-        ring.style.zIndex = '9999';
-        ring.style.opacity = '0.8';
-        
-        container.appendChild(ring);
-        
-        // Animate rings expanding outward
-        ring.animate([
-          { 
-            width: '50px', 
-            height: '50px', 
-            opacity: 0.8,
-            transform: 'translate(-50%, -50%) scale(1)' 
-          },
-          { 
-            width: '800px', 
-            height: '800px', 
-            opacity: 0,
-            transform: 'translate(-50%, -50%) scale(1)' 
-          }
-        ], {
-          duration: 1500,
-          delay: i * 150,
-          easing: 'ease-out'
-        }).onfinish = () => ring.remove();
+  const portalRings = 8;
+  const container = document.querySelector('.intro-page');
+
+  // Create black fade overlay
+  const overlay = document.createElement('div');
+  overlay.style.position = 'fixed';
+  overlay.style.top = 0;
+  overlay.style.left = 0;
+  overlay.style.width = '100vw';
+  overlay.style.height = '100vh';
+  overlay.style.background = 'radial-gradient(circle, rgba(30, 30, 50, 0.1), rgba(10, 10, 20, 0.9))';
+  overlay.style.zIndex = '9998';
+  overlay.style.opacity = 0;
+  overlay.style.transition = 'opacity 1.8s ease';
+  container.appendChild(overlay);
+
+  // Fade in after short delay
+  setTimeout(() => {
+    overlay.style.opacity = 1;
+  }, 300);
+
+  // Create and animate each ring
+  for (let i = 0; i < portalRings; i++) {
+    const ring = document.createElement('div');
+    ring.style.position = 'fixed';
+    ring.style.top = '50%';
+    ring.style.left = '50%';
+    ring.style.width = '50px';
+    ring.style.height = '50px';
+    ring.style.border = '2px solid var(--aether)';
+    ring.style.borderRadius = '50%';
+    ring.style.transform = 'translate(-50%, -50%)';
+    ring.style.pointerEvents = 'none';
+    ring.style.zIndex = '9999';
+    ring.style.opacity = '0.8';
+
+    container.appendChild(ring);
+
+    // Animate rings expanding outward
+    ring.animate([
+      {
+        width: '50px',
+        height: '50px',
+        opacity: 0.8,
+        transform: 'translate(-50%, -50%) scale(1)'
+      },
+      {
+        width: '800px',
+        height: '800px',
+        opacity: 0,
+        transform: 'translate(-50%, -50%) scale(1)'
       }
-    }
+    ], {
+      duration: 1500,
+      delay: i * 150,
+      easing: 'ease-out'
+    }).onfinish = () => ring.remove();
+  }
+}
+
     
     function resonancePing() {
   const aether = document.querySelector('.aether-core');
@@ -1519,68 +1539,52 @@ window.addEventListener('resize', drawConstellation);
       }
     }
     
-    // Sacred Geometry Mode - Enhanced Version
-    function activateSacredGeometry() {
-      const overlay = document.getElementById('sacredGeometryOverlay');
-      
-      if (!sacredGeometryActive) {
-        // Activate Sacred Geometry
-        overlay.style.display = 'block';
-        overlay.style.animation = 'pulseOverlay 6s ease-in-out infinite';
-        sacredGeometryActive = true;
-        createNotification('🔱 Sacred Geometry Activated', 'The hidden patterns of creation revealed... Fibonacci spirals, golden ratios, and platonic solids now dance across your reality.');
-      } else {
-        // Deactivate Sacred Geometry
-        overlay.style.display = 'none';
-        overlay.style.animation = '';
-        sacredGeometryActive = false;
-        createNotification('🔱 Sacred Geometry Deactivated', 'The patterns fade back into the quantum field...');
-      }
-      
-      // Close secret menu
-      secretMenuVisible = false;
-      document.getElementById('secretMenu').classList.remove('visible');
-    }
-    
-    // Create notification system
-    function createNotification(title, message) {
-      const notification = document.createElement('div');
-      notification.style.position = 'fixed';
-      notification.style.top = '20px';
-      notification.style.left = '50%';
-      notification.style.transform = 'translateX(-50%)';
-      notification.style.background = 'rgba(11, 12, 30, 0.95)';
-      notification.style.border = '1px solid var(--aether)';
-      notification.style.borderRadius = '15px';
-      notification.style.padding = '1rem 2rem';
-      notification.style.color = 'var(--soft-light)';
-      notification.style.textAlign = 'center';
-      notification.style.zIndex = '10000';
-      notification.style.backdropFilter = 'blur(10px)';
-      notification.style.boxShadow = '0 10px 30px rgba(147, 112, 219, 0.3)';
-      notification.style.maxWidth = '400px';
-      
-      notification.innerHTML = `
-        <h4 style="color: var(--aether); margin: 0 0 0.5rem 0;">${title}</h4>
-        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">${message}</p>
-      `;
-      
-      document.body.appendChild(notification);
-      
-      // Animate in
-      notification.animate([
-        { opacity: 0, transform: 'translateX(-50%) translateY(-20px)' },
-        { opacity: 1, transform: 'translateX(-50%) translateY(0)' }
-      ], { duration: 300, easing: 'ease-out' });
-      
-      // Remove after 4 seconds
-      setTimeout(() => {
-        notification.animate([
-          { opacity: 1, transform: 'translateX(-50%) translateY(0)' },
-          { opacity: 0, transform: 'translateX(-50%) translateY(-20px)' }
-        ], { duration: 300, easing: 'ease-in' }).onfinish = () => notification.remove();
-      }, 4000);
-    }
+
+function activateSacredGeometry() {
+  const overlay = document.getElementById('sacredGeometryOverlay');
+
+  if (!sacredGeometryActive) {
+    // 🌌 Display overlay and animation
+    overlay.style.display = 'block';
+    overlay.style.animation = 'pulseOverlay 6s ease-in-out infinite';
+    overlay.classList.add('sacred-particles');
+
+    // 🌱 Show Tree of Life
+    const tree = document.createElement('img');
+    tree.src = 'assets/imgs/tree-of-life.svg';
+    tree.className = 'tree-of-life-symbol';
+    overlay.appendChild(tree);
+
+    // 🌀 Add Canvas Particle System
+    particleSystem = createSacredParticles(overlay);
+
+    // 🌟 Notification
+    createNotification(
+      '🔱 Sacred Geometry Activated',
+      'The hidden patterns of creation revealed... Fibonacci spirals, golden ratios, and platonic solids now dance across your reality.'
+    );
+
+    sacredGeometryActive = true;
+  } else {
+    // 💫 Remove all visuals
+    overlay.style.display = 'none';
+    overlay.style.animation = '';
+    overlay.classList.remove('sacred-particles');
+    overlay.innerHTML = ''; // Clear children
+    if (particleSystem && particleSystem.cleanup) particleSystem.cleanup();
+
+    createNotification(
+      '🔱 Sacred Geometry Deactivated',
+      'The patterns fade back into the quantum field...'
+    );
+
+    sacredGeometryActive = false;
+  }
+
+  // 🕳️ Close secret menu
+  secretMenuVisible = false;
+  document.getElementById('secretMenu').classList.remove('visible');
+}
     
     // Element orb interactions
     document.addEventListener('DOMContentLoaded', function() {
