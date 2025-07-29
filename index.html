@@ -27,8 +27,8 @@
       --text-secondary: 210 50% 80%; /* Secondary text */
       
       /* Animation Timing */
-      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 
     /* ===== GLOBAL RESET & BASE STYLES ===== */
@@ -138,7 +138,7 @@
       z-index: 1002;
       opacity: 0;
       transform: translateY(-20px) scale(0.9);
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       pointer-events: none;
       box-shadow: 0 10px 30px hsla(var(--aether), 0.3);
     }
@@ -176,7 +176,7 @@
       gap: 0.5rem;
       padding: 0.5rem;
       border-radius: 8px;
-      transition: all 0.3s ease;
+      transition: var(--transition-smooth);
       font-size: 0.9rem;
     }
     
@@ -184,6 +184,41 @@
       background: hsla(var(--aether), 0.2);
       color: hsl(var(--aether));
       transform: translateX(5px);
+    }
+
+    /* ===== BREADCRUMB NAVIGATION ===== */
+    .breadcrumb {
+      position: fixed;
+      top: 80px;
+      left: 2rem;
+      background: hsla(var(--cosmic-void), 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid hsla(var(--aether), 0.3);
+      border-radius: 20px;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      color: hsl(var(--text-secondary));
+      z-index: 1000;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: var(--transition-smooth);
+      pointer-events: none;
+    }
+
+    .breadcrumb.visible {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: all;
+    }
+
+    .breadcrumb a {
+      color: hsl(var(--aether));
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+    .breadcrumb a:hover {
+      text-shadow: 0 0 8px hsl(var(--aether));
     }
 
     /* ===== NAVIGATION SYSTEM WITH ENHANCED HINTS ===== */
@@ -241,6 +276,7 @@
     .nav-links a.active {
       color: hsl(var(--aether));
       background: hsla(var(--cosmic-mist), 0.08);
+      transform: translateY(-2px);
     }
 
     /* Navigation pulse hint */
@@ -273,26 +309,36 @@
       15%, 55% { opacity: 0.7; transform: translateX(-50%) translateY(-5px); }
     }
 
-    /* ===== PAGE SECTION SYSTEM ===== */
+    /* ===== PAGE SECTION SYSTEM WITH ENHANCED TRANSITIONS ===== */
     .page-section {
       display: none;
       min-height: 100vh;
       padding: 6rem 2rem 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     .page-section.active {
       display: block;
-      animation: fadeInUp 0.6s ease-out;
+      opacity: 1;
+      transform: translateY(0);
+      animation: smoothFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
 
-    @keyframes fadeInUp {
+    .page-section.exiting {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    @keyframes smoothFadeIn {
       0% {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(30px) scale(0.98);
       }
       100% {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
       }
     }
     
@@ -414,6 +460,14 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .aether-core:hover {
+      transform: scale(1.1);
+      box-shadow:
+        0 0 60px hsl(var(--aether)),
+        0 0 120px hsla(var(--aether), 0.8);
     }
 
     .aether-glyph {
@@ -534,16 +588,18 @@
     }
 
     .action-button:hover {
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 8px 25px hsla(var(--aether), 0.3);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 30px hsla(var(--aether), 0.4);
     }
 
     .action-button.primary:hover {
       background: hsla(var(--aether), 0.2);
+      box-shadow: 0 10px 30px hsla(var(--aether), 0.5);
     }
 
     .action-button.secondary:hover {
       background: hsla(var(--water), 0.2);
+      box-shadow: 0 10px 30px hsla(var(--water), 0.4);
     }
 
     /* ===== RESONANCE EFFECTS ===== */
@@ -552,8 +608,8 @@
         0 0 60px hsl(var(--cosmic-glow)),
         0 0 120px hsl(var(--aether)),
         0 0 200px hsla(var(--aether), 0.6) !important;
-      transform: scale(1.1);
-      transition: all 0.3s ease;
+      transform: scale(1.15);
+      transition: all 0.4s ease;
     }
 
     .resonance-confirm {
@@ -665,7 +721,7 @@
       background: hsla(var(--cosmic-mist), 0.05);
       border-radius: 10px;
       border-left: 4px solid hsl(var(--aether));
-      transition: all 0.3s ease;
+      transition: var(--transition-smooth);
     }
     
     .elemental-list li:hover {
@@ -688,6 +744,12 @@
       .floating-actions {
         flex-direction: column;
         align-items: center;
+      }
+
+      .breadcrumb {
+        left: 1rem;
+        right: 1rem;
+        text-align: center;
       }
 
       @keyframes orbit-fire {
@@ -728,6 +790,11 @@
       <li><a href="#" onclick="showPage('workshop')"><span>🔮</span> Sacred Workshop</a></li>
       <li><a href="#" onclick="showPage('frequencies')"><span>🎵</span> Frequencies</a></li>
     </ul>
+  </div>
+  
+  <!-- Breadcrumb Navigation -->
+  <div class="breadcrumb" id="breadcrumb">
+    <a href="#" onclick="showPage('intro')">Home</a> → <span id="currentPageName">Page</span>
   </div>
   
   <!-- Navigation -->
@@ -997,6 +1064,18 @@
     let secretMenuVisible = false;
     let navigationHintShown = false;
 
+    // Page name mapping for breadcrumbs
+    const pageNames = {
+      'intro': 'Home',
+      'about': 'About',
+      'projects': 'Projects', 
+      'contact': 'Contact',
+      'codex': 'The Codex',
+      'garden': 'Digital Garden',
+      'workshop': 'Sacred Workshop',
+      'frequencies': 'Frequencies'
+    };
+
     /* Create cosmic background stars */
     function createCosmos() {
       const cosmos = document.getElementById('cosmos');
@@ -1037,40 +1116,115 @@
       setTimeout(() => star.remove(), 1800);
     }
 
-    /* Page navigation system */
+    /* Update breadcrumb navigation */
+    function updateBreadcrumb(pageId) {
+      const breadcrumb = document.getElementById('breadcrumb');
+      const currentPageName = document.getElementById('currentPageName');
+      
+      if (pageId === 'intro') {
+        breadcrumb.classList.remove('visible');
+      } else {
+        currentPageName.textContent = pageNames[pageId] || 'Unknown Page';
+        breadcrumb.classList.add('visible');
+      }
+    }
+
+    /* Enhanced page navigation with smooth transitions */
     function showPage(pageId) {
-      // Hide all pages
-      const pages = document.querySelectorAll('.page-section');
-      pages.forEach(page => page.classList.remove('active'));
+      const currentSection = document.querySelector('.page-section.active');
+      const newSection = document.getElementById(pageId);
       
-      // Show selected page
-      document.getElementById(pageId).classList.add('active');
+      if (currentSection === newSection) return;
       
-      // Update navigation active states
-      const navLinks = document.querySelectorAll('.nav-link');
-      navLinks.forEach(link => link.classList.remove('active'));
-      
-      // Highlight current nav item (only for main nav)
-      const activeLink = document.querySelector(`[onclick="showPage('${pageId}')"].nav-link`);
-      if (activeLink) {
-        activeLink.classList.add('active');
+      // Add exiting animation to current page
+      if (currentSection) {
+        currentSection.classList.add('exiting');
+        
+        setTimeout(() => {
+          currentSection.classList.remove('active', 'exiting');
+        }, 300);
       }
       
-      // Close secret menu if open
-      if (secretMenuVisible) {
-        secretMenuVisible = false;
-        document.getElementById('secretMenu').classList.remove('visible');
+      // Show new page with delay for smooth transition
+      setTimeout(() => {
+        newSection.classList.add('active');
+        
+        // Update breadcrumb
+        updateBreadcrumb(pageId);
+        
+        // Update navigation active states
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => link.classList.remove('active'));
+        
+        // Highlight current nav item (only for main nav)
+        const activeLink = document.querySelector(`[onclick="showPage('${pageId}')"].nav-link`);
+        if (activeLink) {
+          activeLink.classList.add('active');
+        }
+        
+        // Close secret menu if open
+        if (secretMenuVisible) {
+          secretMenuVisible = false;
+          document.getElementById('secretMenu').classList.remove('visible');
+        }
+        
+        // Remove navigation pulse if active
+        const navLinksContainer = document.getElementById('navLinks');
+        navLinksContainer.classList.remove('pulse-hint');
+        
+        // Update current page tracker
+        currentPage = pageId;
+        
+        // Smooth scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Create page transition particles
+        createPageTransitionParticles(pageId);
+        
+      }, currentSection ? 200 : 0);
+    }
+
+    /* Create page transition particles */
+    function createPageTransitionParticles(pageId) {
+      const colors = {
+        'intro': 'var(--aether)',
+        'about': 'var(--water)', 
+        'projects': 'var(--fire)',
+        'contact': 'var(--air)',
+        'codex': 'var(--aether)',
+        'garden': 'var(--earth)',
+        'workshop': 'var(--fire)',
+        'frequencies': 'var(--aether)'
+      };
+      
+      const color = colors[pageId] || 'var(--aether)';
+      const particles = 8;
+      
+      for (let i = 0; i < particles; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'fixed';
+        particle.style.left = Math.random() * window.innerWidth + 'px';
+        particle.style.top = window.innerHeight + 'px';
+        particle.style.width = '4px';
+        particle.style.height = '4px';
+        particle.style.background = `hsl(${color})`;
+        particle.style.borderRadius = '50%';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '9999';
+        
+        document.body.appendChild(particle);
+        
+        const endY = Math.random() * window.innerHeight * 0.5;
+        const endX = Math.random() * window.innerWidth;
+        
+        particle.animate([
+          { transform: `translate(0, 0) scale(1)`, opacity: 1 },
+          { transform: `translate(${endX - parseInt(particle.style.left)}px, ${endY - window.innerHeight}px) scale(0)`, opacity: 0 }
+        ], {
+          duration: 1200,
+          easing: 'ease-out'
+        }).onfinish = () => particle.remove();
       }
-      
-      // Remove navigation pulse if active
-      const navLinksContainer = document.getElementById('navLinks');
-      navLinksContainer.classList.remove('pulse-hint');
-      
-      // Update current page tracker
-      currentPage = pageId;
-      
-      // Smooth scroll to top
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     /* Pulse navigation hint */
@@ -1139,7 +1293,7 @@
       }
     }
 
-    /* Resonance ping effect */
+    /* Enhanced resonance ping effect */
     function resonancePing() {
       const aether = document.querySelector('.aether-core');
       if (aether) {
@@ -1147,7 +1301,7 @@
         setTimeout(() => aether.classList.remove('resonance-flare'), 1000);
       }
 
-      // Create resonance particles
+      // Create enhanced resonance particles
       createResonanceParticles();
 
       const msg = document.createElement('div');
@@ -1157,7 +1311,7 @@
       setTimeout(() => msg.remove(), 4000);
     }
 
-    /* Create resonance particles */
+    /* Create enhanced resonance particles */
     function createResonanceParticles() {
       const aether = document.querySelector('.aether-core');
       if (!aether) return;
@@ -1176,11 +1330,12 @@
         particle.style.borderRadius = '50%';
         particle.style.pointerEvents = 'none';
         particle.style.zIndex = '9999';
+        particle.style.boxShadow = `0 0 8px hsl(${258} ${44}% ${59}%)`;
         
         document.body.appendChild(particle);
         
         const angle = (i / particles) * Math.PI * 2;
-        const distance = 100;
+        const distance = 120;
         const x = Math.cos(angle) * distance;
         const y = Math.sin(angle) * distance;
         
@@ -1189,7 +1344,7 @@
           { transform: `translate(${x}px, ${y}px) scale(0)`, opacity: 0 }
         ], {
           duration: 1500,
-          easing: 'ease-out'
+          easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
         }).onfinish = () => particle.remove();
       }
     }
