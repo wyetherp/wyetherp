@@ -352,6 +352,11 @@
       margin: 0 auto;
     }
 
+    .page-section:not(.intro-page) .container {
+      margin-top: 6rem;
+      padding-top: 2rem;
+}
+
     /* ===== HIDE ORBITS ON NON-INTRO PAGES ===== */
     .element-orbits {
       width: 500px;
@@ -1523,14 +1528,8 @@
         // Update current page tracker
         currentPage = pageId;
         
-        // For non-intro pages, scroll to show content below nav
-if (pageId !== 'intro') {
-  setTimeout(() => {
-    window.scrollTo({ top: 100, behavior: 'smooth' });
-  }, 400);
-} else {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+        // Smooth scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         
         // Create page transition particles
         createPageTransitionParticles(pageId);
