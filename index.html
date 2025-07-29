@@ -312,11 +312,13 @@
     /* ===== PAGE SECTION SYSTEM WITH ENHANCED TRANSITIONS ===== */
     .page-section {
       display: none;
-      min-height: 100vh;
       padding: 0;
       opacity: 0;
       transform: translateY(30px);
       transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .intro-page {
+      min-height: 100vh;
     }
     
     .page-section.active {
