@@ -341,7 +341,7 @@
     }
     /* ===== NON-INTRO PAGE LAYOUT - FIXED SPACING ===== */
     .page-section:not(.intro-page) {
-      padding-top: 0rem; /* Fixed spacing issue */
+      padding-top: 4.5rem; /* Fixed spacing issue */
       padding-left: 2rem;
       padding-right: 2rem;
       padding-bottom: 2rem;      
@@ -616,7 +616,6 @@
         hsla(var(--fire), 0.03) 100%);
       position: relative;
       overflow: hidden;
-      padding-top: 0;
     }
 
     .about-page::before {
@@ -1524,8 +1523,14 @@
         // Update current page tracker
         currentPage = pageId;
         
-        // Smooth scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // For non-intro pages, scroll to show content below nav
+if (pageId !== 'intro') {
+  setTimeout(() => {
+    window.scrollTo({ top: 100, behavior: 'smooth' });
+  }, 400);
+} else {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
         
         // Create page transition particles
         createPageTransitionParticles(pageId);
