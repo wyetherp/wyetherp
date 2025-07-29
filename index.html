@@ -313,7 +313,7 @@
     .page-section {
       display: none;
       min-height: 100vh;
-      padding: 6rem 2rem 2rem;
+      padding: 0;
       opacity: 0;
       transform: translateY(30px);
       transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -340,6 +340,13 @@
         opacity: 1;
         transform: translateY(0) scale(1);
       }
+    }
+    /* ===== NON-INTRO PAGE LAYOUT ===== */
+    .page-section:not(.intro-page) {
+      padding-top: 6rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      padding-bottom: 2rem;      
     }
     
     .container {
@@ -1184,48 +1191,49 @@
       }, currentSection ? 200 : 0);
     }
 
-    /* Create page transition particles */
-    function createPageTransitionParticles(pageId) {
-      const colors = {
-        'intro': 'var(--aether)',
-        'about': 'var(--water)', 
-        'projects': 'var(--fire)',
-        'contact': 'var(--air)',
-        'codex': 'var(--aether)',
-        'garden': 'var(--earth)',
-        'workshop': 'var(--fire)',
-        'frequencies': 'var(--aether)'
-      };
-      
-      const color = colors[pageId] || 'var(--aether)';
-      const particles = 8;
-      
-      for (let i = 0; i < particles; i++) {
-        const particle = document.createElement('div');
-        particle.style.position = 'fixed';
-        particle.style.left = Math.random() * window.innerWidth + 'px';
-        particle.style.top = window.innerHeight + 'px';
-        particle.style.width = '4px';
-        particle.style.height = '4px';
-        particle.style.background = `hsl(${color})`;
-        particle.style.borderRadius = '50%';
-        particle.style.pointerEvents = 'none';
-        particle.style.zIndex = '9999';
-        
-        document.body.appendChild(particle);
-        
-        const endY = Math.random() * window.innerHeight * 0.5;
-        const endX = Math.random() * window.innerWidth;
-        
-        particle.animate([
-          { transform: `translate(0, 0) scale(1)`, opacity: 1 },
-          { transform: `translate(${endX - parseInt(particle.style.left)}px, ${endY - window.innerHeight}px) scale(0)`, opacity: 0 }
-        ], {
-          duration: 1200,
-          easing: 'ease-out'
-        }).onfinish = () => particle.remove();
-      }
-    }
+     /* Create page transition particles */
+     function createPageTransitionParticles(pageId) {
+       const colors = {
+         'intro': '258 44% 59%',
+         'about': '195 100% 50%', 
+         'projects': '14 100% 57%',
+         'contact': '205 53% 74%',
+         'codex': '258 44% 59%',
+         'garden': '25 59% 30%',
+         'workshop': '14 100% 57%',
+         'frequencies': '258 44% 59%'
+       };
+       
+       const color = colors[pageId] || '258 44% 59%';
+       const particles = 12;
+       
+       for (let i = 0; i < particles; i++) {
+         const particle = document.createElement('div');
+         particle.style.position = 'fixed';
+         particle.style.left = Math.random() * window.innerWidth + 'px';
+         particle.style.top = window.innerHeight + 'px';
+         particle.style.width = '8px';
+         particle.style.height = '8px';
+         particle.style.background = `hsl(${color})`;
+         particle.style.borderRadius = '50%';
+         particle.style.pointerEvents = 'none';
+         particle.style.zIndex = '9999';
+         particle.style.boxShadow = `0 0 12px hsl(${color})`;
+         
+         document.body.appendChild(particle);
+         
+         const endY = Math.random() * window.innerHeight * 0.3;
+         const endX = Math.random() * window.innerWidth;
+         
+         particle.animate([
+           { transform: `translate(0, 0) scale(1)`, opacity: 1 },
+           { transform: `translate(${endX - parseInt(particle.style.left)}px, ${endY - window.innerHeight}px) scale(0)`, opacity: 0 }
+         ], {
+           duration: 2000,
+           easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+         }).onfinish = () => particle.remove();
+       }
+     }
 
     /* Pulse navigation hint */
     function pulseNavigation() {
