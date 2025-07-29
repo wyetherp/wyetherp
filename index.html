@@ -341,9 +341,9 @@
         transform: translateY(0) scale(1);
       }
     }
-    /* ===== NON-INTRO PAGE LAYOUT ===== */
+    /* ===== NON-INTRO PAGE LAYOUT - FIXED SPACING ===== */
     .page-section:not(.intro-page) {
-      padding-top: 4rem;
+      padding-top: 6rem; /* Fixed spacing issue */
       padding-left: 2rem;
       padding-right: 2rem;
       padding-bottom: 2rem;      
@@ -609,6 +609,273 @@
       box-shadow: 0 10px 30px hsla(var(--water), 0.4);
     }
 
+    /* ===== ENHANCED ABOUT PAGE STYLES ===== */
+    .about-page {
+      background: linear-gradient(135deg, 
+        hsla(var(--cosmic-void), 0.8) 0%,
+        hsla(var(--aether), 0.1) 30%,
+        hsla(var(--water), 0.05) 60%,
+        hsla(var(--fire), 0.03) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-page::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at 30% 20%, hsla(var(--aether), 0.15) 0%, transparent 50%),
+                  radial-gradient(ellipse at 70% 80%, hsla(var(--water), 0.1) 0%, transparent 50%),
+                  radial-gradient(ellipse at 90% 40%, hsla(var(--fire), 0.08) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .about-page .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-page h1 {
+      font-size: 3.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      background: linear-gradient(45deg, 
+        hsl(var(--aether)), 
+        hsl(var(--water)), 
+        hsl(var(--fire)), 
+        hsl(var(--air)));
+      background-size: 400% 400%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient-shift 6s ease-in-out infinite;
+      text-shadow: 0 0 30px hsla(var(--aether), 0.5);
+      font-weight: 900;
+    }
+
+    @keyframes gradient-shift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .mystical-subtitle {
+      font-size: 1.4rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: hsl(var(--text-secondary));
+      opacity: 0.9;
+      font-style: italic;
+      animation: gentle-float 4s ease-in-out infinite;
+    }
+
+    @keyframes gentle-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .about-section {
+      margin: 3rem 0;
+      padding: 2.5rem;
+      background: linear-gradient(135deg, 
+        hsla(var(--cosmic-void), 0.4), 
+        hsla(var(--aether), 0.1));
+      border-radius: 20px;
+      border: 1px solid hsla(var(--aether), 0.3);
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        transparent, 
+        hsla(var(--aether), 0.1), 
+        transparent);
+      transition: left 0.8s ease;
+    }
+
+    .about-section:hover::before {
+      left: 100%;
+    }
+
+    .about-section:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 50px hsla(var(--aether), 0.3);
+      border-color: hsl(var(--aether));
+    }
+
+    .about-section h2 {
+      color: hsl(var(--water));
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-section p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: hsl(var(--text-secondary));
+      position: relative;
+      z-index: 2;
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .skill-card {
+      background: linear-gradient(135deg, 
+        hsla(var(--fire), 0.1), 
+        hsla(var(--earth), 0.1));
+      padding: 1.5rem;
+      border-radius: 15px;
+      border: 1px solid hsla(var(--fire), 0.2);
+      transition: var(--transition-bounce);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-card::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: radial-gradient(circle, hsla(var(--fire), 0.2), transparent);
+      border-radius: 50%;
+      transition: all 0.6s ease;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+    }
+
+    .skill-card:hover::after {
+      width: 200px;
+      height: 200px;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px) rotate(2deg);
+      box-shadow: 0 15px 30px hsla(var(--fire), 0.4);
+    }
+
+    .skill-card h3 {
+      color: hsl(var(--fire));
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .skill-card p {
+      color: hsl(var(--text-secondary));
+      position: relative;
+      z-index: 2;
+    }
+
+    .philosophy-quote {
+      background: linear-gradient(135deg, 
+        hsla(var(--aether), 0.2), 
+        hsla(var(--water), 0.1));
+      padding: 2.5rem;
+      border-radius: 20px;
+      border-left: 5px solid hsl(var(--aether));
+      margin: 3rem 0;
+      position: relative;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .philosophy-quote::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      font-size: 6rem;
+      color: hsla(var(--aether), 0.3);
+      font-family: serif;
+    }
+
+    .philosophy-quote p {
+      font-size: 1.4rem;
+      font-style: italic;
+      color: hsl(var(--text-primary));
+      margin: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .elemental-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+
+    .stat-orb {
+      text-align: center;
+      padding: 2rem;
+      background: radial-gradient(circle, 
+        hsla(var(--element-color), 0.2), 
+        hsla(var(--element-color), 0.05));
+      border-radius: 50%;
+      transition: var(--transition-smooth);
+      border: 2px solid hsla(var(--element-color), 0.3);
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .stat-orb:hover {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 0 30px hsla(var(--element-color), 0.6);
+    }
+
+    .stat-orb.fire-stat {
+      --element-color: var(--fire);
+    }
+
+    .stat-orb.water-stat {
+      --element-color: var(--water);
+    }
+
+    .stat-orb.air-stat {
+      --element-color: var(--air);
+    }
+
+    .stat-orb.earth-stat {
+      --element-color: var(--earth);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: hsl(var(--element-color));
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      color: hsl(var(--text-secondary));
+    }
+
     /* ===== RESONANCE EFFECTS ===== */
     .resonance-flare {
       box-shadow:
@@ -699,7 +966,7 @@
       box-shadow: 0 10px 30px hsla(var(--aether), 0.2);
     }
 
-    .about-page h1, .contact-page h1 {
+    .contact-page h1 {
       font-size: 3rem;
       margin-bottom: 2rem;
       color: hsl(var(--aether));
@@ -757,6 +1024,14 @@
         left: 1rem;
         right: 1rem;
         text-align: center;
+      }
+
+      .skill-grid, .elemental-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .about-page h1 {
+        font-size: 2.5rem;
       }
 
       @keyframes orbit-fire {
@@ -868,31 +1143,99 @@
     
     <!-- Discovery Hint -->
     <div class="discovery-hint">
-      ↑ Explore the pathways above, or click the elements to navigate ↑
+      ↑ Explore the pathways above, or scroll down to view content ↑
     </div>
   </section>
 
-  <!-- About Page -->
+  <!-- Enhanced About Page -->
   <section id="about" class="page-section about-page">
     <div class="container">
       <h1>Walking the Forest Path</h1>
-      <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.8;">Most technology feels mentally straining and overwhelming</p>
+      <p class="mystical-subtitle">Most technology feels mentally straining and overwhelming — I craft digital spaces where different minds feel at home</p>
       
-      <h2 style="color: hsl(var(--water)); margin: 2rem 0 1rem; font-size: 1.8rem;">What I Believe</h2>
-      <p style="margin-bottom: 1.5rem; font-size: 1.1rem; color: hsl(var(--text-secondary)); line-height: 1.7;">I believe every website or app is a chance to connect with someone. I build digital spaces where people who think differently feel at home.</p>
-      
-      <h2 style="color: hsl(var(--water)); margin: 2rem 0 1rem; font-size: 1.8rem;">The Five Elements</h2>
-      <ul class="elemental-list">
-        <li>🔥 <strong>Fire</strong> – Inspiration and passionate creation</li>
-        <li>🌊 <strong>Water</strong> – Smooth, intuitive flow</li>
-        <li>🌬️ <strong>Air</strong> – Clear, accessible communication</li>
-        <li>🪨 <strong>Earth</strong> – Solid, reliable foundations</li>
-        <li>✨ <strong>Aether</strong> – The mystical binding that holds it all together</li>
-      </ul>
+      <!-- Philosophy Quote -->
+      <div class="philosophy-quote">
+        <p>"Every interface is a bridge between human consciousness and digital possibility. I design those bridges to honor the full spectrum of neurodivergent experience."</p>
+      </div>
+
+      <!-- Core Beliefs Section -->
+      <div class="about-section">
+        <h2>🌟 Core Philosophy</h2>
+        <p>I believe every website or app is a chance to connect with someone authentically. Technology should feel like a gentle companion, not an overwhelming force. My work centers on creating digital experiences that breathe with natural rhythms and honor different ways of thinking and sensing.</p>
+      </div>
+
+      <!-- Skills & Expertise -->
+      <div class="about-section">
+        <h2>🛠️ Elemental Expertise</h2>
+        <div class="skill-grid">
+          <div class="skill-card">
+            <h3>🔥 Passionate Development</h3>
+            <p>React, TypeScript, Python — Building with fire and intention to create transformative user experiences</p>
+          </div>
+          <div class="skill-card">
+            <h3>🌊 Intuitive Design</h3>
+            <p>UX/UI that flows naturally, honoring cognitive diversity and sensory sensitivity in every interaction</p>
+          </div>
+          <div class="skill-card">
+            <h3>🌬️ Clear Communication</h3>
+            <p>Technical writing, accessibility standards, and documentation that breathes with clarity</p>
+          </div>
+          <div class="skill-card">
+            <h3>🪨 Solid Foundations</h3>
+            <p>System architecture, database design, and infrastructure built to endure and scale gracefully</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Professional Journey -->
+      <div class="about-section">
+        <h2>🚀 Professional Journey</h2>
+        <p>With 5+ years in product development, I've specialized in creating technology that serves neurodivergent communities. From building emotionally intelligent AI companions to designing rhythm-based interfaces, my work bridges the gap between technical excellence and human understanding.</p>
+        
+        <div class="elemental-stats">
+          <div class="stat-orb fire-stat">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Projects Completed</div>
+          </div>
+          <div class="stat-orb water-stat">
+            <div class="stat-number">95%</div>
+            <div class="stat-label">Client Satisfaction</div>
+          </div>
+          <div class="stat-orb air-stat">
+            <div class="stat-number">12</div>
+            <div class="stat-label">Technologies Mastered</div>
+          </div>
+          <div class="stat-orb earth-stat">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Years with Current Focus</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Current Mission -->
+      <div class="about-section">
+        <h2>✨ Current Mission</h2>
+        <p>I'm developing C.R.U.M.B, an emotionally intelligent AI companion designed specifically for neurodivergent minds. This project represents the culmination of my belief that technology can be a source of comfort, understanding, and empowerment rather than stress and overwhelm.</p>
+      </div>
+
+      <!-- The Five Elements Approach -->
+      <div class="about-section">
+        <h2>🌟 The Five Elements</h2>
+        <ul class="elemental-list">
+          <li>🔥 <strong>Fire</strong> – Inspiration and passionate creation that ignites possibility</li>
+          <li>🌊 <strong>Water</strong> – Smooth, intuitive flow that adapts to user needs</li>
+          <li>🌬️ <strong>Air</strong> – Clear, accessible communication that lifts the spirit</li>
+          <li>🪨 <strong>Earth</strong> – Solid, reliable foundations built to endure</li>
+          <li>✨ <strong>Aether</strong> – The mystical binding that holds it all together with purpose</li>
+        </ul>
+      </div>
       
       <div style="text-align: center; margin-top: 3rem;">
         <a href="#" onclick="showPage('projects')" class="action-button primary">
           🛠️ See My Projects
+        </a>
+        <a href="#" onclick="showPage('contact')" class="action-button secondary">
+          🌌 Let's Connect
         </a>
       </div>
     </div>
@@ -1114,9 +1457,9 @@
       const yStart = Math.random() * window.innerHeight * 0.5;
       const size = 2 + Math.random() * 2;
 
-      star.style.left = `${xStart}px`;
-      star.style.top = `${yStart}px`;
-      star.style.width = `${size * 30}px`;
+      star.style.left = xStart + 'px';
+      star.style.top = yStart + 'px';
+      star.style.width = (size * 30) + 'px';
 
       document.getElementById('cosmos').appendChild(star);
 
@@ -1164,7 +1507,7 @@
         navLinks.forEach(link => link.classList.remove('active'));
         
         // Highlight current nav item (only for main nav)
-        const activeLink = document.querySelector(`[onclick="showPage('${pageId}')"].nav-link`);
+        const activeLink = document.querySelector('[onclick="showPage(\'' + pageId + '\')"].nav-link');
         if (activeLink) {
           activeLink.classList.add('active');
         }
@@ -1214,11 +1557,11 @@
          particle.style.top = window.innerHeight + 'px';
          particle.style.width = '8px';
          particle.style.height = '8px';
-         particle.style.background = `hsl(${color})`;
+         particle.style.background = 'hsl(' + color + ')';
          particle.style.borderRadius = '50%';
          particle.style.pointerEvents = 'none';
          particle.style.zIndex = '9999';
-         particle.style.boxShadow = `0 0 12px hsl(${color})`;
+         particle.style.boxShadow = '0 0 12px hsl(' + color + ')';
          
          document.body.appendChild(particle);
          
@@ -1226,8 +1569,8 @@
          const endX = Math.random() * window.innerWidth;
          
          particle.animate([
-           { transform: `translate(0, 0) scale(1)`, opacity: 1 },
-           { transform: `translate(${endX - parseInt(particle.style.left)}px, ${endY - window.innerHeight}px) scale(0)`, opacity: 0 }
+           { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+           { transform: 'translate(' + (endX - parseInt(particle.style.left)) + 'px, ' + (endY - window.innerHeight) + 'px) scale(0)', opacity: 0 }
          ], {
            duration: 2000,
            easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
@@ -1279,7 +1622,7 @@
         particle.style.top = rect.top + rect.height/2 + 'px';
         particle.style.width = '3px';
         particle.style.height = '3px';
-        particle.style.background = `hsl(${258} ${44}% ${59}%)`;
+        particle.style.background = 'hsl(258 44% 59%)';
         particle.style.borderRadius = '50%';
         particle.style.pointerEvents = 'none';
         particle.style.zIndex = '9999';
@@ -1293,7 +1636,7 @@
         
         particle.animate([
           { transform: 'translate(0, 0) scale(1)', opacity: 1 },
-          { transform: `translate(${x}px, ${y}px) scale(0)`, opacity: 0 }
+          { transform: 'translate(' + x + 'px, ' + y + 'px) scale(0)', opacity: 0 }
         ], {
           duration: 800,
           easing: 'ease-out'
@@ -1334,11 +1677,11 @@
         particle.style.top = rect.top + rect.height/2 + 'px';
         particle.style.width = '4px';
         particle.style.height = '4px';
-        particle.style.background = `hsl(${258} ${44}% ${59}%)`;
+        particle.style.background = 'hsl(258 44% 59%)';
         particle.style.borderRadius = '50%';
         particle.style.pointerEvents = 'none';
         particle.style.zIndex = '9999';
-        particle.style.boxShadow = `0 0 8px hsl(${258} ${44}% ${59}%)`;
+        particle.style.boxShadow = '0 0 8px hsl(258 44% 59%)';
         
         document.body.appendChild(particle);
         
@@ -1349,7 +1692,7 @@
         
         particle.animate([
           { transform: 'translate(0, 0) scale(1)', opacity: 1 },
-          { transform: `translate(${x}px, ${y}px) scale(0)`, opacity: 0 }
+          { transform: 'translate(' + x + 'px, ' + y + 'px) scale(0)', opacity: 0 }
         ], {
           duration: 1500,
           easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
