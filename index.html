@@ -309,6 +309,45 @@
       15%, 55% { opacity: 0.7; transform: translateX(-50%) translateY(-5px); }
     }
 
+    /* ===== SCROLL DOWN INDICATOR ===== */
+    .scroll-indicator {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: hsl(var(--aether));
+      font-size: 1.2rem;
+      z-index: 1001;
+      opacity: 0;
+      transition: all 0.4s ease;
+      pointer-events: none;
+      background: hsla(var(--cosmic-void), 0.9);
+      padding: 1.5rem 2rem;
+      border-radius: 20px;
+      border: 2px solid hsl(var(--aether));
+      backdrop-filter: blur(15px);
+      box-shadow: 0 0 30px hsla(var(--aether), 0.4);
+    }
+
+    .scroll-indicator.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .scroll-arrow {
+      font-size: 2rem;
+      animation: bounce-down 2s infinite;
+      display: block;
+      margin-top: 0.5rem;
+    }
+
+    @keyframes bounce-down {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(10px); }
+      60% { transform: translateY(5px); }
+    }
+
     /* ===== PAGE SECTION SYSTEM WITH ENHANCED TRANSITIONS ===== */
     .page-section {
       display: none;
@@ -356,7 +395,7 @@
     .page-section:not(.intro-page) .container {
       margin-top: 70px;
       padding-top: 2rem;
-}
+    }
 
     /* ===== HIDE ORBITS ON NON-INTRO PAGES ===== */
     .element-orbits {
@@ -1096,6 +1135,12 @@
     </div>
   </nav>
 
+  <!-- Scroll Down Indicator -->
+  <div class="scroll-indicator" id="scrollIndicator">
+    <div>Content is below - scroll down to explore</div>
+    <div class="scroll-arrow">↓</div>
+  </div>
+
   <!-- Intro Page -->
   <section id="intro" class="page-section intro-page active">
     <h1 class="intro-title">Wyetherp</h1>
@@ -1430,6 +1475,20 @@
       'frequencies': 'Frequencies'
     };
 
+    /* Show scroll indicator for non-intro pages */
+    function showScrollIndicator() {
+      const indicator = document.getElementById('scrollIndicator');
+      if (currentPage !== 'intro') {
+        indicator.classList.add('visible');
+        // Auto-hide after 4 seconds
+        setTimeout(() => {
+          indicator.classList.remove('visible');
+        }, 4000);
+      } else {
+        indicator.classList.remove('visible');
+      }
+    }
+
     /* Create cosmic background stars */
     function createCosmos() {
       const cosmos = document.getElementById('cosmos');
@@ -1528,6 +1587,9 @@
         
         // Update current page tracker
         currentPage = pageId;
+        
+        // Show scroll indicator for non-intro pages
+        showScrollIndicator();
         
         // Smooth scroll to top
         window.scrollTo({ top: 0, behavior: 'smooth' });
