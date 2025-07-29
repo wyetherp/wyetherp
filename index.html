@@ -6,137 +6,32 @@
   <meta name="description" content="Wyetherp — Tech for the soul and senses. Creating tools for the tender-minded." />
   <title>Wyetherp</title>
   <style>
-
-
-.featured-crumb {
-  background: linear-gradient(135deg, #f0f4ff, #e6e0f8);
-  border-left: 6px solid #9370db;
-  padding: 2em;
-  margin-bottom: 2em;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(147, 112, 219, 0.2);
-}
-
-.resume-section {
-  margin-top: 3em;
-  padding: 2em;
-  background: #fefefe;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  text-align: center;
-}
-
-.resume-button {
-  display: inline-block;
-  margin-top: 1em;
-  padding: 0.75em 1.5em;
-  background-color: #9370db;
-  color: purple;
-  text-decoration: none;
-  border-radius: 6px;
-  transition: background 0.3s ease;
-}
-
-.resume-button:hover {
-  background-color: #7a5ec2;
-}
-
-
-
-
-
-
-
-.resonance-flare {
-  box-shadow:
-    0 0 60px rgba(255,255,255,0.9),
-    0 0 120px rgba(147,112,219,0.8),
-    0 0 200px rgba(147,112,219,0.6) !important;
-  transform: scale(1.1);
-  transition: all 0.3s ease;
-}
-
-.resonance-confirm {
-  position: fixed;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(147, 112, 219, 0.85);
-  padding: 0.8rem 1.5rem;
-  border-radius: 25px;
-  color: white;
-  font-size: 1.1rem;
-  box-shadow: 0 0 15px rgba(147,112,219,0.4);
-  animation: fadeOutUp 4s ease-out forwards;
-  z-index: 9999;
-}
-
-@keyframes fadeOutUp {
-  0% { opacity: 0; transform: translate(-50%, 20px); }
-  10% { opacity: 1; transform: translate(-50%, 0); }
-  90% { opacity: 1; transform: translate(-50%, -10px); }
-  100% { opacity: 0; transform: translate(-50%, -20px); }
-}
-
-
-
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes shoot {
-  from { transform: translateX(0) translateY(0) rotate(45deg); opacity: 0.8; }
-  to { transform: translateX(400px) translateY(400px); opacity: 0; }
-}
-
-.shooting-star {
-  position: absolute;
-  height: 2px;
-  background: white;
-  opacity: 0.8;
-  border-radius: 1px;
-  transform: rotate(45deg);
-  animation: shoot 1.2s ease-out forwards;
-  pointer-events: none;
-  filter: blur(1px);
-}
-
-
-.glow-on-hover {
-  transition: all 0.3s ease;
-}
-.glow-on-hover:hover {
-  color: var(--aether);
-  text-shadow: 0 0 10px rgba(147, 112, 219, 0.7);
-  transform: scale(1.02);
-}
-
-.highlight-aether {
-  color: var(--aether);
-  font-weight: bold;
-  text-shadow: 0 0 8px rgba(147, 112, 219, 0.3);
-}
-
-
+    /* ===== CSS VARIABLES - Design System ===== */
     :root {
-      --fire: #ff4500;
-      --water: #00bfff;
-      --air: #87ceeb;
-      --earth: #8b4513;
-      --aether: #9370db;
-      --deep-space: #0b0c1e;
-      --soft-light: #f0f8ff;
-      --mist: rgba(255, 255, 255, 0.15);
-      --flow-speed: 3s;
+      /* Elemental Color Palette */
+      --fire: 14 100% 57%;        /* HSL: Orange-red fire */
+      --water: 195 100% 50%;      /* HSL: Deep blue water */
+      --air: 205 53% 74%;         /* HSL: Light blue air */
+      --earth: 25 59% 30%;        /* HSL: Brown earth */
+      --aether: 258 44% 59%;      /* HSL: Purple mystical energy */
+      
+      /* Background & Space Colors */
+      --cosmic-void: 231 45% 8%;   /* Deep space background */
+      --cosmic-glow: 210 100% 97%; /* Soft starlight */
+      --cosmic-mist: 0 0% 100%;    /* White mist overlay */
+      
+      /* UI & Interface Colors */
+      --surface: 230 20% 15%;      /* Card/surface background */
+      --border: 0 0% 100%;         /* Border color */
+      --text-primary: 210 100% 97%; /* Primary text */
+      --text-secondary: 210 50% 80%; /* Secondary text */
+      
+      /* Animation Timing */
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
-    
+
+    /* ===== GLOBAL RESET & BASE STYLES ===== */
     * {
       margin: 0;
       padding: 0;
@@ -144,28 +39,33 @@
     }
     
     body {
-      font-family: 'Georgia', serif;
-      background: linear-gradient(135deg, var(--deep-space) 0%, #16213e 50%, #1a1a2e 100%);
-      color: var(--soft-light);
-      line-height: 1.7;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, 
+        hsl(var(--cosmic-void)) 0%, 
+        hsl(231 35% 12%) 50%, 
+        hsl(230 25% 18%) 100%);
+      color: hsl(var(--text-primary));
+      line-height: 1.6;
       min-height: 100vh;
       overflow-x: hidden;
+      scroll-behavior: smooth;
     }
-    
-    /* Mystical background particles */
+
+    /* ===== COSMIC BACKGROUND EFFECTS ===== */
     .cosmos {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: -1;
+      z-index: -2;
       overflow: hidden;
     }
     
+    /* Individual twinkling stars */
     .star {
       position: absolute;
-      background: var(--soft-light);
+      background: hsl(var(--cosmic-glow));
       border-radius: 50%;
       animation: twinkle 4s ease-in-out infinite alternate;
     }
@@ -174,8 +74,37 @@
       0% { opacity: 0.3; transform: scale(1); }
       100% { opacity: 1; transform: scale(1.2); }
     }
-    
-    /* Hidden mystical menu */
+
+    /* ===== SHOOTING STARS ===== */
+    .shooting-star {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, hsl(var(--cosmic-glow)), transparent);
+      border-radius: 1px;
+      animation: shoot 1.8s ease-out forwards;
+      pointer-events: none;
+      filter: blur(0.5px);
+      box-shadow: 0 0 6px hsl(var(--cosmic-glow));
+    }
+
+    @keyframes shoot {
+      from { 
+        transform: translateX(0) translateY(0) rotate(45deg); 
+        opacity: 0.8; 
+        width: 0px;
+      }
+      10% {
+        opacity: 1;
+        width: 60px;
+      }
+      to { 
+        transform: translateX(300px) translateY(300px) rotate(45deg); 
+        opacity: 0;
+        width: 0px;
+      }
+    }
+
+    /* ===== SECRET MENU SYSTEM ===== */
     .hidden-portal {
       position: fixed;
       top: 20px;
@@ -188,20 +117,21 @@
       z-index: 1001;
       opacity: 0;
       transition: opacity 0.3s ease;
+      border-radius: 50%;
     }
     
     .hidden-portal:hover {
-      opacity: 0.1;
-      background: radial-gradient(circle, var(--aether), transparent);
+      opacity: 0.2;
+      background: radial-gradient(circle, hsl(var(--aether)), transparent);
     }
     
     .secret-menu {
       position: fixed;
       top: 60px;
       right: 20px;
-      background: rgba(11, 12, 30, 0.95);
+      background: hsla(var(--cosmic-void), 0.95);
       backdrop-filter: blur(15px);
-      border: 1px solid var(--aether);
+      border: 1px solid hsl(var(--aether));
       border-radius: 15px;
       padding: 1.5rem;
       min-width: 200px;
@@ -210,7 +140,7 @@
       transform: translateY(-20px) scale(0.9);
       transition: all 0.3s ease;
       pointer-events: none;
-      box-shadow: 0 10px 30px rgba(147, 112, 219, 0.3);
+      box-shadow: 0 10px 30px hsla(var(--aether), 0.3);
     }
     
     .secret-menu.visible {
@@ -220,11 +150,11 @@
     }
     
     .secret-menu h3 {
-      color: var(--aether);
+      color: hsl(var(--aether));
       margin-bottom: 1rem;
       font-size: 1.1rem;
       text-align: center;
-      border-bottom: 1px solid rgba(147, 112, 219, 0.3);
+      border-bottom: 1px solid hsla(var(--aether), 0.3);
       padding-bottom: 0.5rem;
     }
     
@@ -239,7 +169,7 @@
     }
     
     .secret-menu a {
-      color: var(--soft-light);
+      color: hsl(var(--text-primary));
       text-decoration: none;
       display: flex;
       align-items: center;
@@ -251,30 +181,23 @@
     }
     
     .secret-menu a:hover {
-      background: rgba(147, 112, 219, 0.2);
-      color: var(--aether);
+      background: hsla(var(--aether), 0.2);
+      color: hsl(var(--aether));
       transform: translateX(5px);
     }
-    
-    .secret-item-icon {
-      width: 16px;
-      height: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    /* Navigation */
+
+    /* ===== NAVIGATION SYSTEM ===== */
     nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
       z-index: 1000;
-      background: rgba(26, 26, 46, 0.95);
-      backdrop-filter: blur(10px);
+      background: hsla(var(--cosmic-void), 0.2);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid hsla(var(--border), 0.05);
       padding: 1rem 2rem;
-      border-bottom: 1px solid var(--mist);
+      transition: var(--transition-smooth);
     }
     
     .nav-container {
@@ -288,14 +211,14 @@
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
-      color: var(--aether);
+      color: hsl(var(--aether));
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: var(--transition-smooth);
     }
     
     .logo:hover {
       transform: scale(1.05);
-      text-shadow: 0 0 20px var(--aether);
+      text-shadow: 0 0 20px hsl(var(--aether));
     }
     
     .nav-links {
@@ -305,21 +228,21 @@
     }
     
     .nav-links a {
-      color: var(--soft-light);
+      color: hsl(var(--text-primary));
       text-decoration: none;
-      transition: all 0.3s ease;
-      position: relative;
+      transition: var(--transition-smooth);
       padding: 0.5rem 1rem;
       border-radius: 20px;
+      background: hsla(var(--cosmic-mist), 0.02);
     }
     
     .nav-links a:hover,
     .nav-links a.active {
-      color: var(--aether);
-      background: var(--mist);
+      color: hsl(var(--aether));
+      background: hsla(var(--cosmic-mist), 0.08);
     }
-    
-    /* Main content sections */
+
+    /* ===== PAGE SECTION SYSTEM ===== */
     .page-section {
       display: none;
       min-height: 100vh;
@@ -328,14 +251,41 @@
     
     .page-section.active {
       display: block;
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     
     .container {
-      max-width: 800px;
+      max-width: 1000px;
       margin: 0 auto;
     }
-    
-    /* Intro page styling */
+
+    /* ===== HIDE ORBITS ON NON-INTRO PAGES ===== */
+    .element-orbits {
+      width: 500px;
+      height: 500px;
+      margin: 2rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .page-section:not(.intro-page) .element-orbits {
+      display: none;
+    }
+
+    /* ===== INTRO PAGE WITH STAR LOGO ===== */
     .intro-page {
       display: flex;
       flex-direction: column;
@@ -349,256 +299,302 @@
     .intro-title {
       font-size: clamp(3rem, 8vw, 6rem);
       margin-bottom: 1rem;
-      background: linear-gradient(45deg, var(--aether), var(--water), var(--fire));
+      background: linear-gradient(45deg, 
+        hsl(var(--aether)), 
+        hsl(var(--water)), 
+        hsl(var(--fire)));
       background-clip: text;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: gentle-pulse 4s ease-in-out infinite;
+      font-weight: 800;
     }
     
     @keyframes gentle-pulse {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.02); }
     }
-    
-    .intro-tagline {
-      font-size: 1.3rem;
-      margin-bottom: 2rem;
-      opacity: 0.9;
-      max-width: 600px;
+
+    /* ===== STAR STICK FIGURE LOGO ===== */
+    .star-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 5;
+      pointer-events: none;
     }
-    
-    .element-orbits {
-  width: 400px;
-  height: 400px;
-  margin: 2rem auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
 
-    
-.aether {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 120px;
-  height: 120px;
-  transform: translate(-50%, -50%);
-  z-index: 20;
-  pointer-events: none;
-}
+    .star-body-part {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: hsl(var(--cosmic-glow));
+      border-radius: 50%;
+      box-shadow: 0 0 6px hsl(var(--cosmic-glow));
+      animation: twinkle 3s ease-in-out infinite alternate;
+    }
 
-.aether-core {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(147,112,219,0.9) 30%, rgba(147,112,219,0.2) 70%);
-  box-shadow:
-    0 0 50px rgba(147,112,219,0.8),
-    0 0 120px rgba(147,112,219,0.4),
-    0 0 200px rgba(147,112,219,0.2);
-  animation: aetherGlowExpand 6s ease-in-out infinite;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: visible;
-}
+    .star-torso { top: 60px; left: 0; }
+    .star-left-arm { top: 40px; left: -25px; }
+    .star-right-arm { top: 40px; left: 25px; }
+    .star-left-leg { top: 90px; left: -15px; }
+    .star-right-leg { top: 90px; left: 15px; }
 
-.aether-glow {
-  position: absolute;
-  width: 180%;
-  height: 180%;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(147,112,219,0.3), transparent 80%);
-  filter: blur(20px);
-  animation: aetherHalo 7s infinite ease-in-out;
-  z-index: 0;
-}
-
-.aether-pulse {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 2px solid rgba(147,112,219,0.3);
-  animation: aetherRipple 3s infinite ease-out;
-  z-index: 0;
-}
-
-.aether-glyph {
-  font-size: 3rem;
-  color: white;
-  text-shadow:
-    0 0 12px #fff,
-    0 0 30px var(--aether),
-    0 0 50px rgba(255,255,255,0.6);
-  z-index: 1;
-  animation: glyphFloat 4s ease-in-out infinite;
-}
-
-@keyframes aetherGlowExpand {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.05); opacity: 0.95; }
-}
-
-@keyframes aetherHalo {
-  0%, 100% { transform: scale(1); opacity: 0.5; }
-  50% { transform: scale(1.2); opacity: 0.7; }
-}
-
-@keyframes aetherRipple {
-  0% { transform: scale(1); opacity: 0.8; }
-  100% { transform: scale(2); opacity: 0; }
-}
-
-@keyframes glyphFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-
-
-
-    
-    /* Orbit rings */
     .orbit-ring {
       position: absolute;
       top: 50%;
       left: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      border: 1px solid hsla(var(--cosmic-mist), 0.1);
       border-radius: 50%;
       transform: translate(-50%, -50%);
     }
     
-    .orbit-1 { width: 160px; height: 160px; }
-    .orbit-2 { width: 220px; height: 220px; }
-    .orbit-3 { width: 280px; height: 280px; }
-    .orbit-4 { width: 340px; height: 340px; }
-    
-    /* Orbiting elements */
+    .orbit-1 { width: 350px; height: 350px; }
+    .orbit-2 { width: 450px; height: 450px; }
+    .orbit-3 { width: 600px; height: 600px; }
+    .orbit-4 { width: 800px; height: 800px; }
+
+    /* Central Aether Core */
+    .aether {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 80px;
+      height: 80px;
+      transform: translate(-50%, -50%);
+      z-index: 20;
+    }
+
+    .aether-core {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle, 
+        hsla(var(--aether), 0.9) 30%, 
+        hsla(var(--aether), 0.2) 70%);
+      box-shadow:
+        0 0 40px hsl(var(--aether)),
+        0 0 80px hsla(var(--aether), 0.6);
+      animation: aether-pulse 3s ease-in-out infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .aether-glyph {
+      font-size: 2rem;
+      color: hsl(var(--cosmic-glow));
+      text-shadow: 0 0 10px hsl(var(--cosmic-glow));
+    }
+
+    @keyframes aether-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* Elemental Orbs */
     .element-orb {
       position: absolute;
-      width: 50px;
-      height: 50px;
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: var(--transition-smooth);
       top: 50%;
       left: 50%;
+      z-index: 15;
     }
     
     .element-orb:hover {
       transform: scale(1.3) !important;
-      z-index: 20;
+      z-index: 25;
+      animation: breathe 2s ease-in-out infinite;
     }
-    
-    /* Fire - closest orbit (Mercury) */
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(1.3); }
+      50% { transform: scale(1.35); }
+    }
+
     .fire { 
-      background: radial-gradient(circle, var(--fire), rgba(255, 69, 0, 0.4));
-      animation: orbit-fire 15s linear infinite;
-      box-shadow: 0 0 20px rgba(255, 69, 0, 0.6), 0 0 40px rgba(255, 69, 0, 0.3);
+      background: radial-gradient(circle, hsl(var(--fire)), hsla(var(--fire), 0.4));
+      animation: orbit-fire 12s linear infinite;
+      box-shadow: 0 0 20px hsl(var(--fire));
     }
     
-    .fire:hover {
-      box-shadow: 0 0 30px rgba(255, 69, 0, 0.8), 0 0 60px rgba(255, 69, 0, 0.5);
-    }
-    
-    /* Earth - second orbit (Venus) */
     .earth { 
-      background: radial-gradient(circle, var(--earth), rgba(139, 69, 19, 0.4));
-      animation: orbit-earth 25s linear infinite;
-      box-shadow: 0 0 15px rgba(139, 69, 19, 0.6), 0 0 30px rgba(139, 69, 19, 0.3);
+      background: radial-gradient(circle, hsl(var(--earth)), hsla(var(--earth), 0.4));
+      animation: orbit-earth 18s linear infinite;
+      box-shadow: 0 0 15px hsl(var(--earth));
     }
     
-    .earth:hover {
-      box-shadow: 0 0 25px rgba(139, 69, 19, 0.8), 0 0 50px rgba(139, 69, 19, 0.5);
-    }
-    
-    /* Water - third orbit (Earth) */
     .water { 
-      background: radial-gradient(circle, var(--water), rgba(0, 191, 255, 0.4));
-      animation: orbit-water 35s linear infinite;
-      box-shadow: 0 0 15px rgba(0, 191, 255, 0.6), 0 0 30px rgba(0, 191, 255, 0.3);
+      background: radial-gradient(circle, hsl(var(--water)), hsla(var(--water), 0.4));
+      animation: orbit-water 24s linear infinite;
+      box-shadow: 0 0 15px hsl(var(--water));
     }
     
-    .water:hover {
-      box-shadow: 0 0 25px rgba(0, 191, 255, 0.8), 0 0 50px rgba(0, 191, 255, 0.5);
-    }
-    
-    /* Air - outermost orbit (Mars) */
     .air { 
-      background: radial-gradient(circle, var(--air), rgba(135, 206, 235, 0.4));
-      animation: orbit-air 45s linear infinite;
-      box-shadow: 0 0 15px rgba(135, 206, 235, 0.6), 0 0 30px rgba(135, 206, 235, 0.3);
+      background: radial-gradient(circle, hsl(var(--air)), hsla(var(--air), 0.4));
+      animation: orbit-air 30s linear infinite;
+      box-shadow: 0 0 15px hsl(var(--air));
     }
-    
-    .air:hover {
-      box-shadow: 0 0 25px rgba(135, 206, 235, 0.8), 0 0 50px rgba(135, 206, 235, 0.5);
-    }
-    
+
     @keyframes orbit-fire {
-      0% { transform: translate(-50%, -50%) rotate(0deg) translateX(80px) rotate(0deg); }
-      100% { transform: translate(-50%, -50%) rotate(360deg) translateX(80px) rotate(-360deg); }
+      0% { transform: translate(-50%, -50%) rotate(0deg) translateX(175px) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg) translateX(175px) rotate(-360deg); }
     }
     
     @keyframes orbit-earth {
-      0% { transform: translate(-50%, -50%) rotate(0deg) translateX(110px) rotate(0deg); }
-      100% { transform: translate(-50%, -50%) rotate(360deg) translateX(110px) rotate(-360deg); }
+      0% { transform: translate(-50%, -50%) rotate(0deg) translateX(225px) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg) translateX(225px) rotate(-360deg); }
     }
     
     @keyframes orbit-water {
-      0% { transform: translate(-50%, -50%) rotate(0deg) translateX(140px) rotate(0deg); }
-      100% { transform: translate(-50%, -50%) rotate(360deg) translateX(140px) rotate(-360deg); }
+      0% { transform: translate(-50%, -50%) rotate(0deg) translateX(300px) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg) translateX(300px) rotate(-360deg); }
     }
     
     @keyframes orbit-air {
-      0% { transform: translate(-50%, -50%) rotate(0deg) translateX(170px) rotate(0deg); }
-      100% { transform: translate(-50%, -50%) rotate(360deg) translateX(170px) rotate(-360deg); }
+      0% { transform: translate(-50%, -50%) rotate(0deg) translateX(400px) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg) translateX(400px) rotate(-360deg); }
     }
-    
+
+    /* Portal entry button */
     .enter-portal {
-      margin-top: 2rem;
+      margin-top: 3rem;
       padding: 1rem 2rem;
-      background: linear-gradient(45deg, var(--aether), var(--water));
+      background: linear-gradient(45deg, hsl(var(--aether)), hsl(var(--water)));
       border: none;
       border-radius: 30px;
-      color: white;
+      color: hsl(var(--cosmic-glow));
       font-size: 1.1rem;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(183, 148, 246, 0.3);
+      transition: var(--transition-bounce);
+      box-shadow: 0 4px 20px hsla(var(--aether), 0.3);
+      font-weight: 600;
     }
-    
+
     .enter-portal:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(183, 148, 246, 0.5);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 8px 30px hsla(var(--aether), 0.4);
+    }
+
+    /* ===== RESONANCE EFFECTS ===== */
+    .resonance-flare {
+      box-shadow:
+        0 0 60px hsl(var(--cosmic-glow)),
+        0 0 120px hsl(var(--aether)),
+        0 0 200px hsla(var(--aether), 0.6) !important;
+      transform: scale(1.1);
+      transition: all 0.3s ease;
+    }
+
+    .resonance-confirm {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: hsla(var(--aether), 0.85);
+      padding: 0.8rem 1.5rem;
+      border-radius: 25px;
+      color: hsl(var(--cosmic-glow));
+      font-size: 1.1rem;
+      box-shadow: 0 0 15px hsla(var(--aether), 0.4);
+      animation: fadeOutUp 4s ease-out forwards;
+      z-index: 9999;
+    }
+
+    @keyframes fadeOutUp {
+      0% { opacity: 0; transform: translate(-50%, 20px); }
+      10% { opacity: 1; transform: translate(-50%, 0); }
+      90% { opacity: 1; transform: translate(-50%, -10px); }
+      100% { opacity: 0; transform: translate(-50%, -20px); }
+    }
+
+    /* ===== PROJECT PAGES ===== */
+    .projects-page h1 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      color: hsl(var(--aether));
+      text-align: center;
+      background: linear-gradient(45deg, hsl(var(--aether)), hsl(var(--fire)));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .featured-project {
+      background: linear-gradient(135deg, 
+        hsla(var(--aether), 0.1), 
+        hsla(var(--water), 0.05));
+      border: 2px solid hsl(var(--aether));
+      border-radius: 20px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      text-align: center;
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .featured-project:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px hsla(var(--aether), 0.3);
+    }
+
+    .featured-project h2 {
+      font-size: 2.5rem;
+      color: hsl(var(--aether));
+      margin-bottom: 1rem;
+    }
+
+    .sub-projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
     }
     
-    /* About page styling */
-    .about-page h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      color: var(--aether);
+    .project-card {
+      background: hsla(var(--surface), 0.3);
+      border-radius: 15px;
+      padding: 2rem;
+      transition: var(--transition-smooth);
+      border: 1px solid hsla(var(--aether), 0.2);
       text-align: center;
     }
     
-    .about-page h2 {
-      color: var(--water);
-      margin: 2rem 0 1rem;
-      font-size: 1.8rem;
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px hsla(var(--aether), 0.2);
     }
-    
-    .about-page p {
-      margin-bottom: 1.5rem;
-      font-size: 1.1rem;
+
+    .about-page h1, .contact-page h1 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      color: hsl(var(--aether));
+      text-align: center;
+      background: linear-gradient(45deg, hsl(var(--aether)), hsl(var(--water)));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    
+
+    /* ===== HIDDEN PAGES ===== */
+    .codex-page {
+      background: linear-gradient(135deg, 
+        hsla(var(--aether), 0.05), 
+        hsla(var(--cosmic-void), 0.8));
+    }
+
     .elemental-list {
       list-style: none;
       margin: 1.5rem 0;
@@ -607,251 +603,55 @@
     .elemental-list li {
       margin: 1rem 0;
       padding: 1rem;
-      background: var(--mist);
+      background: hsla(var(--cosmic-mist), 0.05);
       border-radius: 10px;
-      border-left: 4px solid var(--aether);
+      border-left: 4px solid hsl(var(--aether));
       transition: all 0.3s ease;
     }
     
     .elemental-list li:hover {
       transform: translateX(10px);
-      background: rgba(183, 148, 246, 0.1);
+      background: hsla(var(--aether), 0.1);
     }
-    
-    blockquote {
-      margin: 2rem 0;
-      padding: 1.5rem;
-      border-left: 4px solid var(--fire);
-      background: rgba(255, 107, 53, 0.1);
-      font-style: italic;
-      border-radius: 0 10px 10px 0;
-    }
-    
-    .resonance-button {
-      display: block;
-      margin: 2rem auto;
-      padding: 1rem 2rem;
-      background: linear-gradient(45deg, var(--fire), var(--aether));
-      border: none;
-      border-radius: 25px;
-      color: white;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
-    }
-    
-    .resonance-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 30px rgba(255, 107, 53, 0.5);
-    }
-    
-    /* Projects page */
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin: 2rem 0;
-    }
-    
-    .project-card {
-      background: var(--mist);
-      border-radius: 15px;
-      padding: 2rem;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(183, 148, 246, 0.2);
-    }
-    
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(183, 148, 246, 0.3);
-    }
-    
-    .project-card h3 {
-      color: var(--aether);
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-    }
-    
-    /* Contact page */
-    .contact-form {
-      max-width: 600px;
-      margin: 2rem auto;
-    }
-    
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-    
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      color: var(--water);
-    }
-    
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 1rem;
-      border: 1px solid var(--mist);
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--soft-light);
-      font-family: inherit;
-    }
-    
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--aether);
-      box-shadow: 0 0 20px rgba(183, 148, 246, 0.3);
-    }
-    
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 2rem;
-      margin-top: 4rem;
-      border-top: 1px solid var(--mist);
-      opacity: 0.7;
-    }
-    
-    /* Sacred Geometry Animations */
-    @keyframes rotateSlow {
-      0% { transform: translate(-50%, -50%) rotate(0deg); }
-      100% { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-    
-    @keyframes pulseOverlay {
-      0%, 100% { transform: scale(1); opacity: 0.4; }
-      50% { transform: scale(1.02); opacity: 0.6; }
-    }
-    
-    @keyframes fibonacci-pulse {
-      0%, 100% { opacity: 0.3; }
-      50% { opacity: 0.7; }
-    }
-    
-    /* Responsive design */
-    @media (max-width: 768px) {
-      .nav-links {
-        gap: 1rem;
-      }
-      
-      .nav-links a {
-        padding: 0.3rem 0.7rem;
-        font-size: 0.9rem;
-      }
 
-      
-      .orbit-1 { width: 120px; height: 120px; }
-      .orbit-2 { width: 160px; height: 160px; }
-      .orbit-3 { width: 200px; height: 200px; }
-      .orbit-4 { width: 240px; height: 240px; }
-      
-      .element-orb {
-        width: 40px;
-        height: 40px;
-        font-size: 1.1rem;
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .element-orbits {
+        width: 350px;
+        height: 350px;
       }
       
-      .aether {
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
-      }
-      
+      .orbit-1 { width: 200px; height: 200px; }
+      .orbit-2 { width: 280px; height: 280px; }
+      .orbit-3 { width: 350px; height: 350px; }
+      .orbit-4 { width: 420px; height: 420px; }
+
       @keyframes orbit-fire {
-        0% { transform: translate(-50%, -50%) rotate(0deg) translateX(60px) rotate(0deg); }
-        100% { transform: translate(-50%, -50%) rotate(360deg) translateX(60px) rotate(-360deg); }
-      }
-      
-      @keyframes orbit-earth {
-        0% { transform: translate(-50%, -50%) rotate(0deg) translateX(80px) rotate(0deg); }
-        100% { transform: translate(-50%, -50%) rotate(360deg) translateX(80px) rotate(-360deg); }
-      }
-      
-      @keyframes orbit-water {
         0% { transform: translate(-50%, -50%) rotate(0deg) translateX(100px) rotate(0deg); }
         100% { transform: translate(-50%, -50%) rotate(360deg) translateX(100px) rotate(-360deg); }
       }
       
-      @keyframes orbit-air {
-        0% { transform: translate(-50%, -50%) rotate(0deg) translateX(120px) rotate(0deg); }
-        100% { transform: translate(-50%, -50%) rotate(360deg) translateX(120px) rotate(-360deg); }
+      @keyframes orbit-earth {
+        0% { transform: translate(-50%, -50%) rotate(0deg) translateX(140px) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg) translateX(140px) rotate(-360deg); }
       }
-
-      .aether-core {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, var(--aether) 20%, transparent 60%);
-  box-shadow: 0 0 40px rgba(147, 112, 219, 0.6), 0 0 80px rgba(147, 112, 219, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: aether-glow 4s ease-in-out infinite;
-  overflow: visible;
-}
-
-.aether-glow {
-  position: absolute;
-  width: 140%;
-  height: 140%;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(147,112,219,0.4), transparent 70%);
-  animation: aether-breathe 6s ease-in-out infinite;
-  filter: blur(10px);
-  z-index: 0;
-}
-
-.aether-pulse {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 2px solid rgba(147,112,219,0.3);
-  animation: aether-pulse-ring 3s infinite ease-out;
-  z-index: 0;
-}
-
-.aether-glyph {
-  font-size: 2rem;
-  color: var(--aether);
-  z-index: 2;
-  text-shadow: 0 0 10px rgba(147, 112, 219, 0.7);
-}
-
-@keyframes aether-breathe {
-  0%, 100% { transform: scale(1); opacity: 0.4; }
-  50% { transform: scale(1.1); opacity: 0.6; }
-}
-
-@keyframes aether-glow {
-  0%, 100% {
-    box-shadow: 0 0 40px rgba(147, 112, 219, 0.6), 0 0 80px rgba(147, 112, 219, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 60px rgba(147, 112, 219, 0.8), 0 0 100px rgba(147, 112, 219, 0.3);
-  }
-}
-
-@keyframes aether-pulse-ring {
-  0% { transform: scale(1); opacity: 0.6; }
-  100% { transform: scale(2); opacity: 0; }
-}
-
-
+      
+      @keyframes orbit-water {
+        0% { transform: translate(-50%, -50%) rotate(0deg) translateX(175px) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg) translateX(175px) rotate(-360deg); }
+      }
+      
+      @keyframes orbit-air {
+        0% { transform: translate(-50%, -50%) rotate(0deg) translateX(210px) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg) translateX(210px) rotate(-360deg); }
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Mystical background -->
+  <!-- Cosmic background -->
   <div class="cosmos" id="cosmos"></div>
-  <canvas id="constellation" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:-1;"></canvas>
-
-
+  
   <!-- Hidden Portal (invisible clickable area) -->
   <button class="hidden-portal" onclick="toggleSecretMenu()" title="✨"></button>
   
@@ -859,58 +659,11 @@
   <div class="secret-menu" id="secretMenu">
     <h3>⚡ Hidden Pathways ⚡</h3>
     <ul>
-      <li><a href="#" onclick="showPage('codex')"><span class="secret-item-icon">📜</span> The Codex</a></li>
-      <li><a href="#" onclick="showPage('garden')"><span class="secret-item-icon">🌱</span> Digital Garden</a></li>
-      <li><a href="#" onclick="showPage('workshop')"><span class="secret-item-icon">🔮</span> Sacred Workshop</a></li>
-      <li><a href="#" onclick="showPage('frequencies')"><span class="secret-item-icon">🎵</span> Frequencies</a></li>
-      <li><a href="#" onclick="activateSacredGeometry()"><span class="secret-item-icon">🔱</span> Sacred Geometry</a></li>
+      <li><a href="#" onclick="showPage('codex')"><span>📜</span> The Codex</a></li>
+      <li><a href="#" onclick="showPage('garden')"><span>🌱</span> Digital Garden</a></li>
+      <li><a href="#" onclick="showPage('workshop')"><span>🔮</span> Sacred Workshop</a></li>
+      <li><a href="#" onclick="showPage('frequencies')"><span>🎵</span> Frequencies</a></li>
     </ul>
-  </div>
-
-  <!-- Sacred Geometry Mode Overlay -->
-  <div id="sacredGeometryOverlay" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:9998; pointer-events:none;">
-    <!-- Flower of Life -->
-    <svg id="flowerOfLife" width="200" height="200" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) rotate(0deg); opacity:0.4; animation: rotateSlow 60s linear infinite;">
-      <defs>
-        <circle id="circle" r="50" fill="none" stroke="#9370db" stroke-width="1.5" />
-      </defs>
-      <g>
-        <!-- Central circle -->
-        <use href="#circle" x="100" y="100" />
-        <!-- Six surrounding circles -->
-        <use href="#circle" x="150" y="100" />
-        <use href="#circle" x="125" y="143.3" />
-        <use href="#circle" x="75" y="143.3" />
-        <use href="#circle" x="50" y="100" />
-        <use href="#circle" x="75" y="56.7" />
-        <use href="#circle" x="125" y="56.7" />
-      </g>
-    </svg>
-
-    <!-- Golden Ratio Spiral -->
-    <svg id="goldenSpiral" width="300" height="300" style="position:absolute; top:20px; right:20px; opacity:0.5; animation: fibonacci-pulse 8s ease-in-out infinite;">
-      <path d="M150,150 Q120,120 90,150 Q60,180 90,210 Q120,240 150,210 Q180,180 150,150" 
-            fill="none" stroke="#00bfff" stroke-width="2" stroke-dasharray="5,5" />
-      <path d="M150,150 Q180,120 210,150 Q240,180 210,210 Q180,240 150,210" 
-            fill="none" stroke="#00bfff" stroke-width="1.5" stroke-dasharray="3,3" />
-    </svg>
-
-    <!-- Fibonacci Grid -->
-    <div id="fibonacciGrid" style="position:absolute; top:20px; left:20px; width:200px; height:200px; opacity:0.4; animation: fibonacci-pulse 6s ease-in-out infinite;">
-      <svg width="200" height="200">
-        <rect x="0" y="0" width="50" height="50" fill="none" stroke="#87ceeb" stroke-width="1" />
-        <rect x="50" y="0" width="50" height="50" fill="none" stroke="#87ceeb" stroke-width="1" />
-        <rect x="0" y="50" width="100" height="100" fill="none" stroke="#87ceeb" stroke-width="1.5" />
-        <rect x="100" y="0" width="100" height="150" fill="none" stroke="#87ceeb" stroke-width="1" />
-        <rect x="0" y="150" width="200" height="50" fill="none" stroke="#87ceeb" stroke-width="1" />
-      </svg>
-    </div>
-
-    <!-- Platonic Solids in corners -->
-    <div style="position:absolute; top:50px; left:50px; font-size:2rem; opacity:0.6; animation: fibonacci-pulse 4s ease-in-out infinite;">🔺</div>
-    <div style="position:absolute; top:50px; right:50px; font-size:2rem; opacity:0.6; animation: fibonacci-pulse 5s ease-in-out infinite;">⬜</div>
-    <div style="position:absolute; bottom:50px; left:50px; font-size:2rem; opacity:0.6; animation: fibonacci-pulse 6s ease-in-out infinite;">🔷</div>
-    <div style="position:absolute; bottom:50px; right:50px; font-size:2rem; opacity:0.6; animation: fibonacci-pulse 7s ease-in-out infinite;">⚪</div>
   </div>
   
   <!-- Navigation -->
@@ -929,182 +682,133 @@
   <!-- Intro Page -->
   <section id="intro" class="page-section intro-page active">
     <h1 class="intro-title">Wyetherp</h1>
-    <p class="intro-tagline">Tech for the soul and senses. Creating tools for the tender-minded.</p>
+    <p style="font-size: 1.3rem; margin-bottom: 3rem; opacity: 0.9; max-width: 600px; color: hsl(var(--text-secondary));">Tech for the soul and senses. Creating tools for the tender-minded.</p>
     
     <div class="element-orbits">
-      <!-- Orbital rings for visual guide -->
+      <!-- Visual orbit rings -->
       <div class="orbit-ring orbit-1"></div>
       <div class="orbit-ring orbit-2"></div>
       <div class="orbit-ring orbit-3"></div>
       <div class="orbit-ring orbit-4"></div>
       
-      <!-- Central star (Aether) -->
-      <!-- Central Aether (Mystical Core) -->
-<div class="element-orb aether" title="✨ Aether – The guiding pulse of the elemental realm">
-  <div class="aether-core">
-    <div class="aether-glow"></div>
-    <div class="aether-pulse"></div>
-    <span class="aether-glyph">✶</span>
-  </div>
-</div>
-
+      <!-- STAR STICK FIGURE LOGO -->
+      <div class="star-logo">
+        <div class="star-body-part star-torso"></div>
+        <div class="star-body-part star-left-arm"></div>
+        <div class="star-body-part star-right-arm"></div>
+        <div class="star-body-part star-left-leg"></div>
+        <div class="star-body-part star-right-leg"></div>
+      </div>
       
-      <!-- Orbiting planets -->
-      <div class="element-orb fire" title="Fire - Sacred technology that ignites (closest to the light)">🔥</div>
-      <div class="element-orb earth" title="Earth - Practical tools built to last (stable foundation)">🪨</div>
-      <div class="element-orb water" title="Water - Intuitive design that flows (life-giving essence)">🌊</div>
-      <div class="element-orb air" title="Air - Clear, accessible interfaces (boundless reach)">🌬️</div>
+      <!-- Central Aether Core -->
+      <div class="element-orb aether" title="✨ Aether – The guiding pulse" onclick="resonancePing()">
+        <div class="aether-core">
+          <span class="aether-glyph">✶</span>
+        </div>
+      </div>
+      
+      <!-- Orbiting Elements -->
+      <div class="element-orb fire" title="🔥 Fire">🔥</div>
+      <div class="element-orb earth" title="🪨 Earth">🪨</div>
+      <div class="element-orb water" title="🌊 Water">🌊</div>
+      <div class="element-orb air" title="🌬️ Air">🌬️</div>
     </div>
     
-    <button class="enter-portal" onclick="enterSacredSpace()">Enter the Sacred Space</button>
+    <button class="enter-portal" onclick="enterSacredSpace()">
+      <span>✨</span> Enter the Sacred Space <span>✨</span>
+    </button>
   </section>
 
-<!-- About Page -->
-<!-- About Page -->
-<section id="about" class="page-section about-page">
-  <div class="container" style="animation: fadeInUp 1.2s ease-out;">
-    <h1 style="background: linear-gradient(45deg, var(--aether), var(--water), var(--fire));
-               background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-               animation: gentle-pulse 4s infinite;">Walking the Forest Path</h1>
-
-    <p class="intro-tagline glow-on-hover">Most technology feels mentally straining and overwhelming</p>
-
-    <h2 class="glow-on-hover">What I Believe</h2>
-    <p>I believe every website or app is a chance to connect with someone. I don’t just build software. I build digital spaces where people who think differently feel at home.</p>
-
-    <h2 class="glow-on-hover">Listening First</h2>
-    <p>I aim to build computers that are both easy to talk to, and can meet the unique preferences of every user.</p>
-
-    <h2 class="glow-on-hover">Code With Care</h2>
-    <p>My goal is to create tools that prioritize listening over commanding. That way they support, rather than control, the people who use them.</p>
-
-    <h2 class="glow-on-hover">The Five Elements</h2>
-    <p>I use five elements to guide me:</p>
-    <ul class="elemental-list">
-      <li>🔥 <strong>Fire</strong> – Inspiration / Passion</li>
-      <li>🌊 <strong>Water</strong> – Smooth, easy Flow</li>
-      <li>🌬️ <strong>Air</strong> – Clear / Kind communication</li>
-      <li>🪨 <strong>Earth</strong> – Solid, steady foundations</li>
-      <li>✨ <strong>Aether</strong> – Quiet vision that holds the whole in harmony.</li>
-    </ul>
-
-    <h2 class="glow-on-hover">My Mission</h2>
-    <p>I’m not here to build the fastest or fanciest apps. I want to make safe and intuitive spaces—where all kinds of minds feel welcome. Most tech is built for one kind of brain. I build for the ones that don’t fit the mold.</p>
-
-    <blockquote>
-      <em>"“Not all paths are straight, nor short. But the winding road is where one finds their strength.” -Gandalf The White"</em>
-    </blockquote>
-
-    <button class="resonance-button glow-on-hover" onclick="resonancePing()">✨ (im)Press_Me! ✨</button>
-  </div>
-</section>
-
-  
-
-  
-<section id="projects" class="page-section">
-  <div class="container">
-    <h1 class="glow-on-hover">🛠️ Tools I've Crafted</h1>
-
-    <!-- FEATURED PROJECT -->
-    <div class="project-card featured-crumb">
-      <h2>🤖 Crumb</h2>
-      <p><strong>Emotional AI Assistant for Neurodivergent Minds</strong></p>
-      <ul>
-        <li><span class="highlight-aether">Platform:</span> Raspberry Pi + Python</li>
-        <li><span class="highlight-aether">Features:</span> Elemental modes, fidget integration, LED expression, soundboard</li>
-        <li><span class="highlight-aether">Purpose:</span> Help regulate, communicate, and ground through gentle interface</li>
+  <!-- About Page -->
+  <section id="about" class="page-section about-page">
+    <div class="container">
+      <h1>Walking the Forest Path</h1>
+      <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.8;">Most technology feels mentally straining and overwhelming</p>
+      
+      <h2 style="color: hsl(var(--water)); margin: 2rem 0 1rem; font-size: 1.8rem;">What I Believe</h2>
+      <p style="margin-bottom: 1.5rem; font-size: 1.1rem; color: hsl(var(--text-secondary)); line-height: 1.7;">I believe every website or app is a chance to connect with someone. I build digital spaces where people who think differently feel at home.</p>
+      
+      <h2 style="color: hsl(var(--water)); margin: 2rem 0 1rem; font-size: 1.8rem;">The Five Elements</h2>
+      <ul class="elemental-list">
+        <li>🔥 <strong>Fire</strong> – Inspiration and passionate creation</li>
+        <li>🌊 <strong>Water</strong> – Smooth, intuitive flow</li>
+        <li>🌬️ <strong>Air</strong> – Clear, accessible communication</li>
+        <li>🪨 <strong>Earth</strong> – Solid, reliable foundations</li>
+        <li>✨ <strong>Aether</strong> – The mystical binding that holds it all together</li>
       </ul>
-      <p>Crumb is more than a device—it’s a companion. A whisper of calm in an overstimulating world.</p>
-      <a href="#codex" class="resume-button">Learn More</a>
     </div>
+  </section>
 
-    <!-- PROJECT GRID -->
-    <div class="project-grid">
-      <!-- FLOW INTERFACES -->
-      <div class="project-card">
-        <h3>🌊 Flow Interfaces</h3>
-        <p class="highlight-aether">Design for Ease</p>
-        <p>Breathing, animated layouts designed with body-based timing—interfaces that slow/work with the nervous system.</p>
-        <span class="resume-button" style="font-size: 0.8rem; padding: 0.4rem 1rem;">Prototype</span>
+  <!-- Projects Page -->
+  <section id="projects" class="page-section projects-page">
+    <div class="container">
+      <h1>🛠️ Sacred Creations</h1>
+
+      <div class="featured-project">
+        <h2>🤖 C.R.U.M.B</h2>
+        <p><strong>Emotionally Intelligent Companion</strong></p>
+        <p>An AI assistant designed specifically for neurodivergent minds, offering emotional support through gentle LED feedback, calming interactions, and intuitive communication.</p>
+        <div style="height: 150px; background: linear-gradient(135deg, hsla(var(--aether), 0.1), hsla(var(--water), 0.1)); border-radius: 10px; margin: 2rem 0; display: flex; align-items: center; justify-content: center; border: 2px dashed hsla(var(--aether), 0.3);">
+          <span style="color: hsl(var(--text-secondary)); font-size: 1.1rem;">🎨 [Main Project Visual Placeholder]</span>
+        </div>
       </div>
 
-      <!-- ELEMENTAL DESIGN SYSTEM -->
-      <div class="project-card">
-        <h3>✨ Elemental UI</h3>
-        <p class="highlight-aether">A Design Language</p>
-        <p>Each project is made whole through balancing each of the elemental themes</p>
-        <span class="resume-button" style="font-size: 0.8rem; padding: 0.4rem 1rem;">Open Source</span>
-      </div>
+      <!-- SUB-PROJECTS -->
+      <div class="sub-projects">
+        <div class="project-card">
+          <h3 style="color: hsl(var(--aether)); margin-bottom: 1rem; font-size: 1.5rem;">🌊 Flow Interfaces</h3>
+          <p>Design patterns that work with natural human rhythms rather than against them.</p>
+          <div style="height: 100px; background: hsla(var(--water), 0.1); border-radius: 8px; margin: 1rem 0; display: flex; align-items: center; justify-content: center;">
+            <span style="color: hsl(var(--text-secondary));">📸 [Image Placeholder]</span>
+          </div>
+        </div>
 
-      <!-- MACHINE LEARNING PIPELINES -->
-      <div class="project-card">
-        <h3>📈 Resonant ML</h3>
-        <p class="highlight-aether">Machine Learning, Gently</p>
-        <p>One of the biggest fears I have with the rise of AI is that we dont know what actually happening behind the scenes... I try to make my code as public/understandable as possible</p>
-        <span class="resume-button" style="font-size: 0.8rem; padding: 0.4rem 1rem;">In Use</span>
-      </div>
-
-      <!-- SOUND + SENSOR RESEARCH -->
-      <div class="project-card">
-        <h3>🔊 Water-to-Symphony</h3>
-        <p class="highlight-aether">Sound + Sacred Geometry</p>
-        <p>Experimental pipeline that reads cymatic water shapes and outputs generative sound/music. Harmony meets hydrology.</p>
-        <span class="resume-button" style="font-size: 0.8rem; padding: 0.4rem 1rem;">Experimental</span>
+        <div class="project-card">
+          <h3 style="color: hsl(var(--aether)); margin-bottom: 1rem; font-size: 1.5rem;">🔥 Elemental ML</h3>
+          <p>Machine learning models designed with transparency and emotional intelligence.</p>
+          <div style="height: 100px; background: hsla(var(--fire), 0.1); border-radius: 8px; margin: 1rem 0; display: flex; align-items: center; justify-content: center;">
+            <span style="color: hsl(var(--text-secondary));">📸 [Image Placeholder]</span>
+          </div>
+        </div>
       </div>
     </div>
-
-    <!-- RESUME -->
-    <div class="resume-section">
-      <h2>🌟 Open to Projects & Roles</h2>
-      <p>Seeking opportunities where design, data, and emotional intelligence meet. Let's build something soul-aligned.</p>
-      <a href="/resume.pdf" class="resume-button">View My Resume</a>
-    </div>
-  </div>
-</section>
-
+  </section>
 
   <!-- Contact Page -->
-  <section id="contact" class="page-section">
+  <section id="contact" class="page-section contact-page">
     <div class="container">
-      <h1>Let's Co-Create</h1>
-      <p>Whether you're neurodivergent yourself, or simply believe technology can be more human — I'd love to collaborate.</p>
+      <h1>🌌 Cosmic Communion</h1>
+      <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">Let's collaborate and create something meaningful together.</p>
       
-      <form class="contact-form" onsubmit="handleContact(event)">
-        <div class="form-group">
-          <label for="name">Your Name</label>
-          <input type="text" id="name" name="name" required>
-        </div>
+      <div style="max-width: 600px; margin: 2rem auto; text-align: center;">
+        <p style="margin-bottom: 2rem; color: hsl(var(--text-secondary));">Whether you're neurodivergent yourself, or simply believe technology can be more human — I'd love to connect.</p>
         
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required>
+        <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 3rem;">
+          <a href="mailto:hello@wyetherp.com" style="color: hsl(var(--aether)); text-decoration: none; padding: 1rem 2rem; border: 2px solid hsl(var(--aether)); border-radius: 25px; transition: var(--transition-smooth);">
+            ✉️ Email
+          </a>
+          <a href="#" style="color: hsl(var(--water)); text-decoration: none; padding: 1rem 2rem; border: 2px solid hsl(var(--water)); border-radius: 25px; transition: var(--transition-smooth);">
+            💼 LinkedIn
+          </a>
         </div>
-        
-        <div class="form-group">
-          <label for="project">Project Vision</label>
-          <textarea id="project" name="project" rows="5" placeholder="Share your dreams, ideas, or collaborative visions..."></textarea>
-        </div>
-        
-        <button type="submit" class="resonance-button">Send Into the Cosmos</button>
-      </form>
+      </div>
     </div>
   </section>
 
-  <!-- Hidden Pages from Secret Menu -->
+  <!-- Hidden Pages -->
   
-  <!-- Codex Page (Hidden) -->
-  <section id="codex" class="page-section">
+  <!-- Codex Page -->
+  <section id="codex" class="page-section codex-page">
     <div class="container">
-      <h1>📜 The Codex</h1>
-      <p>Sacred writings and digital spells. The deeper mysteries of creation.</p>
+      <h1 style="color: hsl(var(--aether)); text-align: center; margin-bottom: 2rem;">📜 The Codex</h1>
+      <p style="text-align: center; margin-bottom: 3rem; font-style: italic;">Sacred writings and digital spells. The deeper mysteries of creation.</p>
       
-      <h2>Development Philosophy</h2>
-      <blockquote>
-        <em>"Every line of code is a prayer, every function a ritual, every interface one of sacred geometry."</em>
+      <h2 style="color: hsl(var(--water)); margin: 2rem 0 1rem;">Development Philosophy</h2>
+      <blockquote style="margin: 2rem 0; padding: 1.5rem; border-left: 4px solid hsl(var(--fire)); background: hsla(var(--fire), 0.1); font-style: italic; border-radius: 0 10px 10px 0;">
+        <em>"Every line of code is a prayer, every function a ritual, every interface a piece of sacred geometry."</em>
       </blockquote>
       
-      <h2>The Elemental Programming Principles</h2>
+      <h2 style="color: hsl(var(--water)); margin: 2rem 0 1rem;">The Elemental Programming Principles</h2>
       <ul class="elemental-list">
         <li>🔥 <strong>Fire Code</strong> – Passionate, transformative algorithms that ignite possibility</li>
         <li>🌊 <strong>Water Logic</strong> – Flowing, adaptive functions that bend without breaking</li>
@@ -1112,186 +816,129 @@
         <li>🪨 <strong>Earth Architecture</strong> – Solid, foundational systems built to endure</li>
         <li>✨ <strong>Aether Vision</strong> – The transcendent purpose that guides all creation</li>
       </ul>
-      
-      <h2>Sacred Patterns</h2>
-      <p>Modular, readable code with clear sectioning. Comments for all hardware interaction. Subtle animations and emotionally intelligent behavior. Code that feels like a spellbook rather than a product.</p>
     </div>
   </section>
 
-  <!-- Digital Garden Page (Hidden) -->
+  <!-- Digital Garden Page -->
   <section id="garden" class="page-section">
     <div class="container">
-      <h1>🌱 Digital Garden</h1>
-      <p>A growing collection of thoughts, experiments, and seeds of inspiration.</p>
+      <h1 style="color: hsl(var(--aether)); text-align: center; margin-bottom: 2rem;">🌱 Digital Garden</h1>
+      <p style="text-align: center; margin-bottom: 3rem;">A growing collection of thoughts, experiments, and seeds of inspiration.</p>
       
-      <div class="project-grid">
+      <div class="sub-projects">
         <div class="project-card">
-          <h3>🧠 Neurodivergent Design Patterns</h3>
+          <h3 style="color: hsl(var(--aether)); margin-bottom: 1rem;">🧠 Neurodivergent Design Patterns</h3>
           <p>Exploring how interfaces can better serve different cognitive styles and sensory needs.</p>
-          <p><em>Growing slowly...</em></p>
+          <p style="font-style: italic; color: hsl(var(--text-secondary));">Growing slowly...</p>
         </div>
         
         <div class="project-card">
-          <h3>🎨 Tennis ML scripts</h3>
-          <p>Hoping to use Machine Learning to improve my teams performance both on and off the court.</p>
-          <p><em>Blooming...</em></p>
+          <h3 style="color: hsl(var(--aether)); margin-bottom: 1rem;">🎾 Tennis ML Scripts</h3>
+          <p>Using Machine Learning to improve team performance both on and off the court.</p>
+          <p style="font-style: italic; color: hsl(var(--text-secondary));">Blooming...</p>
         </div>
         
         <div class="project-card">
-          <h3>🌊 Rhythm-Based UX</h3>
+          <h3 style="color: hsl(var(--aether)); margin-bottom: 1rem;">🌊 Rhythm-Based UX</h3>
           <p>Interfaces that breathe and pulse with natural timing, honoring the body's rhythms.</p>
-          <p><em>Flowing...</em></p>
+          <p style="font-style: italic; color: hsl(var(--text-secondary));">Flowing...</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Sacred Workshop Page (Hidden) -->
+  <!-- Sacred Workshop Page -->
   <section id="workshop" class="page-section">
     <div class="container">
-      <h1>🔮 Sacred Workshop</h1>
-      <p>Where ideas are forged into reality. The laboratory of digital alchemy.</p>
+      <h1 style="color: hsl(var(--aether)); text-align: center; margin-bottom: 2rem;">🔮 Sacred Workshop</h1>
+      <p style="text-align: center; margin-bottom: 3rem;">Where ideas are forged into reality. The laboratory of digital alchemy.</p>
       
-      <h2>Current Experiments</h2>
+      <h2 style="color: hsl(var(--water)); margin: 2rem 0 1rem;">Current Experiments</h2>
       <ul class="elemental-list">
         <li>🤖 <strong>Crumb's Emotional Engine</strong> – Teaching AI to recognize and respond to neurodivergent communication patterns</li>
         <li>🌙 <strong>Circadian Design</strong> – Interfaces that adapt to natural energy cycles</li>
         <li>🔊 <strong>Haptic Harmony</strong> – Gentle vibrations that communicate without overwhelming</li>
+        <li>🎨 <strong>Synesthetic Interfaces</strong> – Translating emotions into colors, sounds, and textures</li>
       </ul>
       
-      <button class="resonance-button" onclick="resonancePing()">🔬 Request Workshop Access</button>
+      <div style="text-align: center; margin-top: 3rem;">
+        <button style="padding: 1rem 2rem; background: linear-gradient(45deg, hsl(var(--aether)), hsl(var(--fire))); border: none; border-radius: 25px; color: hsl(var(--cosmic-glow)); cursor: pointer; font-size: 1.1rem;" onclick="resonancePing()">
+          🔬 Request Workshop Access
+        </button>
+      </div>
     </div>
   </section>
 
-  <!-- Frequencies Page (Hidden) -->
+  <!-- Frequencies Page -->
   <section id="frequencies" class="page-section">
-  <div class="container">
-    <h1>🎵 Frequencies</h1>
-    <p>Each part of Crumb hums with its own song—a resonance crafted through sound and intention. Inspired by the ancient Solfeggio frequencies, these tones form Crumb’s hidden harmonic backbone.</p>
+    <div class="container">
+      <h1 style="color: hsl(var(--aether)); text-align: center; margin-bottom: 2rem;">🎵 Frequencies</h1>
+      <p style="text-align: center; margin-bottom: 3rem;">Each part of Crumb hums with its own song—a resonance crafted through sound and intention.</p>
 
-    <h2>Solfeggio Sound Map</h2>
-    <ul class="elemental-list">
-      <li>🔊 <strong>396Hz – Release & Grounding</strong><br>Crumb's <em>Safe Mode</em> anchors anxious energy. This frequency helps release fear and guilt, providing grounding through subtle bass vibrations and muted glow animations.</li>
+      <h2 style="color: hsl(var(--water)); margin: 2rem 0 1rem;">Solfeggio Sound Map</h2>
+      <ul class="elemental-list">
+        <li>🔊 <strong>396Hz – Release & Grounding</strong><br>Crumb's <em>Safe Mode</em> anchors anxious energy through subtle bass vibrations.</li>
+        <li>🌊 <strong>417Hz – Flow & Reset</strong><br>The <em>Water Mode</em> uses this tone to support emotional fluidity during transitions.</li>
+        <li>🔥 <strong>528Hz – DNA Activation</strong><br><em>Fire Mode</em> pulses with this frequency to fuel intention-setting and creative ignition.</li>
+        <li>🌬️ <strong>639Hz – Harmonious Communication</strong><br>This frequency supports <em>Air Mode</em> for nonverbal expression and peaceful dialogue.</li>
+        <li>🪨 <strong>741Hz – Clarity & Structure</strong><br><em>Earth Mode</em> resonates here, helping users find rhythm and order.</li>
+        <li>✨ <strong>852Hz – Intuition & Aether Channel</strong><br>Crumb's internal compass for reflection and environmental attunement.</li>
+      </ul>
 
-      <li>🌊 <strong>417Hz – Flow & Reset</strong><br>The <em>Water Mode</em> uses this tone to gently support emotional fluidity and reset the senses. Used during interface transitions and rhythmic breathing cues.</li>
-
-      <li>🔥 <strong>528Hz – DNA Activation / Heart Resonance</strong><br><em>Fire Mode</em> pulses with this golden frequency. It fuels intention-setting rituals, creative ignition, and emotional recalibration. The heartbeat of Crumb’s sacred design.</li>
-
-      <li>🌬️ <strong>639Hz – Harmonious Communication</strong><br>This frequency supports Crumb’s <em>Air Mode</em>—designed for nonverbal expression and mood display. Fosters connection, clarity, and peaceful dialogue.</li>
-
-      <li>🪨 <strong>741Hz – Clarity & Structure</strong><br><em>Earth Mode</em> resonates here, helping users find rhythm and order. Used for task tracking, planning rituals, and providing structural support.</li>
-
-      <li>✨ <strong>852Hz – Intuition & Aether Channel</strong><br>Crumb’s internal compass—used in dream journaling, reflection, and subtle environmental attunement. This is the gateway to the unseen guidance system of Crumb.</li>
-
-      <li>🌌 <strong>963Hz – Unity & Divine Connection</strong><br>Reserved for future versions of Crumb. This tone opens awareness to higher realms and invites moments of awe.</li>
-    </ul>
-
-    <p><em>Crumb is not just coded. It’s tuned.</em><br><em>Every light. Every pause. Every breath is in harmony with an ancient scale.</em></p>
-  </div>
-</section>
-
-  <footer>
-    <p>&copy; 2025 Wyetherp. Walking gently through code and cosmos.</p>
-  </footer>
+      <p style="text-align: center; font-style: italic; margin-top: 2rem; color: hsl(var(--text-secondary));">
+        <em>Crumb is not just coded. It's tuned.</em>
+      </p>
+    </div>
+  </section>
 
   <script>
-    // Sacred geometry state
-    let sacredGeometryActive = false;
+    /* ===== JAVASCRIPT FUNCTIONALITY ===== */
+    
+    // Global state
+    let currentPage = 'intro';
     let secretMenuVisible = false;
-    
-    // Create mystical background stars
+
+    /* Create cosmic background stars */
     function createCosmos() {
-      function drawConstellation() {
-  const canvas = document.getElementById('constellation');
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-  const ctx = canvas.getContext('2d');
-  ctx.lineWidth = 1;
-  ctx.strokeStyle = 'rgba(255,255,255,0.1)';
-  ctx.fillStyle = 'rgba(255,255,255,0.1)';
-
-  // Get aether star center in canvas coords
-  const aetherEl = document.querySelector('.element-orb.aether');
-  const rect = aetherEl.getBoundingClientRect();
-  const headX = rect.left + rect.width/2;
-  const headY = rect.top + rect.height/2;
-
-  // Body points (relative offsets)
-  const points = [
-    [headX, headY],                     // head
-    [headX, headY + 50],                // torso
-    [headX - 20, headY + 90],           // left leg
-    [headX, headY + 50],                // back to torso
-    [headX + 20, headY + 90],           // right leg
-    [headX, headY + 60],                // back to torso
-    [headX - 30, headY + 30],           // left arm
-    [headX, headY + 50],                // back to torso
-    [headX + 30, headY + 30],           // right arm
-  ];
-
-  ctx.beginPath();
-  ctx.moveTo(points[0][0], points[0][1]);
-  for (let i = 1; i < points.length; i++) {
-    ctx.lineTo(points[i][0], points[i][1]);
-  }
-  ctx.stroke();
-
-  // Draw tiny “key” stars at joints
-  points.slice(1).forEach(p => {
-    ctx.beginPath();
-    ctx.arc(p[0], p[1], 1.5, 0, 2 * Math.PI);
-    ctx.fill();
-  });
-}
-
-function launchShootingStar() {
-  const star = document.createElement('div');
-  star.className = 'shooting-star';
-
-  const xStart = Math.random() * window.innerWidth * 0.8;
-  const yStart = Math.random() * window.innerHeight * 0.5;
-  const angle = Math.random() * 30 - 15; // subtle diagonal
-  const size = 3 + Math.random() * 3;
-
-  // Style it like a glowing orb
-  star.style.position = 'fixed';
-  star.style.left = `${xStart}px`;
-  star.style.top = `${yStart}px`;
-  star.style.width = `${size}px`;
-  star.style.height = `${size}px`;
-  star.style.borderRadius = '50%';
-  star.style.background = 'radial-gradient(white, rgba(255,255,255,0.05))';
-  star.style.boxShadow = '0 0 12px white, 0 0 24px rgba(147,112,219,0.5)';
-  star.style.pointerEvents = 'none';
-  star.style.zIndex = '-1'; // behind everything
-
-  document.getElementById('cosmos').appendChild(star);
-
-  const xTravel = 300 + Math.random() * 300;
-  const yTravel = 200 + Math.random() * 300;
-
-  star.animate([
-    { transform: 'translate(0, 0) scale(1)', opacity: 1 },
-    { transform: `translate(${xTravel}px, ${yTravel}px) scale(0.8)`, opacity: 0 }
-  ], {
-    duration: 1800 + Math.random() * 600,
-    easing: 'ease-out',
-    fill: 'forwards'
-  }).onfinish = () => star.remove();
-}
-
-
-// initiate shooting stars every 5 seconds
-setInterval(launchShootingStar, 5000);
-
-
-// redraw on load & resize
-window.addEventListener('load', drawConstellation);
-window.addEventListener('resize', drawConstellation);
-
+      const cosmos = document.getElementById('cosmos');
+      const starCount = 100;
+      
+      // Create twinkling stars
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        
+        // Random positioning and sizing
+        const size = Math.random() * 3 + 1;
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 4 + 's';
+        
+        cosmos.appendChild(star);
+      }
     }
-    
-    // Page navigation system
+
+    /* Create shooting stars */
+    function createShootingStar() {
+      const star = document.createElement('div');
+      star.className = 'shooting-star';
+
+      const xStart = Math.random() * window.innerWidth * 0.8;
+      const yStart = Math.random() * window.innerHeight * 0.5;
+      const size = 2 + Math.random() * 2;
+
+      star.style.left = `${xStart}px`;
+      star.style.top = `${yStart}px`;
+      star.style.width = `${size * 30}px`;
+
+      document.getElementById('cosmos').appendChild(star);
+
+      setTimeout(() => star.remove(), 1800);
+    }
+
+    /* Page navigation system */
     function showPage(pageId) {
       // Hide all pages
       const pages = document.querySelectorAll('.page-section');
@@ -1300,13 +947,13 @@ window.addEventListener('resize', drawConstellation);
       // Show selected page
       document.getElementById(pageId).classList.add('active');
       
-      // Update navigation
+      // Update navigation active states
       const navLinks = document.querySelectorAll('.nav-link');
       navLinks.forEach(link => link.classList.remove('active'));
       
-      // Add active class to current nav item
-      const activeLink = document.querySelector(`[onclick="showPage('${pageId}')"]`);
-      if (activeLink && activeLink.classList.contains('nav-link')) {
+      // Highlight current nav item (only for main nav)
+      const activeLink = document.querySelector(`[onclick="showPage('${pageId}')"].nav-link`);
+      if (activeLink) {
         activeLink.classList.add('active');
       }
       
@@ -1316,171 +963,14 @@ window.addEventListener('resize', drawConstellation);
         document.getElementById('secretMenu').classList.remove('visible');
       }
       
+      // Update current page tracker
+      currentPage = pageId;
+      
       // Smooth scroll to top
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    
-    // Enhanced enter sacred space with smooth transition
-    function enterSacredSpace() {
-      const button = event.target;
-      const originalText = button.textContent;
-      
-      // Button feedback
-      button.style.transform = 'scale(1.05)';
-      button.textContent = '✨ Opening the portal... ✨';
-      
-      // Create mystical transition effect
-      createPortalEffect();
-      
-      // Wait for effect, then transition
-      setTimeout(() => {
-        showPage('about');
-        
-        // Smooth scroll to top after page change
-        setTimeout(() => {
-          window.scrollTo({ 
-            top: 0, 
-            behavior: 'smooth' 
-          });
-        }, 100);
-        
-        // Reset button
-        button.style.transform = 'scale(1)';
-        button.textContent = originalText;
-      }, 1500);
-    }
-    
-    // Create magical portal opening effect
-    function createPortalEffect() {
-  const portalRings = 8;
-  const container = document.querySelector('.intro-page');
 
-  // Create black fade overlay
-  const overlay = document.createElement('div');
-  overlay.style.position = 'fixed';
-  overlay.style.top = 0;
-  overlay.style.left = 0;
-  overlay.style.width = '100vw';
-  overlay.style.height = '100vh';
-  overlay.style.background = 'radial-gradient(circle, rgba(30, 30, 50, 0.1), rgba(10, 10, 20, 0.9))';
-  overlay.style.zIndex = '9998';
-  overlay.style.opacity = 0;
-  overlay.style.transition = 'opacity 1.8s ease';
-  container.appendChild(overlay);
-
-  // Fade in after short delay
-  setTimeout(() => {
-    overlay.style.opacity = 1;
-  }, 300);
-
-  // Create and animate each ring
-  for (let i = 0; i < portalRings; i++) {
-    const ring = document.createElement('div');
-    ring.style.position = 'fixed';
-    ring.style.top = '50%';
-    ring.style.left = '50%';
-    ring.style.width = '50px';
-    ring.style.height = '50px';
-    ring.style.border = '2px solid var(--aether)';
-    ring.style.borderRadius = '50%';
-    ring.style.transform = 'translate(-50%, -50%)';
-    ring.style.pointerEvents = 'none';
-    ring.style.zIndex = '9999';
-    ring.style.opacity = '0.8';
-
-    container.appendChild(ring);
-
-    // Animate rings expanding outward
-    ring.animate([
-      {
-        width: '50px',
-        height: '50px',
-        opacity: 0.8,
-        transform: 'translate(-50%, -50%) scale(1)'
-      },
-      {
-        width: '800px',
-        height: '800px',
-        opacity: 0,
-        transform: 'translate(-50%, -50%) scale(1)'
-      }
-    ], {
-      duration: 1500,
-      delay: i * 150,
-      easing: 'ease-out'
-    }).onfinish = () => ring.remove();
-  }
-}
-
-    
-    function resonancePing() {
-  const aether = document.querySelector('.aether-core');
-  if (aether) {
-    aether.classList.add('resonance-flare');
-    setTimeout(() => aether.classList.remove('resonance-flare'), 1000);
-  }
-
-  const msg = document.createElement('div');
-  msg.className = 'resonance-confirm';
-  msg.innerHTML = "✨ Resonance sent into the cosmos...";
-  document.body.appendChild(msg);
-  setTimeout(() => msg.remove(), 4000);
-}
-
-    
-    // Create magical particles for resonance
-    function createResonanceParticles(element) {
-      const rect = element.getBoundingClientRect();
-      const particles = 12;
-      
-      for (let i = 0; i < particles; i++) {
-        const particle = document.createElement('div');
-        particle.style.position = 'fixed';
-        particle.style.left = rect.left + rect.width/2 + 'px';
-        particle.style.top = rect.top + rect.height/2 + 'px';
-        particle.style.width = '4px';
-        particle.style.height = '4px';
-        particle.style.background = '#9370db';
-        particle.style.borderRadius = '50%';
-        particle.style.pointerEvents = 'none';
-        particle.style.zIndex = '9999';
-        
-        document.body.appendChild(particle);
-        
-        // Animate particles
-        const angle = (i / particles) * Math.PI * 2;
-        const distance = 100;
-        const x = Math.cos(angle) * distance;
-        const y = Math.sin(angle) * distance;
-        
-        particle.animate([
-          { transform: 'translate(0, 0) scale(1)', opacity: 1 },
-          { transform: `translate(${x}px, ${y}px) scale(0)`, opacity: 0 }
-        ], {
-          duration: 1500,
-          easing: 'ease-out'
-        }).onfinish = () => particle.remove();
-      }
-    }
-    
-    // Handle contact form
-    function handleContact(event) {
-      event.preventDefault();
-      const button = event.target.querySelector('button');
-      const originalText = button.textContent;
-      
-      button.textContent = '✨ Message sent to the cosmos ✨';
-      button.disabled = true;
-      
-      // Simulate sending (replace with actual form handling)
-      setTimeout(() => {
-        button.textContent = originalText;
-        button.disabled = false;
-        event.target.reset();
-      }, 3000);
-    }
-    
-    // Secret menu functionality
+    /* Secret menu toggle */
     function toggleSecretMenu() {
       const menu = document.getElementById('secretMenu');
       secretMenuVisible = !secretMenuVisible;
@@ -1492,19 +982,8 @@ window.addEventListener('resize', drawConstellation);
         menu.classList.remove('visible');
       }
     }
-    
-    // Close secret menu when clicking elsewhere
-    document.addEventListener('click', function(event) {
-      const menu = document.getElementById('secretMenu');
-      const portal = document.querySelector('.hidden-portal');
-      
-      if (secretMenuVisible && !menu.contains(event.target) && event.target !== portal) {
-        secretMenuVisible = false;
-        menu.classList.remove('visible');
-      }
-    });
-    
-    // Create particles when secret menu opens
+
+    /* Create particles when secret menu opens */
     function createSecretMenuParticles() {
       const particles = 6;
       const portal = document.querySelector('.hidden-portal');
@@ -1517,7 +996,7 @@ window.addEventListener('resize', drawConstellation);
         particle.style.top = rect.top + rect.height/2 + 'px';
         particle.style.width = '3px';
         particle.style.height = '3px';
-        particle.style.background = '#9370db';
+        particle.style.background = `hsl(${258} ${44}% ${59}%)`;
         particle.style.borderRadius = '50%';
         particle.style.pointerEvents = 'none';
         particle.style.zIndex = '9999';
@@ -1538,90 +1017,151 @@ window.addEventListener('resize', drawConstellation);
         }).onfinish = () => particle.remove();
       }
     }
-    
 
-function activateSacredGeometry() {
-  const overlay = document.getElementById('sacredGeometryOverlay');
+    /* Portal transition effect */
+    function enterSacredSpace() {
+      const button = event.target;
+      const originalText = button.innerHTML;
+      
+      // Button feedback animation
+      button.style.transform = 'scale(1.05)';
+      button.innerHTML = '✨ Opening the portal... ✨';
+      
+      // Create portal effect
+      createPortalEffect();
+      
+      // Transition to about page after effect
+      setTimeout(() => {
+        showPage('about');
+        
+        // Reset button after page transition
+        setTimeout(() => {
+          button.style.transform = 'scale(1)';
+          button.innerHTML = originalText;
+        }, 500);
+      }, 1500);
+    }
 
-  if (!sacredGeometryActive) {
-    // 🌌 Display overlay and animation
-    overlay.style.display = 'block';
-    overlay.style.animation = 'pulseOverlay 6s ease-in-out infinite';
-    overlay.classList.add('sacred-particles');
+    /* Create portal opening effect */
+    function createPortalEffect() {
+      const portalRings = 8;
+      const container = document.querySelector('.intro-page');
 
-    // 🌱 Show Tree of Life
-    const tree = document.createElement('img');
-    tree.src = 'assets/imgs/tree-of-life.svg';
-    tree.className = 'tree-of-life-symbol';
-    overlay.appendChild(tree);
+      for (let i = 0; i < portalRings; i++) {
+        const ring = document.createElement('div');
+        ring.style.position = 'fixed';
+        ring.style.top = '50%';
+        ring.style.left = '50%';
+        ring.style.width = '50px';
+        ring.style.height = '50px';
+        ring.style.border = `2px solid hsl(${258} ${44}% ${59}%)`;
+        ring.style.borderRadius = '50%';
+        ring.style.transform = 'translate(-50%, -50%)';
+        ring.style.pointerEvents = 'none';
+        ring.style.zIndex = '9999';
+        ring.style.opacity = '0.8';
 
-    // 🌀 Add Canvas Particle System
-    particleSystem = createSacredParticles(overlay);
+        container.appendChild(ring);
 
-    // 🌟 Notification
-    createNotification(
-      '🔱 Sacred Geometry Activated',
-      'The hidden patterns of creation revealed... Fibonacci spirals, golden ratios, and platonic solids now dance across your reality.'
-    );
+        ring.animate([
+          {
+            width: '50px',
+            height: '50px',
+            opacity: 0.8,
+            transform: 'translate(-50%, -50%) scale(1)'
+          },
+          {
+            width: '800px',
+            height: '800px',
+            opacity: 0,
+            transform: 'translate(-50%, -50%) scale(1)'
+          }
+        ], {
+          duration: 1500,
+          delay: i * 150,
+          easing: 'ease-out'
+        }).onfinish = () => ring.remove();
+      }
+    }
 
-    sacredGeometryActive = true;
-  } else {
-    // 💫 Remove all visuals
-    overlay.style.display = 'none';
-    overlay.style.animation = '';
-    overlay.classList.remove('sacred-particles');
-    overlay.innerHTML = ''; // Clear children
-    if (particleSystem && particleSystem.cleanup) particleSystem.cleanup();
+    /* Resonance ping effect */
+    function resonancePing() {
+      const aether = document.querySelector('.aether-core');
+      if (aether) {
+        aether.classList.add('resonance-flare');
+        setTimeout(() => aether.classList.remove('resonance-flare'), 1000);
+      }
 
-    createNotification(
-      '🔱 Sacred Geometry Deactivated',
-      'The patterns fade back into the quantum field...'
-    );
+      // Create resonance particles
+      createResonanceParticles();
 
-    sacredGeometryActive = false;
-  }
+      const msg = document.createElement('div');
+      msg.className = 'resonance-confirm';
+      msg.innerHTML = "✨ Resonance sent into the cosmos...";
+      document.body.appendChild(msg);
+      setTimeout(() => msg.remove(), 4000);
+    }
 
-  // 🕳️ Close secret menu
-  secretMenuVisible = false;
-  document.getElementById('secretMenu').classList.remove('visible');
-}
-    
-    // Element orb interactions
-    document.addEventListener('DOMContentLoaded', function() {
+    /* Create resonance particles */
+    function createResonanceParticles() {
+      const aether = document.querySelector('.aether-core');
+      if (!aether) return;
+      
+      const rect = aether.getBoundingClientRect();
+      const particles = 12;
+      
+      for (let i = 0; i < particles; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'fixed';
+        particle.style.left = rect.left + rect.width/2 + 'px';
+        particle.style.top = rect.top + rect.height/2 + 'px';
+        particle.style.width = '4px';
+        particle.style.height = '4px';
+        particle.style.background = `hsl(${258} ${44}% ${59}%)`;
+        particle.style.borderRadius = '50%';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '9999';
+        
+        document.body.appendChild(particle);
+        
+        const angle = (i / particles) * Math.PI * 2;
+        const distance = 100;
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
+        
+        particle.animate([
+          { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+          { transform: `translate(${x}px, ${y}px) scale(0)`, opacity: 0 }
+        ], {
+          duration: 1500,
+          easing: 'ease-out'
+        }).onfinish = () => particle.remove();
+      }
+    }
+
+    /* Close secret menu when clicking elsewhere */
+    document.addEventListener('click', function(event) {
+      const menu = document.getElementById('secretMenu');
+      const portal = document.querySelector('.hidden-portal');
+      
+      if (secretMenuVisible && !menu.contains(event.target) && event.target !== portal) {
+        secretMenuVisible = false;
+        menu.classList.remove('visible');
+      }
+    });
+
+    /* Initialize on page load */
+    window.addEventListener('load', function() {
       createCosmos();
       
-      // Add hover descriptions for element orbs
-      const orbs = document.querySelectorAll('.element-orb');
-      orbs.forEach(orb => {
-        orb.addEventListener('click', function() {
-          const element = this.title.split(' - ')[0];
-          const description = this.title.split(' - ')[1];
-          
-          // Create a gentle notification
-          const notification = document.createElement('div');
-          notification.style.position = 'fixed';
-          notification.style.top = '50%';
-          notification.style.left = '50%';
-          notification.style.transform = 'translate(-50%, -50%)';
-          notification.style.background = 'rgba(26, 26, 46, 0.95)';
-          notification.style.padding = '2rem';
-          notification.style.borderRadius = '15px';
-          notification.style.border = '1px solid var(--aether)';
-          notification.style.color = 'var(--soft-light)';
-          notification.style.textAlign = 'center';
-          notification.style.zIndex = '10000';
-          notification.style.maxWidth = '400px';
-          notification.style.backdropFilter = 'blur(10px)';
-          
-          notification.innerHTML = `
-            <h3 style="color: var(--aether); margin-bottom: 1rem;">${element}</h3>
-            <p>${description}</p>
-            <button onclick="this.parentElement.remove()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: var(--aether); border: none; border-radius: 20px; color: white; cursor: pointer;">✨ Close</button>
-          `;
-          
-          document.body.appendChild(notification);
-        });
-      });
+      // Set initial navigation state
+      const homeLink = document.querySelector('[onclick="showPage(\'intro\')"].nav-link');
+      if (homeLink) {
+        homeLink.classList.add('active');
+      }
+      
+      // Start shooting stars
+      setInterval(createShootingStar, 5000);
     });
   </script>
 </body>
