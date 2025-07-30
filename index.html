@@ -916,6 +916,37 @@
       100% { opacity: 0; transform: translate(-50%, -20px); }
     }
 
+    /* ===== CONTENT PAGE SCROLL HINT ===== */
+.content-scroll-hint {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: hsl(var(--text-secondary));
+  font-size: 0.9rem;
+  opacity: 0;
+  animation: contentHintFade 4s ease-in-out forwards;
+  animation-delay: 1.5s;
+  pointer-events: none;
+  text-align: center;
+  z-index: 100;
+  background: hsla(var(--cosmic-void), 0.8);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid hsla(var(--aether), 0.2);
+}
+
+.content-scroll-hint.fade-on-scroll {
+  opacity: 0 !important;
+}
+
+@keyframes contentHintFade {
+  0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+  15%, 70% { opacity: 0.8; transform: translateX(-50%) translateY(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+}
+
     /* ===== PROJECT PAGES ===== */
     .projects-page h1 {
       font-size: 3rem;
@@ -1177,70 +1208,93 @@
     </div>
   </section>
 
-  <!-- Enhanced About Page -->
-  <section id="about" class="page-section about-page">
-    <div class="container">
-      <h1>Walking the Forest Path</h1>
-      <p class="mystical-subtitle" style="text-align: center;">Tech for the soul and senses</p>
+<!-- Enhanced About Page -->
+<section id="about" class="page-section about-page">
+    <div class="content-scroll-hint">
+    ↓ Scroll down to explore content ↓
+  </div>
+  <div class="container">
+    <h1>Walking the Forest Path</h1>
+    <p class="mystical-subtitle" style="text-align: center;">Tech for the soul and senses</p>
+    
+    <!-- Philosophy Quote -->
+    <div class="philosophy-quote">
+      <p>"Every interface is a bridge between human consciousness and digital possibility. I design those bridges to honor the full spectrum of neurodivergent experience."</p>
+    </div>
+
+    <!-- Core Beliefs Section -->
+    <div class="about-section">
+      <h2>🌟 Core Philosophy</h2>
+      <p>I believe every website or app is a chance to connect with someone authentically. Technology should feel like a gentle companion, not an overwhelming force. My work centers on creating digital experiences that breathe with natural rhythms and honor different ways of thinking and sensing.</p>
+    </div>
+
+    <!-- Summer Growth Section -->
+    <div class="about-section">
+      <h2>🚀 Recent Growth & Impact</h2>
+      <p>This summer transformed me from a developer into a full-stack innovator. At my internship, I mastered enterprise-level problem solving while building production systems that serve real users. Simultaneously, I dove deep into hardware development with Raspberry Pi, learning GPIO programming and embedded systems to bring my Crumb AI companion to life.</p>
       
-      <!-- Philosophy Quote -->
-      <div class="philosophy-quote">
-        <p>"Every interface is a bridge between human consciousness and digital possibility. I design those bridges to honor the full spectrum of neurodivergent experience."</p>
-      </div>
+      <p>The combination is powerful: I now think in both digital and physical dimensions. Whether I'm optimizing database queries, designing empathetic user interfaces, or wiring sensors that respond to human emotion, I approach every challenge with the same question: "How can this genuinely help someone?"</p>
+      
+      <p>My Computer Science and Psychology background from Lehigh, combined with D1 athletic discipline, gives me a unique perspective on building technology that performs under pressure while remaining deeply human-centered. I don't just write code—I craft experiences that bridge the gap between what's technically possible and what's emotionally meaningful.</p>
+    </div>
 
-      <!-- Core Beliefs Section -->
-      <div class="about-section">
-        <h2>🌟 Core Philosophy</h2>
-        <p>I believe every website or app is a chance to connect with someone authentically. Technology should feel like a gentle companion, not an overwhelming force. My work centers on creating digital experiences that breathe with natural rhythms and honor different ways of thinking and sensing.</p>
-      </div>
+    <!-- Value Proposition -->
+    <div class="about-section">
+      <h2>💎 What I Bring to Your Team</h2>
+      <p>I'm the developer who asks "why" before "how." My technical skills span full-stack web development, embedded systems, and AI integration, but my real strength is translating complex problems into solutions that actually work for people. I bring fresh perspective, relentless curiosity, and the proven ability to learn rapidly while maintaining high-quality output.</p>
+      
+      <p>Whether you need someone to architect scalable systems, collaborate across disciplines, or pioneer new approaches to human-computer interaction, I'm ready to contribute from day one while continuing to grow with your organization's evolving needs.</p>
+    </div>
+  </div>
+</section>
 
-      <!-- Skills & Expertise -->
-      <div class="about-section">
-        <h2>🛠️ Elemental Expertise</h2>
-        <div class="skill-grid">
-          <div class="skill-card">
-            <h3>🔥 Passionate Development</h3>
-            <p>React, TypeScript, Python — Building with fire and intention to create transformative user experiences</p>
-          </div>
-          <div class="skill-card">
-            <h3>🌊 Intuitive Design</h3>
-            <p>UX/UI that flows naturally, honoring cognitive diversity and sensory sensitivity in every interaction</p>
-          </div>
-          <div class="skill-card">
-            <h3>🌬️ Clear Communication</h3>
-            <p>Technical writing, accessibility standards, and documentation that breathes with clarity</p>
-          </div>
-          <div class="skill-card">
-            <h3>🪨 Solid Foundations</h3>
-            <p>System architecture, database design, and infrastructure built to endure and scale gracefully</p>
-          </div>
-        </div>
-      </div>
+<!-- Skills & Expertise -->
+<div class="about-section">
+  <h2>🛠️ Elemental Expertise</h2>
+  <div class="skill-grid">
+    <div class="skill-card">
+      <h3>🔥 Making Cool Stuff</h3>
+      <p>I build websites and apps using React, HTML, and Python. This summer I learned to make tiny computers (Raspberry Pi) control lights and buttons in the real world!</p>
+    </div>
+    <div class="skill-card">
+      <h3>🌊 Making Things Easy to Use</h3>
+      <p>I design apps that are friendly for everyone, especially people who think differently. My Crumb project this summer taught me how to make computers that understand every users individual preferences</p>
+    </div>
+    <div class="skill-card">
+      <h3>🌬️ Explaining Things Clearly</h3>
+      <p>I'm good at writing instructions and explaining how tech works so everyone can understand. My summer job taught me how to make complicated computer stuff make sense</p>
+    </div>
+    <div class="skill-card">
+      <h3>🪨 Building Strong Foundations</h3>
+      <p>I know how to build the behind-the-scenes parts that make websites and apps work. Now I can also wire up tiny computers to control real things like LEDs and sensors</p>
+    </div>
+  </div>
+</div>
 
-      <!-- Professional Journey -->
-      <div class="about-section">
-        <h2>🚀 Professional Journey</h2>
-        <p>With 5+ years in product development, I've specialized in creating technology that serves neurodivergent communities. From building emotionally intelligent AI companions to designing rhythm-based interfaces, my work bridges the gap between technical excellence and human understanding.</p>
-        
-        <div class="elemental-stats">
-          <div class="stat-orb fire-stat">
-            <div class="stat-number">50+</div>
-            <div class="stat-label">Projects Completed</div>
-          </div>
-          <div class="stat-orb water-stat">
-            <div class="stat-number">95%</div>
-            <div class="stat-label">Client Satisfaction</div>
-          </div>
-          <div class="stat-orb air-stat">
-            <div class="stat-number">12</div>
-            <div class="stat-label">Technologies Mastered</div>
-          </div>
-          <div class="stat-orb earth-stat">
-            <div class="stat-number">3</div>
-            <div class="stat-label">Years with Current Focus</div>
-          </div>
-        </div>
-      </div>
+<!-- Professional Journey -->
+<div class="about-section">
+  <h2>🚀 Professional Journey</h2>
+  <p>From the precision of D1 tennis at Lehigh University to the intersection of computer science and psychology, my path has been shaped by discipline, empathy, and deep curiosity about human connection. As a highly motivated tech creator driven by good intentions, I've dedicated myself to building technology that truly serves people—especially those in neurodivergent communities. My unique blend of athletic focus, technical skills, and psychological understanding allows me to create emotionally intelligent solutions that bridge the gap between human needs and technological possibility.</p>
+  
+  <div class="elemental-stats">
+    <div class="stat-orb fire-stat">
+      <div class="stat-number">D1</div>
+      <div class="stat-label">Athletic Excellence</div>
+    </div>
+    <div class="stat-orb water-stat">
+      <div class="stat-number">CS + PSYC</div>
+      <div class="stat-label">Dual Expertise</div>
+    </div>
+    <div class="stat-orb air-stat">
+      <div class="stat-number">∞</div>
+      <div class="stat-label">Creative Solutions</div>
+    </div>
+    <div class="stat-orb earth-stat">
+      <div class="stat-number">💙</div>
+      <div class="stat-label">Good Intentions</div>
+    </div>
+  </div>
+</div>
 
       <!-- Current Mission -->
       <div class="about-section">
@@ -1273,6 +1327,9 @@
 
   <!-- Projects Page -->
   <section id="projects" class="page-section projects-page">
+    <div class="content-scroll-hint">
+    ↓ Scroll down to explore content ↓
+  </div>
     <div class="container">
       <h1>🛠️ Sacred Creations</h1>
 
@@ -1314,6 +1371,9 @@
 
   <!-- Contact Page -->
   <section id="contact" class="page-section contact-page">
+    <div class="content-scroll-hint">
+    ↓ Scroll down to explore content ↓
+  </div>
     <div class="container">
       <h1>🌌 Cosmic Communion</h1>
       <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">Let's collaborate and create something meaningful together.</p>
@@ -1321,82 +1381,101 @@
       <div style="max-width: 600px; margin: 2rem auto;">
         <p style="margin-bottom: 2rem; color: hsl(var(--text-secondary)); text-align: center;">Whether you're neurodivergent yourself, or simply believe technology can be more human — I'd love to connect.</p>
         
-        <!-- Netlify Contact Form -->
-        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="cosmic-form" style="background: linear-gradient(135deg, hsla(var(--aether), 0.1), hsla(var(--water), 0.05)); border: 2px solid hsla(var(--aether), 0.3); border-radius: 20px; padding: 2.5rem; margin: 2rem 0;">
-          <input type="hidden" name="form-name" value="contact" />
-          <div style="display: none;">
-            <input name="bot-field" />
-          </div>
-          
-          <div style="margin-bottom: 1.5rem;">
-            <label for="name" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">What shall I call you? ✨</label>
-            <input type="text" id="name" name="name" required style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.3); border-radius: 10px; background: hsla(var(--cosmic-void), 0.3); color: hsl(var(--text-primary)); font-size: 1rem;" />
-          </div>
-          
-          <div style="margin-bottom: 1.5rem;">
-            <label for="email" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">Your digital frequency 📡</label>
-            <input type="email" id="email" name="email" required style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.3); border-radius: 10px; background: hsla(var(--cosmic-void), 0.3); color: hsl(var(--text-primary)); font-size: 1rem;" />
-          </div>
-          
-          <div style="margin-bottom: 1.5rem;">
-            <label for="project-type" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">What kind of digital magic are you envisioning? 🔮</label>
-            <select id="project-type" name="project-type" style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.3); border-radius: 10px; background: hsla(var(--cosmic-void), 0.3); color: hsl(var(--text-primary)); font-size: 1rem;">
-              <option value="">Choose your path...</option>
-              <option value="neurodivergent-tech">Neurodivergent-friendly technology</option>
-              <option value="ai-companion">AI companion/emotional intelligence</option>
-              <option value="sensory-interface">Sensory-conscious interface design</option>
-              <option value="mindful-webapp">Mindful web application</option>
-              <option value="accessibility-audit">Accessibility consultation</option>
-              <option value="other">Something else entirely</option>
-            </select>
-          </div>
-          
-          <div style="margin-bottom: 1.5rem;">
-            <label for="energy-level" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">What's your current energy around technology? 🌊</label>
-            <select id="energy-level" name="energy-level" style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.3); border-radius: 10px; background: hsla(var(--cosmic-void), 0.3); color: hsl(var(--text-primary)); font-size: 1rem;">
-              <option value="">How are you feeling?</option>
-              <option value="excited">Excited and energized! 🔥</option>
-              <option value="curious">Curious but cautious 🌱</option>
-              <option value="overwhelmed">Feeling overwhelmed by tech 🌊</option>
-              <option value="frustrated">Frustrated with current solutions 🌪️</option>
-              <option value="hopeful">Hopeful for something different ✨</option>
-            </select>
-          </div>
-          
-          <div style="margin-bottom: 1.5rem;">
-            <label for="communication-style" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">How do you prefer to communicate and work? 🗣️</label>
-            <textarea id="communication-style" name="communication-style" rows="3" style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.3); border-radius: 10px; background: hsla(var(--cosmic-void), 0.3); color: hsl(var(--text-primary)); font-size: 1rem; resize: vertical;" placeholder="e.g., I need clear timelines, prefer written updates, work best in quiet environments..."></textarea>
-          </div>
-          
-          <div style="margin-bottom: 2rem;">
-            <label for="message" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">Tell me about your vision - what would feel truly helpful? 💭</label>
-            <textarea id="message" name="message" rows="4" required style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.3); border-radius: 10px; background: hsla(var(--cosmic-void), 0.3); color: hsl(var(--text-primary)); font-size: 1rem; resize: vertical;" placeholder="Share your dreams, challenges, or ideas. What would technology that truly serves you look like?"></textarea>
-          </div>
-          
-          <button type="submit" style="width: 100%; padding: 1rem 2rem; background: linear-gradient(45deg, hsl(var(--aether)), hsl(var(--water))); border: none; border-radius: 15px; color: hsl(var(--cosmic-glow)); font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: var(--transition-smooth);" 
-                  onmouseover="this.style.transform='translateY(-3px) scale(1.02)'; this.style.boxShadow='0 10px 30px hsla(var(--aether), 0.4)'"
-                  onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
-            🌌 Send Cosmic Message
-          </button>
-        </form>
-        
-        <!-- Social Links -->
-        <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 3rem;">
-          <a href="[your-linkedin]" class="action-button secondary">
-            💼 LinkedIn
-          </a>
-          <a href="[your-github]" class="action-button secondary">
-            💻 GitHub
-          </a>
+
+<!-- Contact Page -->
+<section id="contact" class="page-section contact-page">
+  <div class="container">
+    <h1>🌌 Cosmic Communion</h1>
+    <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">Let's collaborate on Crumb - technology that understands you.</p>
+    
+    <div style="max-width: 600px; margin: 2rem auto;">
+      <p style="margin-bottom: 2rem; color: hsl(var(--text-secondary)); text-align: center;">Whether you're neurodivergent, a developer, or simply believe technology can be more emotionally intelligent — I'd love to connect.</p>
+      
+      <!-- Netlify Contact Form -->
+      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="cosmic-form" style="background: linear-gradient(135deg, hsla(var(--aether), 0.1), hsla(var(--water), 0.05)); border: 2px solid hsla(var(--aether), 0.3); border-radius: 20px; padding: 2.5rem; margin: 2rem 0;">
+        <input type="hidden" name="form-name" value="contact" />
+        <div style="display: none;">
+          <input name="bot-field" />
         </div>
         
-        <p style="margin-top: 2rem; font-size: 0.9rem; color: hsl(var(--text-secondary)); opacity: 0.7; text-align: center;">
-          [Replace the placeholder links above with your actual social media information]
-        </p>
-      </div>
-    </div>
-  </section>
+        <div style="margin-bottom: 1.5rem;">
+          <label for="name" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">What is your name? ✨</label>
+          <input type="text" id="name" name="name" required style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.5); border-radius: 10px; background: hsl(var(--aether)); color: hsl(var(--cosmic-glow)); font-size: 1rem;" />
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <label for="email" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">What is your email?</label>
+          <input type="email" id="email" name="email" required style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.5); border-radius: 10px; background: hsl(var(--aether)); color: hsl(var(--cosmic-glow)); font-size: 1rem;" />
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <label for="neurodivergent-experience" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">What's your experience with neurodivergent-friendly tech? 🧠</label>
+          <select id="neurodivergent-experience" name="neurodivergent-experience" style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.5); border-radius: 10px; background: hsl(var(--aether)); color: hsl(var(--cosmic-glow)); font-size: 1rem;">
+            <option value="">Share your perspective...</option>
+            <option value="neurodivergent-user">I'm neurodivergent and use assistive tech</option>
+            <option value="designer-developer">I design/develop accessible solutions</option>
+            <option value="researcher">I research neurodiversity in tech</option>
+            <option value="supporter">I support neurodivergent individuals</option>
+            <option value="curious">I'm curious to learn more</option>
+            <option value="other">Something else</option>
+          </select>
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <label for="ai-interest" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">Are you interested in AI emotional intelligence/companionship? 🤖💕</label>
+          <select id="ai-interest" name="ai-interest" style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.5); border-radius: 10px; background: hsl(var(--aether)); color: hsl(var(--cosmic-glow)); font-size: 1rem;">
+            <option value="">How do you feel about AI companions?</option>
+            <option value="very-interested">Very interested - I want empathetic AI</option>
+            <option value="cautiously-optimistic">Cautiously optimistic</option>
+            <option value="skeptical-but-open">Skeptical but open to learning</option>
+            <option value="concerned">I have concerns about AI companions</option>
+            <option value="experienced">I already work with emotional AI</option>
+          </select>
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <label for="sensory-considerations" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">What sensory considerations matter most to you?</label>
+          <textarea id="sensory-considerations" name="sensory-considerations" rows="3" style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.5); border-radius: 10px; background: hsl(var(--aether)); color: hsl(var(--cosmic-glow)); font-size: 1rem; resize: vertical;" placeholder="e.g., I'm sensitive to bright lights, need gentle sounds, prefer tactile feedback, require high contrast..."></textarea>
+        </div>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <label for="collaboration-vision" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">How do you envision collaborating on Crumb? 🤝</label>
+          <select id="collaboration-vision" name="collaboration-vision" style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.5); border-radius: 10px; background: hsl(var(--aether)); color: hsl(var(--cosmic-glow)); font-size: 1rem;">
+            <option value="">What role interests you?</option>
+            <option value="beta-tester">Beta testing and feedback</option>
+            <option value="developer">Contributing code/development</option>
+            <option value="designer">UX/UI design collaboration</option>
+            <option value="consultant">Accessibility/neurodiversity consulting</option>
+            <option value="user-research">User research and testing</option>
+            <option value="community">Building community around the project</option>
+            <option value="just-interested">Just interested in following progress</option>
+          </select>
+        </div>
+        
+        <div style="margin-bottom: 2rem;">
+          <label for="technical-background" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">What's your technical background/role? 💻</label>
+          <textarea id="technical-background" name="technical-background" rows="4" required style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.5); border-radius: 10px; background: hsl(var(--aether)); color: hsl(var(--cosmic-glow)); font-size: 1rem; resize: vertical;" placeholder="Tell me about your skills, experience, or perspective. Are you a developer, designer, researcher, end-user, or something else? What draws you to emotionally intelligent technology?"></textarea>
+        </div>
+        
+        <button type="submit" style="width: 100%; padding: 1rem 2rem; background: linear-gradient(45deg, hsl(var(--aether)), hsl(var(--water))); border: none; border-radius: 15px; color: hsl(var(--cosmic-glow)); font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: var(--transition-smooth);" 
+                onmouseover="this.style.transform='translateY(-3px) scale(1.02)'; this.style.boxShadow='0 10px 30px hsla(var(--aether), 0.4)'"
+                onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+          🌌 Join the Crumb Journey
+        </button>
+      </form>
+      
+      <!-- Social Links -->
+      <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 3rem;">
+        <a href=https://www.linkedin.com/in/wyetherp/ class="action-button secondary">
+          💼 LinkedIn
+        </a>
+        <a href= https://github.com/wyetherp class="action-button secondary">
+          💻 GitHub
+        </a>
+  </div>
+</section>
 
+        
   <!-- Hidden Pages -->
   
   <!-- Codex Page -->
@@ -1516,7 +1595,7 @@
     /* Create cosmic background stars */
     function createCosmos() {
       const cosmos = document.getElementById('cosmos');
-      const starCount = 100;
+      const starCount = 36;
       
       // Create twinkling stars
       for (let i = 0; i < starCount; i++) {
@@ -1754,6 +1833,35 @@
       }
     }
 
+function initContentScrollHints() {
+  let hasScrolled = false;
+  
+  function handleContentScroll() {
+    if (!hasScrolled && window.scrollY > 100) {
+      hasScrolled = true;
+      const scrollHints = document.querySelectorAll('.content-scroll-hint');
+      scrollHints.forEach(hint => {
+        hint.classList.add('fade-on-scroll');
+      });
+    }
+  }
+  
+  window.addEventListener('scroll', handleContentScroll);
+  
+  // Reset when changing pages
+  const originalShowPage = window.showPage;
+  window.showPage = function(pageId) {
+    if (pageId !== 'intro') {
+      hasScrolled = false;
+      const scrollHints = document.querySelectorAll('.content-scroll-hint');
+      scrollHints.forEach(hint => {
+        hint.classList.remove('fade-on-scroll');
+      });
+    }
+    originalShowPage(pageId);
+  };
+}
+
     /* ===== SCROLL INDICATOR FUNCTIONALITY ===== */
     function initScrollIndicator() {
       const discoveryHint = document.querySelector('.discovery-hint');
@@ -1776,12 +1884,11 @@
     // Initialize when page loads
     document.addEventListener('DOMContentLoaded', function() {
       createCosmos();
+
+      initContentScrollHints();
       
       // Periodically create shooting stars
       setInterval(createShootingStar, 3000);
-      
-      // Initialize scroll awareness
-      setTimeout(createScrollAwareness, 1000);
       
       // Initialize scroll indicator
       setTimeout(initScrollIndicator, 500);
