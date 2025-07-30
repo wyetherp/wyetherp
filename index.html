@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -298,54 +296,21 @@
       color: hsl(var(--text-secondary));
       font-size: 0.9rem;
       opacity: 0;
-      animation: fadeInPulse 3s ease-in-out infinite;
-      animation-delay: 4s;
+      animation: autoFadeOut 4s ease-in-out forwards;
+      animation-delay: 1s;
       pointer-events: none;
       text-align: center;
+      transition: opacity 0.3s ease;
     }
 
-    @keyframes fadeInPulse {
-      0%, 70% { opacity: 0; transform: translateX(-50%) translateY(0); }
-      15%, 55% { opacity: 0.7; transform: translateX(-50%) translateY(-5px); }
+    .discovery-hint.fade-on-scroll {
+      opacity: 0 !important;
     }
 
-    /* ===== SCROLL DOWN INDICATOR ===== */
-    .scroll-indicator {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      color: hsl(var(--aether));
-      font-size: 1.2rem;
-      z-index: 1001;
-      opacity: 0;
-      transition: all 0.4s ease;
-      pointer-events: none;
-      background: hsla(var(--cosmic-void), 0.9);
-      padding: 1.5rem 2rem;
-      border-radius: 20px;
-      border: 2px solid hsl(var(--aether));
-      backdrop-filter: blur(15px);
-      box-shadow: 0 0 30px hsla(var(--aether), 0.4);
-    }
-
-    .scroll-indicator.visible {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .scroll-arrow {
-      font-size: 2rem;
-      animation: bounce-down 2s infinite;
-      display: block;
-      margin-top: 0.5rem;
-    }
-
-    @keyframes bounce-down {
-      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(10px); }
-      60% { transform: translateY(5px); }
+    @keyframes autoFadeOut {
+      0% { opacity: 0; transform: translateX(-50%) translateY(0); }
+      15%, 60% { opacity: 0.7; transform: translateX(-50%) translateY(-5px); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(0); }
     }
 
     /* ===== PAGE SECTION SYSTEM WITH ENHANCED TRANSITIONS ===== */
@@ -381,7 +346,7 @@
     }
     /* ===== NON-INTRO PAGE LAYOUT - FIXED SPACING ===== */
     .page-section:not(.intro-page) {
-      padding-top: 4.5rem; /* Fixed spacing issue */
+      padding-top: 4.5rem; /* Space for fixed nav */
       padding-left: 2rem;
       padding-right: 2rem;
       padding-bottom: 2rem;      
@@ -1020,6 +985,28 @@
       -webkit-text-fill-color: transparent;
     }
 
+    /* ===== CONTACT FORM STYLES ===== */
+    .cosmic-form input:focus,
+    .cosmic-form select:focus,
+    .cosmic-form textarea:focus {
+      outline: none;
+      border-color: hsl(var(--aether));
+      box-shadow: 0 0 15px hsla(var(--aether), 0.3);
+      transform: translateY(-2px);
+    }
+
+    .cosmic-form input,
+    .cosmic-form select,
+    .cosmic-form textarea {
+      transition: var(--transition-smooth);
+    }
+
+    .cosmic-form label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
     /* ===== HIDDEN PAGES ===== */
     .codex-page {
       background: linear-gradient(135deg, 
@@ -1135,12 +1122,6 @@
     </div>
   </nav>
 
-  <!-- Scroll Down Indicator -->
-  <div class="scroll-indicator" id="scrollIndicator">
-    <div>Content is below - scroll down to explore</div>
-    <div class="scroll-arrow">↓</div>
-  </div>
-
   <!-- Intro Page -->
   <section id="intro" class="page-section intro-page active">
     <h1 class="intro-title">Wyetherp</h1>
@@ -1200,7 +1181,7 @@
   <section id="about" class="page-section about-page">
     <div class="container">
       <h1>Walking the Forest Path</h1>
-      <p class="mystical-subtitle">Most technology feels mentally straining and overwhelming — I craft digital spaces where different minds feel at home</p>
+      <p class="mystical-subtitle" style="text-align: center;">Tech for the soul and senses</p>
       
       <!-- Philosophy Quote -->
       <div class="philosophy-quote">
@@ -1337,13 +1318,70 @@
       <h1>🌌 Cosmic Communion</h1>
       <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">Let's collaborate and create something meaningful together.</p>
       
-      <div style="max-width: 600px; margin: 2rem auto; text-align: center;">
-        <p style="margin-bottom: 2rem; color: hsl(var(--text-secondary));">Whether you're neurodivergent yourself, or simply believe technology can be more human — I'd love to connect.</p>
+      <div style="max-width: 600px; margin: 2rem auto;">
+        <p style="margin-bottom: 2rem; color: hsl(var(--text-secondary)); text-align: center;">Whether you're neurodivergent yourself, or simply believe technology can be more human — I'd love to connect.</p>
         
+        <!-- Netlify Contact Form -->
+        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="cosmic-form" style="background: linear-gradient(135deg, hsla(var(--aether), 0.1), hsla(var(--water), 0.05)); border: 2px solid hsla(var(--aether), 0.3); border-radius: 20px; padding: 2.5rem; margin: 2rem 0;">
+          <input type="hidden" name="form-name" value="contact" />
+          <div style="display: none;">
+            <input name="bot-field" />
+          </div>
+          
+          <div style="margin-bottom: 1.5rem;">
+            <label for="name" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">What shall I call you? ✨</label>
+            <input type="text" id="name" name="name" required style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.3); border-radius: 10px; background: hsla(var(--cosmic-void), 0.3); color: hsl(var(--text-primary)); font-size: 1rem;" />
+          </div>
+          
+          <div style="margin-bottom: 1.5rem;">
+            <label for="email" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">Your digital frequency 📡</label>
+            <input type="email" id="email" name="email" required style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.3); border-radius: 10px; background: hsla(var(--cosmic-void), 0.3); color: hsl(var(--text-primary)); font-size: 1rem;" />
+          </div>
+          
+          <div style="margin-bottom: 1.5rem;">
+            <label for="project-type" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">What kind of digital magic are you envisioning? 🔮</label>
+            <select id="project-type" name="project-type" style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.3); border-radius: 10px; background: hsla(var(--cosmic-void), 0.3); color: hsl(var(--text-primary)); font-size: 1rem;">
+              <option value="">Choose your path...</option>
+              <option value="neurodivergent-tech">Neurodivergent-friendly technology</option>
+              <option value="ai-companion">AI companion/emotional intelligence</option>
+              <option value="sensory-interface">Sensory-conscious interface design</option>
+              <option value="mindful-webapp">Mindful web application</option>
+              <option value="accessibility-audit">Accessibility consultation</option>
+              <option value="other">Something else entirely</option>
+            </select>
+          </div>
+          
+          <div style="margin-bottom: 1.5rem;">
+            <label for="energy-level" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">What's your current energy around technology? 🌊</label>
+            <select id="energy-level" name="energy-level" style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.3); border-radius: 10px; background: hsla(var(--cosmic-void), 0.3); color: hsl(var(--text-primary)); font-size: 1rem;">
+              <option value="">How are you feeling?</option>
+              <option value="excited">Excited and energized! 🔥</option>
+              <option value="curious">Curious but cautious 🌱</option>
+              <option value="overwhelmed">Feeling overwhelmed by tech 🌊</option>
+              <option value="frustrated">Frustrated with current solutions 🌪️</option>
+              <option value="hopeful">Hopeful for something different ✨</option>
+            </select>
+          </div>
+          
+          <div style="margin-bottom: 1.5rem;">
+            <label for="communication-style" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">How do you prefer to communicate and work? 🗣️</label>
+            <textarea id="communication-style" name="communication-style" rows="3" style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.3); border-radius: 10px; background: hsla(var(--cosmic-void), 0.3); color: hsl(var(--text-primary)); font-size: 1rem; resize: vertical;" placeholder="e.g., I need clear timelines, prefer written updates, work best in quiet environments..."></textarea>
+          </div>
+          
+          <div style="margin-bottom: 2rem;">
+            <label for="message" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">Tell me about your vision - what would feel truly helpful? 💭</label>
+            <textarea id="message" name="message" rows="4" required style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.3); border-radius: 10px; background: hsla(var(--cosmic-void), 0.3); color: hsl(var(--text-primary)); font-size: 1rem; resize: vertical;" placeholder="Share your dreams, challenges, or ideas. What would technology that truly serves you look like?"></textarea>
+          </div>
+          
+          <button type="submit" style="width: 100%; padding: 1rem 2rem; background: linear-gradient(45deg, hsl(var(--aether)), hsl(var(--water))); border: none; border-radius: 15px; color: hsl(var(--cosmic-glow)); font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: var(--transition-smooth);" 
+                  onmouseover="this.style.transform='translateY(-3px) scale(1.02)'; this.style.boxShadow='0 10px 30px hsla(var(--aether), 0.4)'"
+                  onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
+            🌌 Send Cosmic Message
+          </button>
+        </form>
+        
+        <!-- Social Links -->
         <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 3rem;">
-          <a href="mailto:[your-email]" class="action-button primary">
-            ✉️ Email Me
-          </a>
           <a href="[your-linkedin]" class="action-button secondary">
             💼 LinkedIn
           </a>
@@ -1352,8 +1390,8 @@
           </a>
         </div>
         
-        <p style="margin-top: 2rem; font-size: 0.9rem; color: hsl(var(--text-secondary)); opacity: 0.7;">
-          [Replace the placeholder links above with your actual contact information]
+        <p style="margin-top: 2rem; font-size: 0.9rem; color: hsl(var(--text-secondary)); opacity: 0.7; text-align: center;">
+          [Replace the placeholder links above with your actual social media information]
         </p>
       </div>
     </div>
@@ -1475,20 +1513,6 @@
       'frequencies': 'Frequencies'
     };
 
-    /* Show scroll indicator for non-intro pages */
-    function showScrollIndicator() {
-      const indicator = document.getElementById('scrollIndicator');
-      if (currentPage !== 'intro') {
-        indicator.classList.add('visible');
-        // Auto-hide after 4 seconds
-        setTimeout(() => {
-          indicator.classList.remove('visible');
-        }, 4000);
-      } else {
-        indicator.classList.remove('visible');
-      }
-    }
-
     /* Create cosmic background stars */
     function createCosmos() {
       const cosmos = document.getElementById('cosmos');
@@ -1569,80 +1593,23 @@
         const navLinks = document.querySelectorAll('.nav-link');
         navLinks.forEach(link => link.classList.remove('active'));
         
-        // Highlight current nav item (only for main nav)
-        const activeLink = document.querySelector('[onclick="showPage(\'' + pageId + '\')"].nav-link');
-        if (activeLink) {
-          activeLink.classList.add('active');
-        }
+        // Find and highlight current page link
+        navLinks.forEach(link => {
+          if (link.getAttribute('onclick')?.includes(`'${pageId}'`)) {
+            link.classList.add('active');
+          }
+        });
+        
+        // Update current page state
+        currentPage = pageId;
         
         // Close secret menu if open
         if (secretMenuVisible) {
-          secretMenuVisible = false;
-          document.getElementById('secretMenu').classList.remove('visible');
+          toggleSecretMenu();
         }
         
-        // Remove navigation pulse if active
-        const navLinksContainer = document.getElementById('navLinks');
-        navLinksContainer.classList.remove('pulse-hint');
-        
-        // Update current page tracker
-        currentPage = pageId;
-        
-        // Show scroll indicator for non-intro pages
-        showScrollIndicator();
-        
-        // Smooth scroll to top
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        
-        // Create page transition particles
-        createPageTransitionParticles(pageId);
-        
-      }, currentSection ? 200 : 0);
+      }, 200);
     }
-
-     /* Create page transition particles */
-     function createPageTransitionParticles(pageId) {
-       const colors = {
-         'intro': '258 44% 59%',
-         'about': '195 100% 50%', 
-         'projects': '14 100% 57%',
-         'contact': '205 53% 74%',
-         'codex': '258 44% 59%',
-         'garden': '25 59% 30%',
-         'workshop': '14 100% 57%',
-         'frequencies': '258 44% 59%'
-       };
-       
-       const color = colors[pageId] || '258 44% 59%';
-       const particles = 12;
-       
-       for (let i = 0; i < particles; i++) {
-         const particle = document.createElement('div');
-         particle.style.position = 'fixed';
-         particle.style.left = Math.random() * window.innerWidth + 'px';
-         particle.style.top = window.innerHeight + 'px';
-         particle.style.width = '8px';
-         particle.style.height = '8px';
-         particle.style.background = 'hsl(' + color + ')';
-         particle.style.borderRadius = '50%';
-         particle.style.pointerEvents = 'none';
-         particle.style.zIndex = '9999';
-         particle.style.boxShadow = '0 0 12px hsl(' + color + ')';
-         
-         document.body.appendChild(particle);
-         
-         const endY = Math.random() * window.innerHeight * 0.3;
-         const endX = Math.random() * window.innerWidth;
-         
-         particle.animate([
-           { transform: 'translate(0, 0) scale(1)', opacity: 1 },
-           { transform: 'translate(' + (endX - parseInt(particle.style.left)) + 'px, ' + (endY - window.innerHeight) + 'px) scale(0)', opacity: 0 }
-         ], {
-           duration: 2000,
-           easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
-         }).onfinish = () => particle.remove();
-       }
-     }
 
     /* Pulse navigation hint */
     function pulseNavigation() {
@@ -1746,57 +1713,78 @@
         particle.style.background = 'hsl(258 44% 59%)';
         particle.style.borderRadius = '50%';
         particle.style.pointerEvents = 'none';
-        particle.style.zIndex = '9999';
+        particle.style.zIndex = '9998';
         particle.style.boxShadow = '0 0 8px hsl(258 44% 59%)';
         
         document.body.appendChild(particle);
         
         const angle = (i / particles) * Math.PI * 2;
-        const distance = 120;
+        const distance = 100 + Math.random() * 50;
         const x = Math.cos(angle) * distance;
         const y = Math.sin(angle) * distance;
         
         particle.animate([
-          { transform: 'translate(0, 0) scale(1)', opacity: 1 },
-          { transform: 'translate(' + x + 'px, ' + y + 'px) scale(0)', opacity: 0 }
+          { 
+            transform: 'translate(0, 0) scale(1)', 
+            opacity: 1,
+            filter: 'blur(0px)'
+          },
+          { 
+            transform: `translate(${x}px, ${y}px) scale(0)`, 
+            opacity: 0,
+            filter: 'blur(2px)'
+          }
         ], {
-          duration: 1500,
-          easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+          duration: 1200 + Math.random() * 400,
+          easing: 'ease-out'
         }).onfinish = () => particle.remove();
       }
     }
 
-    /* Close secret menu when clicking elsewhere */
-    document.addEventListener('click', function(event) {
-      const menu = document.getElementById('secretMenu');
-      const portal = document.querySelector('.hidden-portal');
-      
-      if (secretMenuVisible && !menu.contains(event.target) && event.target !== portal) {
-        secretMenuVisible = false;
-        menu.classList.remove('visible');
+    /* Create scroll awareness system */
+    function createScrollAwareness() {
+      // Only show hints if user hasn't navigated yet
+      if (currentPage === 'intro' && !navigationHintShown) {
+        setTimeout(() => {
+          if (currentPage === 'intro') {
+            pulseNavigation();
+            navigationHintShown = true;
+          }
+        }, 8000);
       }
-    });
+    }
 
-    /* Initialize on page load */
-    window.addEventListener('load', function() {
+    /* ===== SCROLL INDICATOR FUNCTIONALITY ===== */
+    function initScrollIndicator() {
+      const discoveryHint = document.querySelector('.discovery-hint');
+      if (!discoveryHint) return;
+      
+      // Auto-fade after 2 seconds (handled by CSS animation)
+      // Also fade on scroll
+      let hasScrolled = false;
+      
+      function handleScroll() {
+        if (!hasScrolled && window.scrollY > 50) {
+          hasScrolled = true;
+          discoveryHint.classList.add('fade-on-scroll');
+        }
+      }
+      
+      window.addEventListener('scroll', handleScroll);
+    }
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
       createCosmos();
       
-      // Set initial navigation state
-      const homeLink = document.querySelector('[onclick="showPage(\'intro\')"].nav-link');
-      if (homeLink) {
-        homeLink.classList.add('active');
-      }
+      // Periodically create shooting stars
+      setInterval(createShootingStar, 3000);
       
-      // Start shooting stars
-      setInterval(createShootingStar, 5000);
+      // Initialize scroll awareness
+      setTimeout(createScrollAwareness, 1000);
       
-      // Show navigation hint after 8 seconds if still on intro page
-      setTimeout(() => {
-        if (currentPage === 'intro' && !navigationHintShown) {
-          pulseNavigation();
-          navigationHintShown = true;
-        }
-      }, 8000);
+      // Initialize scroll indicator
+      setTimeout(initScrollIndicator, 500);
     });
   </script>
 </body>
