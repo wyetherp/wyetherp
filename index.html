@@ -1,1731 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Wyetherp — Tech for the soul and senses. Creating tools for the tender-minded." />
-  <title>Wyetherp V0.01</title>
-  <style>
-    /* ===== CSS VARIABLES - Design System ===== */
-    :root {
-      /* Elemental Color Palette */
-      --fire: 14 100% 57%;        /* HSL: Orange-red fire */
-      --water: 195 100% 50%;      /* HSL: Deep blue water */
-      --air: 205 53% 74%;         /* HSL: Light blue air */
-      --earth: 25 59% 30%;        /* HSL: Brown earth */
-      --aether: 258 44% 59%;      /* HSL: Purple mystical energy */
-      
-      /* Background & Space Colors */
-      --cosmic-void: 231 45% 8%;   /* Deep space background */
-      --cosmic-glow: 210 100% 97%; /* Soft starlight */
-      --cosmic-mist: 0 0% 100%;    /* White mist overlay */
-      
-      /* UI & Interface Colors */
-      --surface: 230 20% 15%;      /* Card/surface background */
-      --border: 0 0% 100%;         /* Border color */
-      --text-primary: 210 100% 97%; /* Primary text */
-      --text-secondary: 210 50% 80%; /* Secondary text */
-      
-      /* Animation Timing */
-      --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
-
-    /* ===== GLOBAL RESET & BASE STYLES ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: linear-gradient(135deg, 
-        hsl(var(--cosmic-void)) 0%, 
-        hsl(231 35% 12%) 50%, 
-        hsl(230 25% 18%) 100%);
-      color: hsl(var(--text-primary));
-      line-height: 1.6;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-    }
-
-    /* ===== COSMIC BACKGROUND EFFECTS ===== */
-    .cosmos {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -2;
-      overflow: hidden;
-    }
-    
-    /* Individual twinkling stars */
-    .star {
-      position: absolute;
-      background: hsl(var(--cosmic-glow));
-      border-radius: 50%;
-      animation: twinkle 4s ease-in-out infinite alternate;
-    }
-    
-    @keyframes twinkle {
-      0% { opacity: 0.3; transform: scale(1); }
-      100% { opacity: 1; transform: scale(1.2); }
-    }
-
-    /* ===== SHOOTING STARS ===== */
-    .shooting-star {
-      position: absolute;
-      height: 2px;
-      background: linear-gradient(90deg, hsl(var(--cosmic-glow)), transparent);
-      border-radius: 1px;
-      animation: shoot 1.8s ease-out forwards;
-      pointer-events: none;
-      filter: blur(0.5px);
-      box-shadow: 0 0 6px hsl(var(--cosmic-glow));
-    }
-
-    @keyframes shoot {
-      from { 
-        transform: translateX(0) translateY(0) rotate(45deg); 
-        opacity: 0.8; 
-        width: 0px;
-      }
-      10% {
-        opacity: 1;
-        width: 60px;
-      }
-      to { 
-        transform: translateX(300px) translateY(300px) rotate(45deg); 
-        opacity: 0;
-        width: 0px;
-      }
-    }
-
-    /* ===== SECRET MENU SYSTEM ===== */
-    .hidden-portal {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      width: 30px;
-      height: 30px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      z-index: 1001;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      border-radius: 50%;
-    }
-    
-    .hidden-portal:hover {
-      opacity: 0.2;
-      background: radial-gradient(circle, hsl(var(--aether)), transparent);
-    }
-    
-    .secret-menu {
-      position: fixed;
-      top: 60px;
-      right: 20px;
-      background: hsla(var(--cosmic-void), 0.95);
-      backdrop-filter: blur(15px);
-      border: 1px solid hsl(var(--aether));
-      border-radius: 15px;
-      padding: 1.5rem;
-      min-width: 200px;
-      z-index: 1002;
-      opacity: 0;
-      transform: translateY(-20px) scale(0.9);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      pointer-events: none;
-      box-shadow: 0 10px 30px hsla(var(--aether), 0.3);
-    }
-    
-    .secret-menu.visible {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      pointer-events: all;
-    }
-    
-    .secret-menu h3 {
-      color: hsl(var(--aether));
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
-      text-align: center;
-      border-bottom: 1px solid hsla(var(--aether), 0.3);
-      padding-bottom: 0.5rem;
-    }
-    
-    .secret-menu ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    
-    .secret-menu li {
-      margin: 0.8rem 0;
-    }
-    
-    .secret-menu a {
-      color: hsl(var(--text-primary));
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem;
-      border-radius: 8px;
-      transition: var(--transition-smooth);
-      font-size: 0.9rem;
-    }
-    
-    .secret-menu a:hover {
-      background: hsla(var(--aether), 0.2);
-      color: hsl(var(--aether));
-      transform: translateX(5px);
-    }
-
-    /* ===== BREADCRUMB NAVIGATION ===== */
-    .breadcrumb {
-      position: fixed;
-      top: 80px;
-      left: 2rem;
-      background: hsla(var(--cosmic-void), 0.8);
-      backdrop-filter: blur(10px);
-      border: 1px solid hsla(var(--aether), 0.3);
-      border-radius: 20px;
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
-      color: hsl(var(--text-secondary));
-      z-index: 1000;
-      opacity: 0;
-      transform: translateX(-20px);
-      transition: var(--transition-smooth);
-      pointer-events: none;
-    }
-
-    .breadcrumb.visible {
-      opacity: 1;
-      transform: translateX(0);
-      pointer-events: all;
-    }
-
-    .breadcrumb a {
-      color: hsl(var(--aether));
-      text-decoration: none;
-      transition: var(--transition-smooth);
-    }
-
-    .breadcrumb a:hover {
-      text-shadow: 0 0 8px hsl(var(--aether));
-    }
-
-    /* ===== NAVIGATION SYSTEM WITH ENHANCED HINTS ===== */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      background: hsla(var(--cosmic-void), 0.2);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid hsla(var(--border), 0.05);
-      padding: 1rem 2rem;
-      transition: var(--transition-smooth);
-      height: 70px;
-    }
-    
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: hsl(var(--aether));
-      text-decoration: none;
-      transition: var(--transition-smooth);
-    }
-    
-    .logo:hover {
-      transform: scale(1.05);
-      text-shadow: 0 0 20px hsl(var(--aether));
-    }
-    
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-    
-    .nav-links a {
-      color: hsl(var(--text-primary));
-      text-decoration: none;
-      transition: var(--transition-smooth);
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      background: hsla(var(--cosmic-mist), 0.02);
-      position: relative;
-    }
-    
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: hsl(var(--aether));
-      background: hsla(var(--cosmic-mist), 0.08);
-      transform: translateY(-2px);
-    }
-
-    /* Navigation pulse hint */
-    .nav-links.pulse-hint a {
-      animation: gentle-glow 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes gentle-glow {
-      0% { box-shadow: 0 0 5px hsla(var(--aether), 0.3); }
-      100% { box-shadow: 0 0 15px hsla(var(--aether), 0.6); }
-    }
-
-    /* ===== NAVIGATION DISCOVERY HINTS ===== */
-    .discovery-hint {
-      position: absolute;
-      bottom: -80px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: hsl(var(--text-secondary));
-      font-size: 0.9rem;
-      opacity: 0;
-      animation: autoFadeOut 4s ease-in-out forwards;
-      animation-delay: 1s;
-      pointer-events: none;
-      text-align: center;
-      transition: opacity 0.3s ease;
-    }
-
-    .discovery-hint.fade-on-scroll {
-      opacity: 0 !important;
-    }
-
-    @keyframes autoFadeOut {
-      0% { opacity: 0; transform: translateX(-50%) translateY(0); }
-      15%, 60% { opacity: 0.7; transform: translateX(-50%) translateY(-5px); }
-      100% { opacity: 0; transform: translateX(-50%) translateY(0); }
-    }
-
-    /* ===== PAGE SECTION SYSTEM WITH ENHANCED TRANSITIONS ===== */
-    .page-section {
-      display: none;
-      padding: 0;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .page-section.active {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-      animation: smoothFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    .page-section.exiting {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-
-    @keyframes smoothFadeIn {
-      0% {
-        opacity: 0;
-        transform: translateY(30px) scale(0.98);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-    /* ===== NON-INTRO PAGE LAYOUT - FIXED SPACING ===== */
-    .page-section:not(.intro-page) {
-      padding-top: 4.5rem; /* Space for fixed nav */
-      padding-left: 2rem;
-      padding-right: 2rem;
-      padding-bottom: 2rem;      
-    }
-    
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .page-section:not(.intro-page) .container {
-      margin-top: 70px;
-      padding-top: 2rem;
-    }
-
-    /* ===== HIDE ORBITS ON NON-INTRO PAGES ===== */
-    .element-orbits {
-      width: 500px;
-      height: 500px;
-      margin: 2rem auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .page-section:not(.intro-page) .element-orbits {
-      display: none;
-    }
-
-    /* ===== INTRO PAGE WITH STAR LOGO ===== */
-    .intro-page {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      min-height: 100vh;
-      padding: 2rem;
-      position: relative;
-    }
-    
-    .intro-title {
-      font-size: clamp(3rem, 8vw, 6rem);
-      margin-bottom: 1rem;
-      background: linear-gradient(45deg, 
-        hsl(var(--aether)), 
-        hsl(var(--water)), 
-        hsl(var(--fire)));
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gentle-pulse 4s ease-in-out infinite;
-      font-weight: 800;
-    }
-    
-    @keyframes gentle-pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.02); }
-    }
-
-    /* ===== STAR STICK FIGURE LOGO ===== */
-    .star-logo {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 5;
-      pointer-events: none;
-    }
-
-    .star-body-part {
-      position: absolute;
-      width: 3px;
-      height: 3px;
-      background: hsl(var(--cosmic-glow));
-      border-radius: 50%;
-      box-shadow: 0 0 6px hsl(var(--cosmic-glow));
-      animation: twinkle 3s ease-in-out infinite alternate;
-    }
-
-    .star-torso { top: 60px; left: 0; }
-    .star-left-arm { top: 40px; left: -25px; }
-    .star-right-arm { top: 40px; left: 25px; }
-    .star-left-leg { top: 90px; left: -15px; }
-    .star-right-leg { top: 90px; left: 15px; }
-
-    .orbit-ring {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      border: 1px solid hsla(var(--cosmic-mist), 0.1);
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-    }
-    
-    .orbit-1 { width: 350px; height: 350px; }
-    .orbit-2 { width: 450px; height: 450px; }
-    .orbit-3 { width: 600px; height: 600px; }
-    .orbit-4 { width: 800px; height: 800px; }
-
-    /* Central Aether Core */
-    .aether {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 80px;
-      height: 80px;
-      transform: translate(-50%, -50%);
-      z-index: 20;
-    }
-
-    .aether-core {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: radial-gradient(circle, 
-        hsla(var(--aether), 0.9) 30%, 
-        hsla(var(--aether), 0.2) 70%);
-      box-shadow:
-        0 0 40px hsl(var(--aether)),
-        0 0 80px hsla(var(--aether), 0.6);
-      animation: aether-pulse 3s ease-in-out infinite;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: var(--transition-smooth);
-    }
-
-    .aether-core:hover {
-      transform: scale(1.1);
-      box-shadow:
-        0 0 60px hsl(var(--aether)),
-        0 0 120px hsla(var(--aether), 0.8);
-    }
-
-    .aether-glyph {
-      font-size: 2rem;
-      color: hsl(var(--cosmic-glow));
-      text-shadow: 0 0 10px hsl(var(--cosmic-glow));
-    }
-
-    @keyframes aether-pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
-    /* Elemental Orbs - Visual only */
-    .element-orb {
-      position: absolute;
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      transition: var(--transition-smooth);
-      top: 50%;
-      left: 50%;
-      z-index: 15;
-    }
-    
-    .element-orb:hover {
-      transform: scale(1.2) !important;
-      z-index: 25;
-    }
-
-    .fire { 
-      background: radial-gradient(circle, hsl(var(--fire)), hsla(var(--fire), 0.4));
-      animation: orbit-fire 12s linear infinite;
-      box-shadow: 0 0 20px hsl(var(--fire));
-    }
-    
-    .earth { 
-      background: radial-gradient(circle, hsl(var(--earth)), hsla(var(--earth), 0.4));
-      animation: orbit-earth 18s linear infinite;
-      box-shadow: 0 0 15px hsl(var(--earth));
-    }
-    
-    .water { 
-      background: radial-gradient(circle, hsl(var(--water)), hsla(var(--water), 0.4));
-      animation: orbit-water 24s linear infinite;
-      box-shadow: 0 0 15px hsl(var(--water));
-    }
-    
-    .air { 
-      background: radial-gradient(circle, hsl(var(--air)), hsla(var(--air), 0.4));
-      animation: orbit-air 30s linear infinite;
-      box-shadow: 0 0 15px hsl(var(--air));
-    }
-
-    @keyframes orbit-fire {
-      0% { transform: translate(-50%, -50%) rotate(0deg) translateX(175px) rotate(0deg); }
-      100% { transform: translate(-50%, -50%) rotate(360deg) translateX(175px) rotate(-360deg); }
-    }
-    
-    @keyframes orbit-earth {
-      0% { transform: translate(-50%, -50%) rotate(0deg) translateX(225px) rotate(0deg); }
-      100% { transform: translate(-50%, -50%) rotate(360deg) translateX(225px) rotate(-360deg); }
-    }
-    
-    @keyframes orbit-water {
-      0% { transform: translate(-50%, -50%) rotate(0deg) translateX(300px) rotate(0deg); }
-      100% { transform: translate(-50%, -50%) rotate(360deg) translateX(300px) rotate(-360deg); }
-    }
-    
-    @keyframes orbit-air {
-      0% { transform: translate(-50%, -50%) rotate(0deg) translateX(400px) rotate(0deg); }
-      100% { transform: translate(-50%, -50%) rotate(360deg) translateX(400px) rotate(-360deg); }
-    }
-
-    /* ===== NEW FLOATING ACTION BUTTONS ===== */
-    .floating-actions {
-      position: absolute;
-      bottom: 100px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 1rem;
-      opacity: 0;
-      animation: floatUp 1s ease-out 2s forwards;
-    }
-
-    @keyframes floatUp {
-      0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-      100% { opacity: 1; transform: translateX(-50%) translateY(0); }
-    }
-
-    .action-button {
-      padding: 0.8rem 1.5rem;
-      border: 2px solid;
-      border-radius: 25px;
-      background: transparent;
-      color: hsl(var(--cosmic-glow));
-      text-decoration: none;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: var(--transition-smooth);
-      backdrop-filter: blur(10px);
-      font-weight: 500;
-    }
-
-    .action-button.primary {
-      border-color: hsl(var(--aether));
-      background: hsla(var(--aether), 0.1);
-    }
-
-    .action-button.secondary {
-      border-color: hsl(var(--water));
-      background: hsla(var(--water), 0.1);
-    }
-
-    .action-button:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 10px 30px hsla(var(--aether), 0.4);
-    }
-
-    .action-button.primary:hover {
-      background: hsla(var(--aether), 0.2);
-      box-shadow: 0 10px 30px hsla(var(--aether), 0.5);
-    }
-
-    .action-button.secondary:hover {
-      background: hsla(var(--water), 0.2);
-      box-shadow: 0 10px 30px hsla(var(--water), 0.4);
-    }
-
-    /* ===== ENHANCED ABOUT PAGE STYLES ===== */
-    .about-page {
-      background: linear-gradient(135deg, 
-        hsla(var(--cosmic-void), 0.8) 0%,
-        hsla(var(--aether), 0.1) 30%,
-        hsla(var(--water), 0.05) 60%,
-        hsla(var(--fire), 0.03) 100%);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .about-page::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(ellipse at 30% 20%, hsla(var(--aether), 0.15) 0%, transparent 50%),
-                  radial-gradient(ellipse at 70% 80%, hsla(var(--water), 0.1) 0%, transparent 50%),
-                  radial-gradient(ellipse at 90% 40%, hsla(var(--fire), 0.08) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .about-page .container {
-      position: relative;
-      z-index: 2;
-    }
-
-    .about-page h1 {
-      font-size: 3.5rem;
-      margin-bottom: 2rem;
-      text-align: center;
-      background: linear-gradient(45deg, 
-        hsl(var(--aether)), 
-        hsl(var(--water)), 
-        hsl(var(--fire)), 
-        hsl(var(--air)));
-      background-size: 400% 400%;
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradient-shift 6s ease-in-out infinite;
-      text-shadow: 0 0 30px hsla(var(--aether), 0.5);
-      font-weight: 900;
-    }
-
-    @keyframes gradient-shift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-
-    .mystical-subtitle {
-      font-size: 1.4rem;
-      text-align: center;
-      margin-bottom: 3rem;
-      color: hsl(var(--text-secondary));
-      opacity: 0.9;
-      font-style: italic;
-      animation: gentle-float 4s ease-in-out infinite;
-    }
-
-    @keyframes gentle-float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-
-    .about-section {
-      margin: 3rem 0;
-      padding: 2.5rem;
-      background: linear-gradient(135deg, 
-        hsla(var(--cosmic-void), 0.4), 
-        hsla(var(--aether), 0.1));
-      border-radius: 20px;
-      border: 1px solid hsla(var(--aether), 0.3);
-      transition: var(--transition-smooth);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .about-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, 
-        transparent, 
-        hsla(var(--aether), 0.1), 
-        transparent);
-      transition: left 0.8s ease;
-    }
-
-    .about-section:hover::before {
-      left: 100%;
-    }
-
-    .about-section:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 20px 50px hsla(var(--aether), 0.3);
-      border-color: hsl(var(--aether));
-    }
-
-    .about-section h2 {
-      color: hsl(var(--water));
-      margin-bottom: 1.5rem;
-      font-size: 2rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .about-section p {
-      font-size: 1.2rem;
-      line-height: 1.8;
-      color: hsl(var(--text-secondary));
-      position: relative;
-      z-index: 2;
-    }
-
-    .skill-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin: 2rem 0;
-    }
-
-    .skill-card {
-      background: linear-gradient(135deg, 
-        hsla(var(--fire), 0.1), 
-        hsla(var(--earth), 0.1));
-      padding: 1.5rem;
-      border-radius: 15px;
-      border: 1px solid hsla(var(--fire), 0.2);
-      transition: var(--transition-bounce);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .skill-card::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background: radial-gradient(circle, hsla(var(--fire), 0.2), transparent);
-      border-radius: 50%;
-      transition: all 0.6s ease;
-      transform: translate(-50%, -50%);
-      z-index: 1;
-    }
-
-    .skill-card:hover::after {
-      width: 200px;
-      height: 200px;
-    }
-
-    .skill-card:hover {
-      transform: translateY(-5px) rotate(2deg);
-      box-shadow: 0 15px 30px hsla(var(--fire), 0.4);
-    }
-
-    .skill-card h3 {
-      color: hsl(var(--fire));
-      margin-bottom: 1rem;
-      font-size: 1.3rem;
-      position: relative;
-      z-index: 2;
-    }
-
-    .skill-card p {
-      color: hsl(var(--text-secondary));
-      position: relative;
-      z-index: 2;
-    }
-
-    .philosophy-quote {
-      background: linear-gradient(135deg, 
-        hsla(var(--aether), 0.2), 
-        hsla(var(--water), 0.1));
-      padding: 2.5rem;
-      border-radius: 20px;
-      border-left: 5px solid hsl(var(--aether));
-      margin: 3rem 0;
-      position: relative;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    .philosophy-quote::before {
-      content: '"';
-      position: absolute;
-      top: -10px;
-      left: 20px;
-      font-size: 6rem;
-      color: hsla(var(--aether), 0.3);
-      font-family: serif;
-    }
-
-    .philosophy-quote p {
-      font-size: 1.4rem;
-      font-style: italic;
-      color: hsl(var(--text-primary));
-      margin: 0;
-      position: relative;
-      z-index: 2;
-    }
-
-    .elemental-stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin: 3rem 0;
-    }
-
-    .stat-orb {
-      text-align: center;
-      padding: 2rem;
-      background: radial-gradient(circle, 
-        hsla(var(--element-color), 0.2), 
-        hsla(var(--element-color), 0.05));
-      border-radius: 50%;
-      transition: var(--transition-smooth);
-      border: 2px solid hsla(var(--element-color), 0.3);
-      aspect-ratio: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .stat-orb:hover {
-      transform: scale(1.1) rotate(5deg);
-      box-shadow: 0 0 30px hsla(var(--element-color), 0.6);
-    }
-
-    .stat-orb.fire-stat {
-      --element-color: var(--fire);
-    }
-
-    .stat-orb.water-stat {
-      --element-color: var(--water);
-    }
-
-    .stat-orb.air-stat {
-      --element-color: var(--air);
-    }
-
-    .stat-orb.earth-stat {
-      --element-color: var(--earth);
-    }
-
-    .stat-number {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: hsl(var(--element-color));
-      margin-bottom: 0.5rem;
-    }
-
-    .stat-label {
-      font-size: 1rem;
-      color: hsl(var(--text-secondary));
-    }
-
-    /* ===== RESONANCE EFFECTS ===== */
-    .resonance-flare {
-      box-shadow:
-        0 0 60px hsl(var(--cosmic-glow)),
-        0 0 120px hsl(var(--aether)),
-        0 0 200px hsla(var(--aether), 0.6) !important;
-      transform: scale(1.15);
-      transition: all 0.4s ease;
-    }
-
-    .resonance-confirm {
-      position: fixed;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: hsla(var(--aether), 0.85);
-      padding: 0.8rem 1.5rem;
-      border-radius: 25px;
-      color: hsl(var(--cosmic-glow));
-      font-size: 1.1rem;
-      box-shadow: 0 0 15px hsla(var(--aether), 0.4);
-      animation: fadeOutUp 4s ease-out forwards;
-      z-index: 9999;
-    }
-
-    @keyframes fadeOutUp {
-      0% { opacity: 0; transform: translate(-50%, 20px); }
-      10% { opacity: 1; transform: translate(-50%, 0); }
-      90% { opacity: 1; transform: translate(-50%, -10px); }
-      100% { opacity: 0; transform: translate(-50%, -20px); }
-    }
-
-    /* ===== PROJECT PAGES ===== */
-    .projects-page h1 {
-      font-size: 3rem;
-      margin-bottom: 2rem;
-      color: hsl(var(--aether));
-      text-align: center;
-      background: linear-gradient(45deg, hsl(var(--aether)), hsl(var(--fire)));
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .featured-project {
-      background: linear-gradient(135deg, 
-        hsla(var(--aether), 0.1), 
-        hsla(var(--water), 0.05));
-      border: 2px solid hsl(var(--aether));
-      border-radius: 20px;
-      padding: 3rem;
-      margin-bottom: 3rem;
-      text-align: center;
-      transition: var(--transition-smooth);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .featured-project:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px hsla(var(--aether), 0.3);
-    }
-
-    .featured-project h2 {
-      font-size: 2.5rem;
-      color: hsl(var(--aether));
-      margin-bottom: 1rem;
-    }
-
-    .sub-projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin: 2rem 0;
-    }
-    
-    .project-card {
-      background: hsla(var(--surface), 0.3);
-      border-radius: 15px;
-      padding: 2rem;
-      transition: var(--transition-smooth);
-      border: 1px solid hsla(var(--aether), 0.2);
-      text-align: center;
-    }
-    
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px hsla(var(--aether), 0.2);
-    }
-
-    .contact-page h1 {
-      font-size: 3rem;
-      margin-bottom: 2rem;
-      color: hsl(var(--aether));
-      text-align: center;
-      background: linear-gradient(45deg, hsl(var(--aether)), hsl(var(--water)));
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    /* ===== CONTACT FORM STYLES ===== */
-    .cosmic-form input:focus,
-    .cosmic-form select:focus,
-    .cosmic-form textarea:focus {
-      outline: none;
-      border-color: hsl(var(--aether));
-      box-shadow: 0 0 15px hsla(var(--aether), 0.3);
-      transform: translateY(-2px);
-    }
-
-    .cosmic-form input,
-    .cosmic-form select,
-    .cosmic-form textarea {
-      transition: var(--transition-smooth);
-    }
-
-    .cosmic-form label {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    /* ===== HIDDEN PAGES ===== */
-    .codex-page {
-      background: linear-gradient(135deg, 
-        hsla(var(--aether), 0.05), 
-        hsla(var(--cosmic-void), 0.8));
-    }
-
-    .elemental-list {
-      list-style: none;
-      margin: 1.5rem 0;
-    }
-    
-    .elemental-list li {
-      margin: 1rem 0;
-      padding: 1rem;
-      background: hsla(var(--cosmic-mist), 0.05);
-      border-radius: 10px;
-      border-left: 4px solid hsl(var(--aether));
-      transition: var(--transition-smooth);
-    }
-    
-    .elemental-list li:hover {
-      transform: translateX(10px);
-      background: hsla(var(--aether), 0.1);
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .element-orbits {
-        width: 350px;
-        height: 350px;
-      }
-      
-      .orbit-1 { width: 200px; height: 200px; }
-      .orbit-2 { width: 280px; height: 280px; }
-      .orbit-3 { width: 350px; height: 350px; }
-      .orbit-4 { width: 420px; height: 420px; }
-
-      .floating-actions {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .breadcrumb {
-        left: 1rem;
-        right: 1rem;
-        text-align: center;
-      }
-
-      .skill-grid, .elemental-stats {
-        grid-template-columns: 1fr;
-      }
-
-      .about-page h1 {
-        font-size: 2.5rem;
-      }
-
-      @keyframes orbit-fire {
-        0% { transform: translate(-50%, -50%) rotate(0deg) translateX(100px) rotate(0deg); }
-        100% { transform: translate(-50%, -50%) rotate(360deg) translateX(100px) rotate(-360deg); }
-      }
-      
-      @keyframes orbit-earth {
-        0% { transform: translate(-50%, -50%) rotate(0deg) translateX(140px) rotate(0deg); }
-        100% { transform: translate(-50%, -50%) rotate(360deg) translateX(140px) rotate(-360deg); }
-      }
-      
-      @keyframes orbit-water {
-        0% { transform: translate(-50%, -50%) rotate(0deg) translateX(175px) rotate(0deg); }
-        100% { transform: translate(-50%, -50%) rotate(360deg) translateX(175px) rotate(-360deg); }
-      }
-      
-      @keyframes orbit-air {
-        0% { transform: translate(-50%, -50%) rotate(0deg) translateX(210px) rotate(0deg); }
-        100% { transform: translate(-50%, -50%) rotate(360deg) translateX(210px) rotate(-360deg); }
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My Digital Space</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e2e8f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: bold;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #64ffda, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .constellation {
+            width: 300px;
+            height: 200px;
+            margin: 2rem auto;
+            position: relative;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stick-figure {
+            font-size: 4rem;
+            color: #64ffda;
+            text-shadow: 0 0 20px #64ffda;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            max-width: 600px;
+            margin: 2rem auto;
+            opacity: 0.9;
+        }
+
+        /* Section Styles */
+        section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 0;
+        }
+
+        .section-content {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .section-content h2 {
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: bold;
+            margin-bottom: 2rem;
+            color: #64ffda;
+        }
+
+        .section-content p {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        /* CRUMB Project Styles */
+        .crumb-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .image-placeholder {
+            background: rgba(100, 255, 218, 0.1);
+            border: 2px dashed rgba(100, 255, 218, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .image-placeholder:hover {
+            background: rgba(100, 255, 218, 0.2);
+            border-color: rgba(100, 255, 218, 0.5);
+        }
+
+        .placeholder-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #64ffda, #7c3aed);
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: rgba(100, 255, 218, 0.1);
+            border: 2px solid rgba(100, 255, 218, 0.3);
+            border-radius: 50px;
+            color: #64ffda;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .btn:hover {
+            background: rgba(100, 255, 218, 0.2);
+            border-color: #64ffda;
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
+        }
+
+        /* Stars Background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #64ffda;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 30px;
+            background: linear-gradient(to bottom, #64ffda, transparent);
+            border-radius: 2px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section-content {
+                padding: 2rem;
+                margin: 0 1rem;
+            }
+            
+            .crumb-images {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Cosmic background -->
-  <div class="cosmos" id="cosmos"></div>
-  
-  <!-- Hidden Portal (invisible clickable area) -->
-  <button class="hidden-portal" onclick="toggleSecretMenu()" title="✨"></button>
-  
-  <!-- Secret Menu -->
-  <div class="secret-menu" id="secretMenu">
-    <h3>⚡ Hidden Pathways ⚡</h3>
-    <ul>
-      <li><a href="#" onclick="showPage('codex')"><span>📜</span> The Codex</a></li>
-      <li><a href="#" onclick="showPage('garden')"><span>🌱</span> Digital Garden</a></li>
-      <li><a href="#" onclick="showPage('workshop')"><span>🔮</span> Sacred Workshop</a></li>
-      <li><a href="#" onclick="showPage('frequencies')"><span>🎵</span> Frequencies</a></li>
-    </ul>
-  </div>
-  
-  <!-- Breadcrumb Navigation -->
-  <div class="breadcrumb" id="breadcrumb">
-    <a href="#" onclick="showPage('intro')">Home</a> → <span id="currentPageName">Page</span>
-  </div>
-  
-  <!-- Navigation -->
-  <nav>
-    <div class="nav-container">
-      <a href="#" class="logo" onclick="showPage('intro')">Wyetherp</a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#" onclick="showPage('intro')" class="nav-link">Home</a></li>
-        <li><a href="#" onclick="showPage('about')" class="nav-link">About</a></li>
-        <li><a href="#" onclick="showPage('projects')" class="nav-link">Projects</a></li>
-        <li><a href="#" onclick="showPage('contact')" class="nav-link">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
+    <!-- Stars Background -->
+    <div class="stars" id="stars"></div>
 
-  <!-- Intro Page -->
-  <section id="intro" class="page-section intro-page active">
-    <h1 class="intro-title">Wyetherp</h1>
-    <p style="font-size: 1.0rem; margin-bottom: 3rem; opacity: 0.9; max-width: 600px; color: hsl(var(--text-secondary));">Tech for the soul and senses. Creating tools for the tender-minded.</p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to My Digital Space</h1>
+            
+            <div class="constellation">
+                <div class="stick-figure">🧑‍🚀</div>
+            </div>
+            
+            <p>A cosmic journey through creativity, technology, and human-centered design</p>
+        </div>
+        
+        <div class="scroll-indicator"></div>
+    </section>
 
-    <div class="user-directions" style="text-align: center; margin-top: 1rem; color: hsl(var(--text-secondary)); font-size: 0.9rem;">
-    ↑ Use navigation above or buttons below to explore ↑
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-content">
+                <h2>About Me</h2>
+                <p>I'm a creator who believes technology should serve humanity.</p>
+                <p>I build things that matter, with intention and care.</p>
+                <p>Currently exploring the intersection of AI, hardware, and human-centered design.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CRUMB Section -->
+    <section id="crumb">
+        <div class="container">
+            <div class="section-content">
+                <h2>CRUMB Project</h2>
+                <p>An AI companion designed for people who experience the world differently.</p>
+                <p>Built with Raspberry Pi, local-first privacy, and a philosophy that technology should love you back.</p>
+                
+  <div class="crumb-images">
+    <div class="image-container">
+        <img src="images/image1.jpg" alt="CRUMB hardware prototype showing Raspberry Pi setup with touchscreen">
+        <h3>CRUMB Prototype - Hardware</h3>
+        <p>Raspberry Pi setup with integrated touchscreen and LED system</p>
     </div>
     
-    <div class="element-orbits">
-      <!-- Visual orbit rings -->
-      <div class="orbit-ring orbit-1"></div>
-      <div class="orbit-ring orbit-2"></div>
-      <div class="orbit-ring orbit-3"></div>
-      <div class="orbit-ring orbit-4"></div>
-      
-      <!-- STAR STICK FIGURE LOGO -->
-      <div class="star-logo">
-        <div class="star-body-part star-torso"></div>
-        <div class="star-body-part star-left-arm"></div>
-        <div class="star-body-part star-right-arm"></div>
-        <div class="star-body-part star-left-leg"></div>
-        <div class="star-body-part star-right-leg"></div>
-      </div>
-      
-      <!-- Central Aether Core -->
-      <div class="element-orb aether" title="✨ Aether – The guiding pulse" onclick="resonancePing()">
-        <div class="aether-core">
-          <span class="aether-glyph">✶</span>
+    <div class="image-container">
+        <img src="images/image2.jpg" alt="CRUMB interface demo showing breathing light patterns">
+        <h3>CRUMB Interface Demo</h3>
+        <p>Touchscreen interface with breathing light patterns in action</p>
+    </div>
+</div>
+                
+                <a href="#" class="btn">Learn More</a>
+            </div>
         </div>
-      </div>
-      
-      <!-- Orbiting Elements - Visual only -->
-      <div class="element-orb fire" title="🔥 Fire - Passionate creation">🔥</div>
-      <div class="element-orb earth" title="🪨 Earth - Solid foundations">🪨</div>
-      <div class="element-orb water" title="🌊 Water - Intuitive flow">🌊</div>
-      <div class="element-orb air" title="🌬️ Air - Clear communication">🌬️</div>
-    </div>
-    
-    <!-- Floating Action Buttons -->
-    <div class="floating-actions">
-      <a href="#" class="action-button primary" onclick="showPage('projects')">
-        ✨ View My Work
-      </a>
-      <a href="#" class="action-button secondary" onclick="showPage('about')">
-        🌟 Learn More
-      </a>
-    </div>
-    
-    <!-- Discovery Hint -->
-    <div class="discovery-hint">
-      ↑ Explore the pathways above, or scroll down to view content ↑
-    </div>
-  </section>
+    </section>
 
-  <!-- Enhanced About Page -->
-  <section id="about" class="page-section about-page">
-    <div class="container">
-      <h1>About me and my creations</h1>
-      <p class="mystical-subtitle" style="text-align: center;">Tech for the soul and senses</p>
-      
-      <!-- Philosophy Quote -->
-      <div class="philosophy-quote">
-        <p>Every interface is a bridge between human experience and digital possibility. I design those bridges to honor the full spectrum of experience.</p>
-      </div>
+    <script>
+        // Generate stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 100;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
 
-      <!-- Core Beliefs Section -->
-      <div class="about-section">
-        <h2>🌟 Core Philosophy</h2>
-        <p>I believe every website or app is a chance to connect with someone authentically. Technology should feel like a gentle companion, not an overwhelming force. My work centers on creating digital experiences that breathe with natural rhythms and honor different ways of thinking and sensing.</p>
-      </div>
-
-    <!-- Summer Growth Section -->
-    <div class="about-section">
-      <h2>🚀 Recent Growth & Impact</h2>
-      <p>This summer transformed me from a developer into a full-stack innovator. At my internship, I mastered enterprise-level problem solving while building production systems that serve real users. Simultaneously, I dove deep into hardware development with Raspberry Pi, learning GPIO programming and embedded systems to bring my Crumb AI companion to life.</p>
-      
-      <p>The combination is powerful: I now think in both digital and physical dimensions. Whether I'm optimizing database queries, designing empathetic user interfaces, or wiring sensors that respond to human emotion, I approach every challenge with the same question: "How can this genuinely help someone?"</p>
-      
-      <p>My Computer Science and Psychology background from Lehigh, combined with D1 athletic discipline, gives me a unique perspective on building technology that performs under pressure while remaining deeply human-centered. I don't just write code—I craft experiences that bridge the gap between what's technically possible and what's emotionally meaningful.</p>
-    </div>
-
-   <!-- Value Proposition -->
-    <div class="about-section">
-      <h2>💎 What I Bring to Your Team</h2>
-      <p>I'm the developer who asks "why" before "how." My technical skills span full-stack web development, embedded systems, and AI integration, but my real strength is translating complex problems into solutions that actually work for people. I bring fresh perspective, relentless curiosity, and the proven ability to learn rapidly while maintaining high-quality output.</p>
-      
-      <p>Whether you need someone to architect scalable systems, collaborate across disciplines, or pioneer new approaches to human-computer interaction, I'm ready to contribute from day one while continuing to grow with your organization's evolving needs.</p>
-    </div>
-  </div>
-</section>
-
-
-
-
-  <!-- Projects Page -->
-  <section id="projects" class="page-section projects-page">
-    <div class="container">
-      <h1>🛠️ Sacred Creations</h1>
-
-      <div class="featured-project">
-        <h2>🤖 C.R.U.M.B</h2>
-        <p><strong>Emotionally Intelligent Companion</strong></p>
-        <p>An AI assistant designed specifically for neurodivergent minds, offering emotional support through gentle LED feedback, calming interactions, and intuitive communication.</p>
-        <div style="height: 150px; background: linear-gradient(135deg, hsla(var(--aether), 0.1), hsla(var(--water), 0.1)); border-radius: 10px; margin: 2rem 0; display: flex; align-items: center; justify-content: center; border: 2px dashed hsla(var(--aether), 0.3);">
-          <span style="color: hsl(var(--text-secondary)); font-size: 1.1rem;">🎨 [Add your project visuals here]</span>
-        </div>
-      </div>
-
-      <!-- SUB-PROJECTS -->
-      <div class="sub-projects">
-        <div class="project-card">
-          <h3 style="color: hsl(var(--aether)); margin-bottom: 1rem; font-size: 1.5rem;">🌊 Flow Interfaces</h3>
-          <p>Design patterns that work with natural human rhythms rather than against them.</p>
-          <div style="height: 100px; background: hsla(var(--water), 0.1); border-radius: 8px; margin: 1rem 0; display: flex; align-items: center; justify-content: center;">
-            <span style="color: hsl(var(--text-secondary));">📸 [Add project image]</span>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <h3 style="color: hsl(var(--aether)); margin-bottom: 1rem; font-size: 1.5rem;">🔥 Elemental ML</h3>
-          <p>Machine learning models designed with transparency and emotional intelligence.</p>
-          <div style="height: 100px; background: hsla(var(--fire), 0.1); border-radius: 8px; margin: 1rem 0; display: flex; align-items: center; justify-content: center;">
-            <span style="color: hsl(var(--text-secondary));">📸 [Add project image]</span>
-          </div>
-        </div>
-      </div>
-      
-      <div style="text-align: center; margin-top: 3rem;">
-        <a href="#" onclick="showPage('contact')" class="action-button primary">
-          🌌 Let's Collaborate
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Page -->
-  <section id="contact" class="page-section contact-page">
-    <div class="container">
-      <h1>🌌 Cosmic Communion</h1>
-      <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">Let's collaborate and create something meaningful together.</p>
-      
-      <div style="max-width: 600px; margin: 2rem auto;">
-        <p style="margin-bottom: 2rem; color: hsl(var(--text-secondary)); text-align: center;">Whether you're neurodivergent yourself, or simply believe technology can be more human — I'd love to connect.</p>
-        
-        <!-- Netlify Contact Form -->
-        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="cosmic-form" style="background: linear-gradient(135deg, hsla(var(--aether), 0.1), hsla(var(--water), 0.05)); border: 2px solid hsla(var(--aether), 0.3); border-radius: 20px; padding: 2.5rem; margin: 2rem 0;">
-          <input type="hidden" name="form-name" value="contact" />
-          <div style="display: none;">
-            <input name="bot-field" />
-          </div>
-          
-          <div style="margin-bottom: 1.5rem;">
-            <label for="name" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">What is your name? ✨</label>
-            <input type="text" id="name" name="name" required style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.3); border-radius: 10px; background: hsla(var(--cosmic-void), 0.3); color: hsl(var(--text-primary)); font-size: 1rem;" />
-          </div>
-          
-          <div style="margin-bottom: 1.5rem;">
-            <label for="email" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">What is your email?📡</label>
-            <input type="email" id="email" name="email" required style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.3); border-radius: 10px; background: hsla(var(--cosmic-void), 0.3); color: hsl(var(--text-primary)); font-size: 1rem;" />
-          </div>
-          
-          <div style="margin-bottom: 1.5rem;">
-            <label for="project-type" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">What is your technical background? 🔮</label>
-            <select id="project-type" name="project-type" style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.3); border-radius: 10px; background: hsla(var(--cosmic-void), 0.3); color: hsl(var(--text-primary)); font-size: 1rem;">
-              <option value="">Choose your path...</option>
-              <option value="neurodivergent-tech">Neurodivergent-friendly technology</option>
-              <option value="ai-companion">AI companion/emotional intelligence</option>
-              <option value="sensory-interface">Sensory-conscious interface design</option>
-              <option value="mindful-webapp">Mindful web application</option>
-              <option value="accessibility-audit">Accessibility consultation</option>
-              <option value="other">Something else entirely</option>
-            </select>
-          </div>
-          
-          <div style="margin-bottom: 1.5rem;">
-            <label for="energy-level" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">How do you feel about AI companions as a whole? 🌊</label>
-            <select id="energy-level" name="energy-level" style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.3); border-radius: 10px; background: hsla(var(--cosmic-void), 0.3); color: hsl(var(--text-primary)); font-size: 1rem;">
-              <option value="">How are you feeling?</option>
-              <option value="excited">Excited and energized! 🔥</option>
-              <option value="curious">Curious but cautious 🌱</option>
-              <option value="overwhelmed">Feeling overwhelmed by tech 🌊</option>
-              <option value="frustrated">Frustrated with current solutions 🌪️</option>
-              <option value="hopeful">Hopeful for something different ✨</option>
-            </select>
-          </div>
-          
-          <div style="margin-bottom: 1.5rem;">
-            <label for="communication-style" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">How do you prefer to communicate and work? 🗣️</label>
-            <textarea id="communication-style" name="communication-style" rows="3" style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.3); border-radius: 10px; background: hsla(var(--cosmic-void), 0.3); color: hsl(var(--text-primary)); font-size: 1rem; resize: vertical;" placeholder="e.g., I need clear timelines, prefer written updates, work best in quiet environments..."></textarea>
-          </div>
-          
-          <div style="margin-bottom: 2rem;">
-            <label for="message" style="display: block; color: hsl(var(--aether)); margin-bottom: 0.5rem; font-weight: 600;">Tell me about your vision - what would feel truly helpful? 💭</label>
-            <textarea id="message" name="message" rows="4" required style="width: 100%; padding: 0.8rem; border: 2px solid hsla(var(--aether), 0.3); border-radius: 10px; background: hsla(var(--cosmic-void), 0.3); color: hsl(var(--text-primary)); font-size: 1rem; resize: vertical;" placeholder="Share your dreams, challenges, or ideas. What would technology that truly serves you look like?"></textarea>
-          </div>
-          
-          <button type="submit" style="width: 100%; padding: 1rem 2rem; background: linear-gradient(45deg, hsl(var(--aether)), hsl(var(--water))); border: none; border-radius: 15px; color: hsl(var(--cosmic-glow)); font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: var(--transition-smooth);" 
-                  onmouseover="this.style.transform='translateY(-3px) scale(1.02)'; this.style.boxShadow='0 10px 30px hsla(var(--aether), 0.4)'"
-                  onmouseout="this.style.transform='none'; this.style.boxShadow='none'">
-            🌌 Send Cosmic Message
-          </button>
-        </form>
-        
-        <!-- Social Links -->
-        <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-top: 3rem;">
-          <a href=https://www.linkedin.com/in/wyetherp/ class="action-button secondary">
-            💼 LinkedIn
-          </a>
-          <a href=https://github.com/wyetherp class="action-button secondary">
-            💻 GitHub
-          </a>
-    </div>
-  </section>
-
-  <!-- Hidden Pages -->
-  
-  <!-- Codex Page -->
-  <section id="codex" class="page-section codex-page">
-    <div class="container">
-      <h1 style="color: hsl(var(--aether)); text-align: center; margin-bottom: 2rem;">📜 The Codex</h1>
-      <p style="text-align: center; margin-bottom: 3rem; font-style: italic;">Sacred writings and digital spells. The deeper mysteries of creation.</p>
-      
-      <h2 style="color: hsl(var(--water)); margin: 2rem 0 1rem;">Development Philosophy</h2>
-      <blockquote style="margin: 2rem 0; padding: 1.5rem; border-left: 4px solid hsl(var(--fire)); background: hsla(var(--fire), 0.1); font-style: italic; border-radius: 0 10px 10px 0;">
-        <em>"Every line of code is a prayer, every function a ritual, every interface a piece of sacred geometry."</em>
-      </blockquote>
-      
-      <h2 style="color: hsl(var(--water)); margin: 2rem 0 1rem;">The Elemental Programming Principles</h2>
-      <ul class="elemental-list">
-        <li>🔥 <strong>Fire Code</strong> – Passionate, transformative algorithms that ignite possibility</li>
-        <li>🌊 <strong>Water Logic</strong> – Flowing, adaptive functions that bend without breaking</li>
-        <li>🌬️ <strong>Air Interfaces</strong> – Light, breathable UX that lifts the spirit</li>
-        <li>🪨 <strong>Earth Architecture</strong> – Solid, foundational systems built to endure</li>
-        <li>✨ <strong>Aether Vision</strong> – The transcendent purpose that guides all creation</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Digital Garden Page -->
-  <section id="garden" class="page-section">
-    <div class="container">
-      <h1 style="color: hsl(var(--aether)); text-align: center; margin-bottom: 2rem;">🌱 Digital Garden</h1>
-      <p style="text-align: center; margin-bottom: 3rem;">A growing collection of thoughts, experiments, and seeds of inspiration.</p>
-      
-      <div class="sub-projects">
-        <div class="project-card">
-          <h3 style="color: hsl(var(--aether)); margin-bottom: 1rem;">🧠 Neurodivergent Design Patterns</h3>
-          <p>Exploring how interfaces can better serve different cognitive styles and sensory needs.</p>
-          <p style="font-style: italic; color: hsl(var(--text-secondary));">Growing slowly...</p>
-        </div>
-        
-        <div class="project-card">
-          <h3 style="color: hsl(var(--aether)); margin-bottom: 1rem;">🎾 Tennis ML Scripts</h3>
-          <p>Using Machine Learning to improve team performance both on and off the court.</p>
-          <p style="font-style: italic; color: hsl(var(--text-secondary));">Blooming...</p>
-        </div>
-        
-        <div class="project-card">
-          <h3 style="color: hsl(var(--aether)); margin-bottom: 1rem;">🌊 Rhythm-Based UX</h3>
-          <p>Interfaces that breathe and pulse with natural timing, honoring the body's rhythms.</p>
-          <p style="font-style: italic; color: hsl(var(--text-secondary));">Flowing...</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sacred Workshop Page -->
-  <section id="workshop" class="page-section">
-    <div class="container">
-      <h1 style="color: hsl(var(--aether)); text-align: center; margin-bottom: 2rem;">🔮 Sacred Workshop</h1>
-      <p style="text-align: center; margin-bottom: 3rem;">Where ideas are forged into reality. The laboratory of digital alchemy.</p>
-      
-      <h2 style="color: hsl(var(--water)); margin: 2rem 0 1rem;">Current Experiments</h2>
-      <ul class="elemental-list">
-        <li>🤖 <strong>Crumb's Emotional Engine</strong> – Teaching AI to recognize and respond to neurodivergent communication patterns</li>
-        <li>🌙 <strong>Circadian Design</strong> – Interfaces that adapt to natural energy cycles</li>
-        <li>🔊 <strong>Haptic Harmony</strong> – Gentle vibrations that communicate without overwhelming</li>
-        <li>🎨 <strong>Synesthetic Interfaces</strong> – Translating emotions into colors, sounds, and textures</li>
-      </ul>
-      
-      <div style="text-align: center; margin-top: 3rem;">
-        <button style="padding: 1rem 2rem; background: linear-gradient(45deg, hsl(var(--aether)), hsl(var(--fire))); border: none; border-radius: 25px; color: hsl(var(--cosmic-glow)); cursor: pointer; font-size: 1.1rem;" onclick="resonancePing()">
-          🔬 Request Workshop Access
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Frequencies Page -->
-  <section id="frequencies" class="page-section">
-    <div class="container">
-      <h1 style="color: hsl(var(--aether)); text-align: center; margin-bottom: 2rem;">🎵 Frequencies</h1>
-      <p style="text-align: center; margin-bottom: 3rem;">Each part of Crumb hums with its own song—a resonance crafted through sound and intention.</p>
-
-      <h2 style="color: hsl(var(--water)); margin: 2rem 0 1rem;">Solfeggio Sound Map</h2>
-      <ul class="elemental-list">
-        <li>🔊 <strong>396Hz – Release & Grounding</strong><br>Crumb's <em>Safe Mode</em> anchors anxious energy through subtle bass vibrations.</li>
-        <li>🌊 <strong>417Hz – Flow & Reset</strong><br>The <em>Water Mode</em> uses this tone to support emotional fluidity during transitions.</li>
-        <li>🔥 <strong>528Hz – DNA Activation</strong><br><em>Fire Mode</em> pulses with this frequency to fuel intention-setting and creative ignition.</li>
-        <li>🌬️ <strong>639Hz – Harmonious Communication</strong><br>This frequency supports <em>Air Mode</em> for nonverbal expression and peaceful dialogue.</li>
-        <li>🪨 <strong>741Hz – Clarity & Structure</strong><br><em>Earth Mode</em> resonates here, helping users find rhythm and order.</li>
-        <li>✨ <strong>852Hz – Intuition & Aether Channel</strong><br>Crumb's internal compass for reflection and environmental attunement.</li>
-      </ul>
-
-      <p style="text-align: center; font-style: italic; margin-top: 2rem; color: hsl(var(--text-secondary));">
-        <em>Crumb is not just coded. It's tuned.</em>
-      </p>
-    </div>
-  </section>
-
-  <script>
-    /* ===== JAVASCRIPT FUNCTIONALITY ===== */
-    
-    // Global state
-    let currentPage = 'intro';
-    let secretMenuVisible = false;
-    let navigationHintShown = false;
-
-    // Page name mapping for breadcrumbs
-    const pageNames = {
-      'intro': 'Home',
-      'about': 'About',
-      'projects': 'Projects', 
-      'contact': 'Contact',
-      'codex': 'The Codex',
-      'garden': 'Digital Garden',
-      'workshop': 'Sacred Workshop',
-      'frequencies': 'Frequencies'
-    };
-
-    /* Create cosmic background stars */
-    function createCosmos() {
-      const cosmos = document.getElementById('cosmos');
-      const starCount = 36;
-      
-      // Create twinkling stars
-      for (let i = 0; i < starCount; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        
-        // Random positioning and sizing
-        const size = Math.random() * 3 + 1;
-        star.style.width = size + 'px';
-        star.style.height = size + 'px';
-        star.style.left = Math.random() * 100 + '%';
-        star.style.top = Math.random() * 100 + '%';
-        star.style.animationDelay = Math.random() * 4 + 's';
-        
-        cosmos.appendChild(star);
-      }
-    }
-
-    /* Create shooting stars */
-    function createShootingStar() {
-      const star = document.createElement('div');
-      star.className = 'shooting-star';
-
-      const xStart = Math.random() * window.innerWidth * 0.8;
-      const yStart = Math.random() * window.innerHeight * 0.5;
-      const size = 2 + Math.random() * 2;
-
-      star.style.left = xStart + 'px';
-      star.style.top = yStart + 'px';
-      star.style.width = (size * 30) + 'px';
-
-      document.getElementById('cosmos').appendChild(star);
-
-      setTimeout(() => star.remove(), 1800);
-    }
-
-    /* Update breadcrumb navigation */
-    function updateBreadcrumb(pageId) {
-      const breadcrumb = document.getElementById('breadcrumb');
-      const currentPageName = document.getElementById('currentPageName');
-      
-      if (pageId === 'intro') {
-        breadcrumb.classList.remove('visible');
-      } else {
-        currentPageName.textContent = pageNames[pageId] || 'Unknown Page';
-        breadcrumb.classList.add('visible');
-      }
-    }
-
-    /* Enhanced page navigation with smooth transitions */
-    function showPage(pageId) {
-      const currentSection = document.querySelector('.page-section.active');
-      const newSection = document.getElementById(pageId);
-      
-      if (currentSection === newSection) return;
-      
-      // Add exiting animation to current page
-      if (currentSection) {
-        currentSection.classList.add('exiting');
-        
-        setTimeout(() => {
-          currentSection.classList.remove('active', 'exiting');
-        }, 300);
-      }
-      
-      // Show new page with delay for smooth transition
-      setTimeout(() => {
-        newSection.classList.add('active');
-        
-        // Update breadcrumb
-        updateBreadcrumb(pageId);
-        
-        // Update navigation active states
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => link.classList.remove('active'));
-        
-        // Find and highlight current page link
-        navLinks.forEach(link => {
-          if (link.getAttribute('onclick')?.includes(`'${pageId}'`)) {
-            link.classList.add('active');
-          }
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
-        
-        // Update current page state
-        currentPage = pageId;
-        
-        // Close secret menu if open
-        if (secretMenuVisible) {
-          toggleSecretMenu();
-        }
-        
-      }, 200);
-    }
 
-    /* Pulse navigation hint */
-    function pulseNavigation() {
-      const navLinks = document.getElementById('navLinks');
-      navLinks.classList.add('pulse-hint');
-      
-      // Show notification
-      const msg = document.createElement('div');
-      msg.className = 'resonance-confirm';
-      msg.innerHTML = "✨ Explore the pathways above ↑";
-      document.body.appendChild(msg);
-      setTimeout(() => msg.remove(), 4000);
-      
-      // Remove pulse after 3 seconds
-      setTimeout(() => {
-        navLinks.classList.remove('pulse-hint');
-      }, 3000);
-    }
-
-    /* Secret menu toggle */
-    function toggleSecretMenu() {
-      const menu = document.getElementById('secretMenu');
-      secretMenuVisible = !secretMenuVisible;
-      
-      if (secretMenuVisible) {
-        menu.classList.add('visible');
-        createSecretMenuParticles();
-      } else {
-        menu.classList.remove('visible');
-      }
-    }
-
-    /* Create particles when secret menu opens */
-    function createSecretMenuParticles() {
-      const particles = 6;
-      const portal = document.querySelector('.hidden-portal');
-      const rect = portal.getBoundingClientRect();
-      
-      for (let i = 0; i < particles; i++) {
-        const particle = document.createElement('div');
-        particle.style.position = 'fixed';
-        particle.style.left = rect.left + rect.width/2 + 'px';
-        particle.style.top = rect.top + rect.height/2 + 'px';
-        particle.style.width = '3px';
-        particle.style.height = '3px';
-        particle.style.background = 'hsl(258 44% 59%)';
-        particle.style.borderRadius = '50%';
-        particle.style.pointerEvents = 'none';
-        particle.style.zIndex = '9999';
-        
-        document.body.appendChild(particle);
-        
-        const angle = (i / particles) * Math.PI * 2;
-        const distance = 60;
-        const x = Math.cos(angle) * distance;
-        const y = Math.sin(angle) * distance;
-        
-        particle.animate([
-          { transform: 'translate(0, 0) scale(1)', opacity: 1 },
-          { transform: 'translate(' + x + 'px, ' + y + 'px) scale(0)', opacity: 0 }
-        ], {
-          duration: 800,
-          easing: 'ease-out'
-        }).onfinish = () => particle.remove();
-      }
-    }
-
-    /* Enhanced resonance ping effect */
-    function resonancePing() {
-      const aether = document.querySelector('.aether-core');
-      if (aether) {
-        aether.classList.add('resonance-flare');
-        setTimeout(() => aether.classList.remove('resonance-flare'), 1000);
-      }
-
-      // Create enhanced resonance particles
-      createResonanceParticles();
-
-      const msg = document.createElement('div');
-      msg.className = 'resonance-confirm';
-      msg.innerHTML = "✨ Resonance sent into the cosmos...";
-      document.body.appendChild(msg);
-      setTimeout(() => msg.remove(), 4000);
-    }
-
-    /* Create enhanced resonance particles */
-    function createResonanceParticles() {
-      const aether = document.querySelector('.aether-core');
-      if (!aether) return;
-      
-      const rect = aether.getBoundingClientRect();
-      const particles = 12;
-      
-      for (let i = 0; i < particles; i++) {
-        const particle = document.createElement('div');
-        particle.style.position = 'fixed';
-        particle.style.left = rect.left + rect.width/2 + 'px';
-        particle.style.top = rect.top + rect.height/2 + 'px';
-        particle.style.width = '4px';
-        particle.style.height = '4px';
-        particle.style.background = 'hsl(258 44% 59%)';
-        particle.style.borderRadius = '50%';
-        particle.style.pointerEvents = 'none';
-        particle.style.zIndex = '9998';
-        particle.style.boxShadow = '0 0 8px hsl(258 44% 59%)';
-        
-        document.body.appendChild(particle);
-        
-        const angle = (i / particles) * Math.PI * 2;
-        const distance = 100 + Math.random() * 50;
-        const x = Math.cos(angle) * distance;
-        const y = Math.sin(angle) * distance;
-        
-        particle.animate([
-          { 
-            transform: 'translate(0, 0) scale(1)', 
-            opacity: 1,
-            filter: 'blur(0px)'
-          },
-          { 
-            transform: `translate(${x}px, ${y}px) scale(0)`, 
-            opacity: 0,
-            filter: 'blur(2px)'
-          }
-        ], {
-          duration: 1200 + Math.random() * 400,
-          easing: 'ease-out'
-        }).onfinish = () => particle.remove();
-      }
-    }
-
-    /* Create scroll awareness system */
-    function createScrollAwareness() {
-      // Only show hints if user hasn't navigated yet
-      if (currentPage === 'intro' && !navigationHintShown) {
-        setTimeout(() => {
-          if (currentPage === 'intro') {
-            pulseNavigation();
-            navigationHintShown = true;
-          }
-        }, 8000);
-      }
-    }
-
-    /* ===== SCROLL INDICATOR FUNCTIONALITY ===== */
-    function initScrollIndicator() {
-      const discoveryHint = document.querySelector('.discovery-hint');
-      if (!discoveryHint) return;
-      
-      // Auto-fade after 2 seconds (handled by CSS animation)
-      // Also fade on scroll
-      let hasScrolled = false;
-      
-      function handleScroll() {
-        if (!hasScrolled && window.scrollY > 50) {
-          hasScrolled = true;
-          discoveryHint.classList.add('fade-on-scroll');
-        }
-      }
-      
-      window.addEventListener('scroll', handleScroll);
-    }
-
-    // Initialize when page loads
-    document.addEventListener('DOMContentLoaded', function() {
-      createCosmos();
-      
-      // Periodically create shooting stars
-      setInterval(createShootingStar, 3000);
-      
-      // Initialize scroll awareness
-      setTimeout(createScrollAwareness, 1000);
-      
-      // Initialize scroll indicator
-      setTimeout(initScrollIndicator, 500);
-    });
-  </script>
+        // Initialize stars when page loads
+        document.addEventListener('DOMContentLoaded', createStars);
+    </script>
 </body>
 </html>
